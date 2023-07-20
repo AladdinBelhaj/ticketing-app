@@ -19,7 +19,7 @@ export class LoginService {
       tap((response) => {
         // Save the token in local storage or in a cookie
         localStorage.setItem('token', response.token);
-
+console.log('im her')
         // Redirect to the dashboard after successful login
         this.router.navigate(['/dashboard']);
       }),
