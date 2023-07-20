@@ -2,7 +2,11 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
+
+// Allow all origins
+app.use(cors());
 
 app.use(express.json());
 
@@ -11,7 +15,7 @@ app.use(express.json());
 const connexion = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'issatm',
+    password: '',
     database:'ticket-app-bd'
 });
 

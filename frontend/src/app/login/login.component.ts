@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { User } from '../model/user';
+import { LoginService } from '../service/login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,27 +14,13 @@ import { of } from 'rxjs';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-
-  constructor(private http: HttpClient, private router: Router) {}
+  private user: User = {email: "",password: ""};
+  constructor(private loginService: LoginService) {}
 
   login() {
-    const loginData = { email: this.email, password: this.password };
-
-    // Send the login credentials to the backend
-    this.http.post<any>('http://localhost:3000/login', loginData).pipe(
-      tap((response) => {
-        // Save the token in local storage or in a cookie
-        localStorage.setItem('token', response.token);
-        
-        // Redirect to the dashboard after successful login
-        this.router.navigate(['/dashboard']);
-      }),
-      catchError((error) => {
-        // Handle login errors here
-        console.error('Login error:', error);
-        // Return an observable with a default value or perform additional error handling
-        return of(null);
-      })
-    ).subscribe();
+    
+    this.user.email= this.email;
+    this.user.password= this.password;
+    this.loginService.login(this.user);
   }
 }
