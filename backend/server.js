@@ -15,7 +15,7 @@ app.use(express.json());
 const connexion = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: 'issatm',
     database:'ticket-app-bd'
 });
 
