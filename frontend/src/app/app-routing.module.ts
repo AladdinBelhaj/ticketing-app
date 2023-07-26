@@ -7,7 +7,7 @@ import { authGuard } from './service/auth.guard';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate:[authGuard]},
-  { path: '', redirectTo: '/login', pathMatch: 'full'}
+  { path: '', redirectTo: '/login', pathMatch: 'full'} // when path is empty, redirect to /login
 ];
 
 @NgModule({

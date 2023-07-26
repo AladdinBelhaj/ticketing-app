@@ -14,21 +14,20 @@ export class LoginService {
   
   login(user: User) {
 
-    // Send the login credentials to the backend
-    this.http.post<any>('http://localhost:3000/login', user).pipe(
-      tap((response) => {
-        // Save the token in local storage or in a cookie
-        localStorage.setItem('token', response.token);
-console.log('im her')
-        // Redirect to the dashboard after successful login
-        this.router.navigate(['/dashboard']);
+    
+    this.http.post<any>('http://localhost:3000/login', user).pipe( // send the login credentials to the backend 
+      tap((response) => { // process response from server (if login sucessfull tap receives token)
+       
+        localStorage.setItem('token', response.token);  // save the token in local storage or in a cookie
+
+        
+        this.router.navigate(['/dashboard']); // redirect to the dashboard after login
       }),
       catchError((error) => {
-        // Handle login errors here
-        console.error('Login error:', error);
-        // Return an observable with a default value or perform additional error handling
-        return of(null);
+        
+        console.error('Login error:', error); // error handling
+        return of(null); // error handling
       })
-    ).subscribe();
+    ).subscribe(); // initiate the HTTP request and handle the responses using tap/catcherror
   }
 }

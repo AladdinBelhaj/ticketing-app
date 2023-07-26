@@ -1,0 +1,9 @@
+<div class="sidebar" [ngClass]="{ 'active': sidebarActive }"
+     (mouseenter)="onSidebarMouseEnter()" (mouseleave)="onSidebarMouseLeave()">
+  <h1>Dashboard</h1>
+  <nav>
+    <ul>
+        <li class="clickable-li" (click)="clickbutton()">Ajouter Ticket</li>
+    </ul>
+  </nav>
+</div>
