@@ -1,9 +1,44 @@
-<div class="sidebar" [ngClass]="{ 'active': sidebarActive }"
-     (mouseenter)="onSidebarMouseEnter()" (mouseleave)="onSidebarMouseLeave()">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<div class="sidebar">
   <h1>Dashboard</h1>
   <nav>
+    <span>Settings</span>
     <ul>
-        <li class="clickable-li" (click)="clickbutton()">Ajouter Ticket</li>
+        <li class="clickable-li" id="user">
+          <div>
+            <mat-icon>account_circle</mat-icon>
+            USER PROFILE
+          </div>
+        <li class="clickable-li"(click)="clickbutton()">
+          <div>
+            <mat-icon>add_circle</mat-icon>
+            ADD TICKET
+          </div>
+        </li>
+        <li class="clickable-li">
+          <div>
+            <mat-icon>add_circle</mat-icon>
+            EXAMPLE
+          </div>
+        </li>
+        <li class="clickable-li"> 
+          <div>
+           <mat-icon>add_circle</mat-icon>
+           EXAMPLE
+          </div></li>
+        <li class="clickable-li">
+          <div>
+            <mat-icon>inbox</mat-icon>
+            INBOX
+          </div>
+        </li>
     </ul>
   </nav>
 </div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap');
+  </style>
