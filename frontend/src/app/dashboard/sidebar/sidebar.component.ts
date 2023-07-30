@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import { AddticketComponent } from '../addticket/addticket.component';
+import { AddprojectComponent } from '../addproject/addproject.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,10 +27,19 @@ export class SidebarComponent {
    ngOnInit(): void {
    }
 
-   clickbutton(): void{
+   addTicket(): void{
     this.dialog.open(AddticketComponent, {
       width: '750px',
       height: '500px'
     });
   }
+
+  addProject(): void{
+    this.dialog.open(AddprojectComponent, {
+      width: '750px',
+      height: '500px'
+    });
+  }
 }
+
+

@@ -10,10 +10,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddticketComponent } from './dashboard/addticket/addticket.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SidebarComponent } from './dashboard/sidebar/sidebar.component'
+import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
+import { AddprojectComponent } from './dashboard/addproject/addproject.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent, AddticketComponent, SidebarComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, AddticketComponent, SidebarComponent, AddprojectComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, BrowserAnimationsModule ,MatDialogModule,MatIconModule],
   providers: [],
   bootstrap: [AppComponent],
