@@ -15,10 +15,11 @@ import { AddprojectComponent } from './dashboard/addproject/addproject.component
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, DashboardComponent, AddticketComponent, SidebarComponent, AddprojectComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, BrowserAnimationsModule ,MatDialogModule,MatIconModule,MatFormFieldModule,MatStepperModule,MatInputModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, BrowserAnimationsModule ,MatDialogModule,MatIconModule,MatFormFieldModule,MatStepperModule,MatInputModule, MatSelectModule],
   providers: [],
   bootstrap: [AppComponent],
 })
