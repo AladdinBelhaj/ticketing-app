@@ -12,10 +12,13 @@ import { AddticketComponent } from './dashboard/addticket/addticket.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { AddprojectComponent } from './dashboard/addproject/addproject.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, DashboardComponent, AddticketComponent, SidebarComponent, AddprojectComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, BrowserAnimationsModule ,MatDialogModule,MatIconModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, BrowserAnimationsModule ,MatDialogModule,MatIconModule,MatFormFieldModule,MatStepperModule,MatInputModule],
   providers: [],
   bootstrap: [AppComponent],
 })

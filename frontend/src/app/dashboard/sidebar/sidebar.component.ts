@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule, MatDialogConfig} from '@angular/material/dialog';
 import { AddticketComponent } from '../addticket/addticket.component';
 import { AddprojectComponent } from '../addproject/addproject.component';
+import { DialogConfig } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,16 +10,7 @@ import { AddprojectComponent } from '../addproject/addproject.component';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-  
-  @Input() sidebarActive = false;
 
-  onSidebarMouseEnter() {
-    this.sidebarActive = true;
-  }
-
-  onSidebarMouseLeave() {
-    this.sidebarActive = false;
-  }
   
  
   constructor(public dialog: MatDialog){
@@ -35,10 +27,15 @@ export class SidebarComponent {
   }
 
   addProject(): void{
-    this.dialog.open(AddprojectComponent, {
-      width: '750px',
-      height: '500px'
-    });
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '1000px';
+    dialogConfig.height = '300px';
+
+    this.dialog.open(AddprojectComponent, dialogConfig);
+    
   }
 }
 
