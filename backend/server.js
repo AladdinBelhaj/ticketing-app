@@ -12,7 +12,7 @@ app.use(express.json()); // create an express application
 const connexion = mysql.createConnection({ // define database metadata
     host: 'localhost',
     user: 'root',
-    password: 'issatm',
+    password: '',
     database:'ticket-app-bd'
 });
 
@@ -59,3 +59,4 @@ connexion.connect((err) => { // establish connection with database
   app.listen(port, () => {
     console.log(`Server started on port ${port}`);
   });
+  
