@@ -3,7 +3,7 @@
     <mat-label>Projet</mat-label>
     <mat-select formControlName="projet">
       <mat-option *ngFor="let projet of listProjet" [value]="projet.id">
-        {{ projet.name }}
+        {{ projet.number }} - {{ projet.title }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -18,7 +18,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Emitteur (disabled)</mat-label>
+    <mat-label>Emitteur</mat-label>
     <input formControlName="emitteur" matInput />
   </mat-form-field>
 
@@ -31,10 +31,20 @@
     ></textarea>
   </mat-form-field>
 
+  <div class="container">
+    <input
+      #fileInput
+      formControlName="fichier"
+      (change)="onFileChange(fileInput)"
+      type="file"
+    />
+  </div>
+
   <mat-dialog-actions></mat-dialog-actions>
   <section>
     <div class="example-button-row">
       <button
+        (click)="saveTicket()"
         mat-raised-button
         color="primary"
         [disabled]="!addTicketForm.valid"
@@ -45,7 +55,3 @@
   </section>
   <mat-dialog-actions></mat-dialog-actions>
 </form>
-<div class="container">
-  <input #fileInput type="file" />
-  <button (click)="onFileUpload(fileInput)">upload</button>
-</div>

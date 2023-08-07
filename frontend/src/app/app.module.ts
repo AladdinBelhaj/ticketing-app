@@ -9,8 +9,14 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddticketComponent } from './dashboard/addticket/addticket.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddprojectComponent } from './dashboard/addproject/addproject.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -19,6 +25,7 @@ import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
     DashboardComponent,
     AddticketComponent,
     SidebarComponent,
+    AddprojectComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,8 +33,14 @@ import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatDialogModule,
     MatIconModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

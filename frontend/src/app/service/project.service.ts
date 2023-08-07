@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, tap } from 'rxjs';
+import { Observable, catchError, tap } from 'rxjs';
 import { Project } from '../model/project';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   saveProject(project: Project) {
     return this.http.post<any>('http://localhost:3000/project', project).pipe(
@@ -20,5 +19,9 @@ export class ProjectService {
         return []; // Return an empty array to handle errors gracefully in the component
       })
     );
+  }
+
+  getAllProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>('http://localhost:3000/projet');
   }
 }
