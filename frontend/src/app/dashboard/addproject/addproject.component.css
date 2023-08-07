@@ -1,0 +1,10 @@
+
+  mat-dialog-actions {
+    display: flex; /* Use flexbox to align buttons horizontally */
+    justify-content: flex-end; /* Align buttons to the right */
+    padding: 16px; /* Add padding to create space between buttons and content */
+    background-color: white; /* Set background color to white */
+    gap: 10px;
+  }
+
+  

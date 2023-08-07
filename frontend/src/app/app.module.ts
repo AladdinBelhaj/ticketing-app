@@ -11,9 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddticketComponent } from './dashboard/addticket/addticket.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -31,10 +28,6 @@ import { MatInputModule } from '@angular/material/input';
     BrowserAnimationsModule,
     MatDialogModule,
     MatIconModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
