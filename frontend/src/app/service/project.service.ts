@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, tap } from 'rxjs';
 import { Project } from '../model/project';
+import { Client } from '../model/client';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,7 @@ import { Project } from '../model/project';
 export class ProjectService {
   constructor(private http: HttpClient) {}
 
-  saveProject(project: Project) {
+  saveProject(project: Project): Observable<any> {
     return this.http.post<any>('http://localhost:3000/project', project).pipe(
       tap((response) => {
         console.log('Data inserted successfully!'); // Log success message
@@ -24,4 +26,10 @@ export class ProjectService {
   getAllProjects(): Observable<Project[]> {
     return this.http.get<Project[]>('http://localhost:3000/projet');
   }
+
+
+  getClientList(): Observable<string[]> {
+    return this.http.get<any[]>('http://localhost:3000/client')
+  }
+  
 }

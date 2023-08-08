@@ -34,6 +34,12 @@ const saveObject = require("./app/controllers/object/addobject.controller.js");
 saveObject(app);
 
 
+const getClientList = require("./app/routes/client.route");
+app.use(getClientList()); // Invoke getClientList and use the returned router
+
+
+
+
 // start server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

@@ -9,10 +9,22 @@ import { ProjectService } from 'src/app/service/project.service';
 })
 export class AddprojectComponent implements OnInit{
 
+  clients: string[] = []; // Array to store the list of clients
+
   ngOnInit(): void {
-    
+    // Fetch the list of clients from the backend
+    this.projectService.getClientList().subscribe(
+      (clients) => {
+        this.clients = clients;
+      },
+      (error) => {
+        console.error('Error fetching clients:', error);
+      }
+    );
   }
 
+
+  
 
 title: string = '';
 number: number = 0;

@@ -38,16 +38,17 @@
       </mat-dialog-actions>
     </mat-step>
 
+   
     <mat-step label="Client">
       <mat-form-field>
         <mat-label>Client</mat-label>
-        <input
-          matNativeControl
-          [(ngModel)]="client"
-          name="client"
-          placeholder="Enter your project client"
-        />
+        <mat-select [(ngModel)]="client" name="client">
+          <mat-option *ngFor="let clientName of clients" [value]="clientName">
+            {{ clientName }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
+    
       <div class="stepper-actions">
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
