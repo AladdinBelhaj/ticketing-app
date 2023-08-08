@@ -31,5 +31,9 @@ export class ProjectService {
   getClientList(): Observable<string[]> {
     return this.http.get<any[]>('http://localhost:3000/client')
   }
+
+  getEmployeList(): Observable<string[]>{
+    return this.http.get<any[]>('http://localhost:3000/employe')
+  }
   
 }

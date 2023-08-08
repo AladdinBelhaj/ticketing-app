@@ -33,10 +33,13 @@ saveProject(app);
 const saveObject = require("./app/controllers/object/addobject.controller.js");
 saveObject(app);
 
-
+// import and set up getclient routes
 const getClientList = require("./app/routes/client.route");
 app.use(getClientList()); // Invoke getClientList and use the returned router
 
+// import and set up getclient routes
+const getEmployeList = require('./app/routes/employe.route');
+app.use(getEmployeList());
 
 
 

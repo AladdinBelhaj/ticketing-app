@@ -80,12 +80,11 @@
     <mat-step label="Responsable">
       <mat-form-field>
         <mat-label>Responsable</mat-label>
-        <input
-          matNativeControl
-          [(ngModel)]="responsable"
-          name="responsable"
-          placeholder="Enter your project responsable"
-        />
+        <mat-select [(ngModel)]="responsable" name="responsable">
+          <mat-option *ngFor="let employeName of employes" [value]="employeName">
+            {{ employeName }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <div class="stepper-actions">
         <button mat-button matStepperPrevious>Back</button>
@@ -99,16 +98,12 @@
     <mat-step label="Alt. Responsable">
       <mat-form-field>
         <mat-label>Alt. Responsable</mat-label>
-        <input
-          matNativeControl
-          [(ngModel)]="altResponsable"
-          name="altResponsable"
-          placeholder="Enter your project alt. responsable"
-        />
+        <mat-select [(ngModel)]="altResponsable" name="altresponsable">
+          <mat-option *ngFor="let employeName of employes" [value]="employeName">
+            {{ employeName }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-      <div class="stepper-actions">
-        <button mat-button matStepperPrevious>Back</button>
-      </div>
 
       <mat-dialog-actions>
         <button mat-button mat-dialog-close>Cancel</button>
