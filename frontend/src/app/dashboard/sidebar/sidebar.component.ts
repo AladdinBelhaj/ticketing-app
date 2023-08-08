@@ -3,6 +3,7 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule, MatDialogConf
 import { AddticketComponent } from '../addticket/addticket.component';
 import { AddprojectComponent } from '../addproject/addproject.component';
 import { DialogConfig } from '@angular/cdk/dialog';
+import { AddobjectComponent } from '../addobject/addobject.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -37,6 +38,16 @@ export class SidebarComponent {
     this.dialog.open(AddprojectComponent, dialogConfig);
     
   }
+
+  addObject():void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '1000px';
+    dialogConfig.height = '300px';
+    
+    this.dialog.open(AddobjectComponent, dialogConfig);
+  }
+
 }
 
 

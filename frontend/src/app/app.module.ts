@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddprojectComponent } from './dashboard/addproject/addproject.component';
 import { MatSelectModule } from '@angular/material/select';
+import { AddobjectComponent } from './dashboard/addobject/addobject.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
     AddticketComponent,
     SidebarComponent,
     AddprojectComponent,
+    AddobjectComponent,
   ],
   imports: [
     BrowserModule,

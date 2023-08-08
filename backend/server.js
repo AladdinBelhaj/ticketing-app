@@ -25,8 +25,14 @@ setupAddTicketRoutes(app);
 
 
 // Import and set up the addproject routes
-const saveProject = require(".app/controllers/project/addproject.controller.js");
+const saveProject = require("./app/controllers/project/addproject.controller.js");
 saveProject(app);
+
+
+// Import and set up the addobject routes
+const saveObject = require("./app/controllers/object/addobject.controller.js");
+saveObject(app);
+
 
 // start server
 const port = process.env.PORT || 3000;

@@ -1,0 +1,15 @@
+h2{
+    text-align: center;
+    padding: 15px;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+
+mat-dialog-actions {
+    display: flex; /* Use flexbox to align buttons horizontally */
+    justify-content: flex-end; /* Align buttons to the right */
+    align-items: flex-end;
+    padding: 16px; /* Add padding to create space between buttons and content */
+    background-color: white; /* Set background color to white */
+    gap: 10px;
+  }
