@@ -3,10 +3,10 @@ const cors = require("cors");
 const connexion = require("../controllers/db").connexion;
 const router = express.Router();
 
-// Function to get the list of clients
+
 const getClientList = () => {
   router.get("/client", (req, res) => {
-    const query = "SELECT name FROM client"; // Adjust the query based on your table structure
+    const query = "SELECT name FROM client"; 
 
     connexion.query(query, (err, results) => {
       if (err) {
@@ -19,7 +19,7 @@ const getClientList = () => {
     });
   });
 
-  return router; // Return the router instance
+  return router; 
 };
 
 module.exports = getClientList;
