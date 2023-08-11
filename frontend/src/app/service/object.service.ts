@@ -12,11 +12,11 @@ export class ObjectService {
   saveProject(object: Object) {
     return this.http.post<any>('http://localhost:3000/object', object).pipe(
       tap((response) => {
-        console.log('Data inserted successfully!'); // Log success message
+        console.log('Data inserted successfully!')
       }),
       catchError((error) => {
         console.error('Project save error:', error);
-        return []; // Return an empty array to handle errors gracefully in the component
+        return [];
       })
     );
   }

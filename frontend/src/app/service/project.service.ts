@@ -14,11 +14,11 @@ export class ProjectService {
   saveProject(project: Project): Observable<any> {
     return this.http.post<any>('http://localhost:3000/project', project).pipe(
       tap((response) => {
-        console.log('Data inserted successfully!'); // Log success message
+        console.log('Data inserted successfully!'); 
       }),
       catchError((error) => {
         console.error('Project save error:', error);
-        return []; // Return an empty array to handle errors gracefully in the component
+        return []; // incase of error return empty array
       })
     );
   }
