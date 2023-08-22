@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddticketComponent } from './ticket/addticket/addticket.component';
 import { DashboardComponent } from './dashboard.component';
-import { AddprojectComponent } from './addproject/addproject.component';
+import { AddprojectComponent } from './project/addproject/addproject.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { UpdateTicketComponent } from './ticket/update-ticket/update-ticket.component';
 import { InfoTicketComponent } from './ticket/info-ticket/info-ticket.component';

@@ -8,8 +8,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './dashboard/header/header.component';
 import { SideBarComponent } from './dashboard/side-bar/side-bar.component';
 import { LoginComponent } from './login/login.component';
-import { UpdateTicketComponent } from './dashboard/ticket/update-ticket/update-ticket.component';
 
+import { UpdateTicketComponent } from './dashboard/ticket/update-ticket/update-ticket.component';
 @NgModule({
   declarations: [
     AppComponent,

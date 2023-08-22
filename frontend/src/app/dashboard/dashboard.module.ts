@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
-import { AddprojectComponent } from './addproject/addproject.component';
+import { AddprojectComponent } from './project/addproject/addproject.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { AddticketComponent } from './ticket/addticket/addticket.component';
@@ -21,6 +21,9 @@ import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 import { UpdateTicketComponent } from './ticket/update-ticket/update-ticket.component';
 import { InfoTicketComponent } from './ticket/info-ticket/info-ticket.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { UpdateProjectComponent } from './project/update-project/update-project.component';
+import { InfoProjectComponent } from './project/info-project/info-project.component';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -29,6 +32,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     TicketComponent,
     UpdateTicketComponent,
     InfoTicketComponent,
+    InfoProjectComponent,
+    UpdateProjectComponent
   ],
   imports: [
     HttpClientModule,
