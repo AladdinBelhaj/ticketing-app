@@ -1,0 +1,114 @@
+<div class="pd-20 card-box mb-30">
+  <div class="clearfix">
+    <div class="pull-left">
+      <div class="d-inline-flex align-items-end">
+        <p>
+          Paramétrage >
+          <a routerLink="../">Tickets</a> >
+        </p>
+        <p class="text-blue">&nbsp;Ajouter</p>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="addTicketForm">
+    <!--PROJET-->
+    <div class="form-group">
+      <label>Projet *</label>
+      <div>
+        <select class="custom-select col-12" formControlName="projet">
+          <option *ngFor="let projet of listProjet" [value]="projet.id">
+            {{ projet.title }} - {{ projet.number }}
+          </option>
+        </select>
+      </div>
+      <div
+        class="text-danger"
+        *ngIf="
+          addTicketForm.get('projet')!.invalid &&
+          addTicketForm.get('projet')!.touched
+        "
+      >
+        Projet invalid
+      </div>
+    </div>
+    <!--Objet-->
+    <div class="form-group">
+      <label>Objet *</label>
+      <div>
+        <select class="custom-select col-12" formControlName="objet">
+          <option *ngFor="let objet of listObjet" [value]="objet.id">
+            {{ objet.title }} - {{ objet.number }}
+          </option>
+        </select>
+      </div>
+      <div
+        class="text-danger"
+        *ngIf="
+          addTicketForm.get('objet')!.invalid &&
+          addTicketForm.get('objet')!.touched
+        "
+      >
+        Objet invalid
+      </div>
+    </div>
+    <!--EMITTEUR-->
+    <div class="form-group">
+      <label>Emitteur *</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="emitteur"
+        readonly
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          addTicketForm.get('emitteur')!.invalid &&
+          addTicketForm.get('emitteur')!.touched
+        "
+      >
+        Emitteur invalid
+      </div>
+    </div>
+
+    <!--Description-->
+    <div class="form-group">
+      <label>Description</label>
+      <textarea formControlName="description" class="form-control"></textarea>
+    </div>
+
+    <!--FICHIER-->
+    <div class="form-group">
+      <label>Fichier</label>
+      <div class="custom-file">
+        <input
+          #fileInput
+          (change)="onFileChange(fileInput)"
+          type="file"
+          class="custom-file-input"
+        />
+        <label class="custom-file-label">{{ fileName }}</label>
+      </div>
+    </div>
+    <!--buttons-->
+    <div class="d-flex justify-content-end">
+      <button
+        type="submit"
+        class="btn btn-success"
+        (click)="saveTicket()"
+        [ngStyle]="{ cursor: addTicketForm.valid ? 'pointer' : 'not-allowed' }"
+        [disabled]="!addTicketForm.valid"
+        routerLink="/dashboard/ticket"
+      >
+        Ajouter
+      </button>
+      <button
+        type="submit"
+        class="btn btn-secondary ml-3"
+        (click)="resetForm()"
+      >
+        Réinitialiser
+      </button>
+    </div>
+  </form>
+</div>

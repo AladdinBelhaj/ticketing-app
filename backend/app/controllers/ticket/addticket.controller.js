@@ -18,6 +18,9 @@ const setupAddTicketRoutes = (app) => {
 
   //posting information
   app.post("/ticket", upload.single("fichier"), (req, res) => {
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded." });
+    }
     const {
       projet,
       objet,
@@ -29,7 +32,7 @@ const setupAddTicketRoutes = (app) => {
       fichierSolution,
     } = req.body;
 
-    const insertQuery = `INSERT INTO ticket (projet, objet, emitteur, description,fichier,etat,responsable,descriptionSolution,fichierSolution) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)`;
+    const insertQuery = `INSERT INTO ticket (projet, objet, emitteur, description,fichier,etat,responsable,descriptionSolution,fichierSolution) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     const values = [
       projet,
       objet,
@@ -69,6 +72,121 @@ const setupAddTicketRoutes = (app) => {
       }
 
       res.status(200).json(rows); // Sending all rows
+    });
+  });
+
+  //update ticket
+  app.put("/ticket/:id", upload.single("fichier"), (req, res) => {
+    const ticketId = req.params.id;
+
+    const {
+      projet,
+      objet,
+      emitteur,
+      description,
+      etat,
+      responsable,
+      descriptionSolution,
+      fichierSolution,
+    } = req.body;
+
+    let updateQuery =
+      "UPDATE ticket SET projet = ?, objet = ?, emitteur = ?, description = ?, etat = ?, responsable = ?, descriptionSolution = ?, fichierSolution = ?";
+
+    const updateValues = [
+      projet,
+      objet,
+      emitteur,
+      description,
+      etat,
+      responsable,
+      descriptionSolution,
+      fichierSolution,
+    ];
+
+    if (req.file) {
+      updateQuery += ", fichier = ?";
+      updateValues.push(req.file.filename);
+    }
+
+    updateQuery += " WHERE id = ?";
+
+    updateValues.push(ticketId);
+
+    connexion.query(updateQuery, updateValues, (err, results) => {
+      if (err) {
+        console.error("Error updating ticket:", err);
+        res.status(500).json({ message: "Error updating ticket" });
+        return;
+      }
+
+      console.log("Ticket updated successfully!");
+      res.status(200).json({ message: "Ticket updated successfully" });
+    });
+  });
+
+  //get the information from the objet table:
+  app.get("/objet", (req, res) => {
+    const selectQuery = "SELECT * FROM objet";
+
+    connexion.query(selectQuery, (err, rows) => {
+      if (err) {
+        console.error("Error fetching objet:", err);
+        res.status(500).json({ message: "Error fetching objet" });
+        return;
+      }
+
+      res.status(200).json(rows); // Sending all rows
+    });
+  });
+
+  //get tickets by user:
+  app.get("/ticket/:email", (req, res) => {
+    const email = req.params.email;
+    const selectQuery = "SELECT * FROM ticket where emitteur = ?";
+
+    connexion.query(selectQuery, [email], (err, rows) => {
+      if (err) {
+        console.error("Error fetching objet:", err);
+        res.status(500).json({ message: "Error fetching objet" });
+        return;
+      }
+
+      res.status(200).json(rows); // Sending all rows
+    });
+  });
+
+  // Delete a ticket by ID
+  app.delete("/ticket/:id", (req, res) => {
+    const ticketId = req.params.id;
+
+    const deleteQuery = "DELETE FROM ticket WHERE id = ?";
+
+    connexion.query(deleteQuery, [ticketId], (err, results) => {
+      if (err) {
+        console.error("Error deleting ticket:", err);
+        res.status(500).json({ message: "Error deleting ticket" });
+        return;
+      }
+
+      console.log("Ticket deleted successfully!");
+      res.status(200).json({ message: "Ticket deleted successfully" });
+    });
+  });
+
+  //get tickets by user:
+  app.get("/ticket/getbyid/:id", (req, res) => {
+    const id = req.params.id;
+    const selectQuery = "SELECT * FROM ticket where id = ?";
+
+    connexion.query(selectQuery, [id], (err, rows) => {
+      if (err) {
+        console.error("Error fetching objet:", err);
+        res.status(500).json({ message: "Error fetching objet" });
+        return;
+      }
+
+      res.status(200).json(rows[0]); // Sending all rows
     });
   });
 };

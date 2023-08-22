@@ -6,12 +6,17 @@ import { authGuard } from './service/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate:[authGuard]},
-  { path: '', redirectTo: '/login', pathMatch: 'full'} // when path is empty, redirect to /login
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+    canActivate: [authGuard],
+  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // when path is empty, redirect to /login
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

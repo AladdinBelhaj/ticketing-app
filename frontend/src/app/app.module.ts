@@ -1,31 +1,21 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './dashboard/header/header.component';
+import { SideBarComponent } from './dashboard/side-bar/side-bar.component';
 import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AddticketComponent } from './dashboard/addticket/addticket.component';
-import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
-import { AddprojectComponent } from './dashboard/addproject/addproject.component';
-import { MatSelectModule } from '@angular/material/select';
+import { UpdateTicketComponent } from './dashboard/ticket/update-ticket/update-ticket.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
-    AddticketComponent,
-    SidebarComponent,
-    AddprojectComponent,
+    SideBarComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,14 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatIconModule,
-    MatStepperModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    MatDialogModule,
     ReactiveFormsModule,
-    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

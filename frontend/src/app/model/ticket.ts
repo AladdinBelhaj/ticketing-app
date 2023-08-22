@@ -3,9 +3,10 @@ export interface Ticket {
   objet: string;
   emitteur: string;
   description: string;
-  fichier?: FormData;
+  fichier?: File; // Change the type to File
   etat: string;
   responsable?: string;
   descriptionSolution?: string;
   fichierSolution?: string;
+  id?: string;
 }
