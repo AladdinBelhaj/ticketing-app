@@ -1,4 +1,5 @@
-export interface Object{
-    title: string;
-    classType: string;
+export interface Object {
+  title: string;
+  number: number;
+  id?: string;
 }

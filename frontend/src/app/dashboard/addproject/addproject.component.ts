@@ -9,31 +9,10 @@ import { ProjectService } from 'src/app/service/project.service';
 })
 export class AddprojectComponent implements OnInit{
 
-  clients: string[] = []; // array to store list of clients
-  employes: string[] = []; // array to store list of clients
-
   ngOnInit(): void {
-    // fetch list of clients from back end
-    this.projectService.getClientList().subscribe(
-      (clients) => {
-        this.clients = clients;
-      },
-      (error) => {
-        console.error('Error fetching clients:', error);
-      }
-    );
-
-    this.projectService.getEmployeList().subscribe(
-      (employes) => {
-        this.employes = employes;
-      },
-      (error) =>{
-        console.error('Error fetching employes:', error);
-      }
-    )
+    
   }
 
-  
 
 title: string = '';
 number: number = 0;
@@ -55,12 +34,14 @@ saveProject() {
   this.project.altResponsable = this.altResponsable;
 
   this.projectService.saveProject(this.project).subscribe(  () => {
-    // http request sucessfull
+    // This block executes when the HTTP request is successful
     console.log('Project saved successfully!');
+    // Optionally, you can perform any other actions or display a success message here.
   },
   (error) => {
-    // error
+    // This block executes if there's an error during the HTTP request
     console.error('Error saving project:', error);
+    // Optionally, you can display an error message to the user or handle the error in any other way.
   }
 );}
 

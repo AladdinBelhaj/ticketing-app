@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, tap } from 'rxjs';
-import { Object } from '../model/object';
+import { Object } from 'src/app/model/object'; // Make sure you import the correct Object type
 
 @Injectable({
   providedIn: 'root',
@@ -9,16 +9,8 @@ import { Object } from '../model/object';
 export class ObjectService {
   constructor(private http: HttpClient) {}
 
-  saveProject(object: Object) {
-    return this.http.post<any>('http://localhost:3000/object', object).pipe(
-      tap((response) => {
-        console.log('Data inserted successfully!')
-      }),
-      catchError((error) => {
-        console.error('Project save error:', error);
-        return [];
-      })
-    );
+  // Change the return type to Object[] instead of object[]
+  getAllObjects(): Observable<Object[]> {
+    return this.http.get<Object[]>('http://localhost:3000/objet');
   }
-
 }

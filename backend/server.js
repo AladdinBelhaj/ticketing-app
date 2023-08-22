@@ -17,31 +17,30 @@ connexion.connect((err) => {
 
 require("./app/routes/auth.route")(app);
 
+app.post("/project", (req, res) => {
+  const { title, number, client, type, responsable, altResponsable } = req.body;
 
+  const insertQuery = `INSERT INTO projet (title, numero, client, type, resp, resp_alt) VALUES (?, ?, ?, ?, ?, ?)`;
+  const values = [title, number, client, type, responsable, altResponsable];
+
+  // Execute the query
+  connexion.query(insertQuery, values, (err, results) => {
+    if (err) {
+      console.error("Error inserting data into the database:", err);
+      res
+        .status(500)
+        .json({ message: "Error inserting data into the database" });
+      return;
+    }
+
+    console.log("Data inserted successfully!");
+    res.status(200).json({ message: "Data inserted successfully" });
+  });
+});
 
 // Import and set up the addticket routes
 const setupAddTicketRoutes = require("./app/controllers/ticket/addticket.controller.js");
 setupAddTicketRoutes(app);
-
-
-// Import and set up the addproject routes
-const saveProject = require("./app/controllers/project/addproject.controller.js");
-saveProject(app);
-
-
-// Import and set up the addobject routes
-const saveObject = require("./app/controllers/object/addobject.controller.js");
-saveObject(app);
-
-// import and set up getclient routes
-const getClientList = require("./app/routes/client.route");
-app.use(getClientList()); // Invoke getClientList and use the returned router
-
-// import and set up getclient routes
-const getEmployeList = require('./app/routes/employe.route');
-app.use(getEmployeList());
-
-
 
 // start server
 const port = process.env.PORT || 3000;

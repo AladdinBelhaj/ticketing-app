@@ -1,1 +1,5 @@
-<router-outlet></router-outlet>  
+<div [style.display]="!router.url.startsWith('/login') ? 'block' : 'none'">
+  <app-header></app-header>
+  <app-side-bar></app-side-bar>
+</div>
+<router-outlet></router-outlet>
