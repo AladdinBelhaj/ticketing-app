@@ -1,5 +1,5 @@
 export interface Object {
   title: string;
-  class: string;
+  classType: string;
   id?: string;
 }

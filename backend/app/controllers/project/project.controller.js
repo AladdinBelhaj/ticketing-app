@@ -42,7 +42,7 @@ const saveProject = (app) => {
       res.status(200).json({ message: "projet deleted successfully" });
     });
   });
-  //get tickets by id:
+  //get project by id:
   app.get("/projet/getbyid/:id", (req, res) => {
     const id = req.params.id;
     const selectQuery = "SELECT * FROM projet where id = ?";

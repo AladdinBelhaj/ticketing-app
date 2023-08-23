@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const connexion = require("./app/controllers/db").connexion;
-
 app.use(cors()); // allow request from different domains
 app.use(express.json()); // create an express application
 
@@ -41,7 +40,9 @@ app.post("/project", (req, res) => {
 // Import and set up the addticket routes
 const setupAddTicketRoutes = require("./app/controllers/ticket/addticket.controller.js");
 setupAddTicketRoutes(app);
-
+// Import and set up the object routes
+const setupObjectRoutes = require("./app/controllers/object/object.controller");
+setupObjectRoutes(app);
 // start server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
