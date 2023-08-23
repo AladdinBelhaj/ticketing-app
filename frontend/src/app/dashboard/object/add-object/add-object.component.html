@@ -1,1 +1,75 @@
-<p>add-object works!</p>
+<div class="pd-20 card-box mb-30">
+  <div class="clearfix">
+    <div class="pull-left">
+      <div class="d-inline-flex align-items-end">
+        <p>
+          Paramétrage >
+          <a routerLink="../">Objects</a> >
+        </p>
+        <p class="text-blue">&nbsp;Ajouter</p>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="AddObjectForm">
+    <!--title-->
+    <div class="form-group">
+      <label>title *</label>
+      <input
+        min="0"
+        formControlName="title"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          AddObjectForm.get('title')!.invalid &&
+          AddObjectForm.get('title')!.touched
+        "
+      >
+        title-Invalid
+      </div>
+    </div>
+    <!--classType-->
+    <div class="form-group">
+      <label>classType *</label>
+      <input
+        min="0"
+        formControlName="classType"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          AddObjectForm.get('classType')!.invalid &&
+          AddObjectForm.get('classType')!.touched
+        "
+      >
+        classType-Invalid
+      </div>
+    </div>
+    <!--buttons-->
+    <div class="d-flex justify-content-end">
+      <button
+        type="submit"
+        class="btn btn-success"
+        (click)="saveObject()"
+        [ngStyle]="{ cursor: AddObjectForm.valid ? 'pointer' : 'not-allowed' }"
+        [disabled]="!AddObjectForm.valid"
+        routerLink="/dashboard/objet"
+      >
+        Ajouter
+      </button>
+      <button
+        type="submit"
+        class="btn btn-secondary ml-3"
+        (click)="resetForm()"
+      >
+        Réinitialiser
+      </button>
+    </div>
+  </form>
+</div>

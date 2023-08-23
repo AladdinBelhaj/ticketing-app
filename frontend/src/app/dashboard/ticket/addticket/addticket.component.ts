@@ -86,12 +86,9 @@ export class AddticketComponent implements OnInit, OnDestroy {
       (response) => {
         console.log('Ticket added successfully:', response);
         this.ticketService.addTicketForm = undefined;
-
-        // You can perform additional actions here after a successful post.
       },
       (error) => {
         console.error('Error adding ticket:', error);
-        // Handle error cases here.
       }
     );
   }

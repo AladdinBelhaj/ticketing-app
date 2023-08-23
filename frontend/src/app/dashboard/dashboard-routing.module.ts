@@ -43,7 +43,7 @@ const routes: Routes = [
       { path: 'projet/update/:id', component: UpdateProjectComponent },
       //object
       { path: 'objet', component: ObjectComponent },
-      { path: 'objet/aa', component: AddObjectComponent },
+      { path: 'objet/add', component: AddObjectComponent },
     ],
   },
 ];
