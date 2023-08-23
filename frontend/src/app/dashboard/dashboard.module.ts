@@ -24,6 +24,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ProjectComponent } from './project/project.component';
 import { InfoProjectComponent } from './project/info-project/info-project.component';
 import { UpdateProjectComponent } from './project/update-project/update-project.component';
+import { ObjectComponent } from './object/object.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -35,6 +36,7 @@ import { UpdateProjectComponent } from './project/update-project/update-project.
     ProjectComponent,
     InfoProjectComponent,
     UpdateProjectComponent,
+    ObjectComponent,
   ],
   imports: [
     HttpClientModule,

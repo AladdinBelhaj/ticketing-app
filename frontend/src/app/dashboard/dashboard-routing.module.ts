@@ -7,12 +7,14 @@ import { TicketComponent } from './ticket/ticket.component';
 import { UpdateTicketComponent } from './ticket/update-ticket/update-ticket.component';
 import { InfoTicketComponent } from './ticket/info-ticket/info-ticket.component';
 import { ProjectComponent } from './project/project.component';
+import { UpdateProjectComponent } from './project/update-project/update-project.component';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
     children: [
+      //ticket
       {
         path: 'ticket',
         component: TicketComponent,
@@ -23,6 +25,7 @@ const routes: Routes = [
       },
       { path: 'ticket/update/:id', component: UpdateTicketComponent },
       { path: 'ticket/info/:id', component: InfoTicketComponent },
+      //project
       {
         path: 'projet',
         component: ProjectComponent,
@@ -35,6 +38,8 @@ const routes: Routes = [
         path: 'projet/info/:id',
         component: InfoTicketComponent,
       },
+      { path: 'projet/update/:id', component: UpdateProjectComponent },
+      //object
     ],
   },
 ];
