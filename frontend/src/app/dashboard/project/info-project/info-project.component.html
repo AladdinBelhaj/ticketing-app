@@ -1,1 +1,31 @@
-<p>info-project works!</p>
+<!-- Simple Datatable start -->
+
+<div class="card-box mb-30">
+  <div class="">
+    <div class="pt-3 px-4">
+      <div class="d-inline-flex align-items-end">
+        <p>
+          Paramétrage >
+          <a routerLink="../..">projects</a> >
+        </p>
+        <p class="text-blue">&nbsp;Consulter</p>
+      </div>
+      <p class="text-blue h6 my-3">Détails projet:</p>
+      <div *ngIf="project" class="pl-4 d-flex justify-content-around">
+        <div>
+          <p><b>title</b> {{ project.title }}</p>
+          <p><b>number:</b> {{ project.number }}</p>
+          <p><b>client :</b> {{ project.client }}</p>
+        </div>
+
+        <div>
+          <p><b>type :</b> {{ project.type }}</p>
+          <p><b>responsable :</b> {{ project.responsable }}</p>
+          <p><b>altResponsable :</b> {{ project.altResponsable }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Simple Datatable End -->

@@ -174,7 +174,7 @@ const setupAddTicketRoutes = (app) => {
     });
   });
 
-  //get tickets by user:
+  //get tickets by id:
   app.get("/ticket/getbyid/:id", (req, res) => {
     const id = req.params.id;
     const selectQuery = "SELECT * FROM ticket where id = ?";

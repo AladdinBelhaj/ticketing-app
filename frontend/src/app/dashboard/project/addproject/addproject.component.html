@@ -1,146 +1,135 @@
-<mat-dialog-content>
-  <mat-horizontal-stepper>
-    <mat-step label="Title">
-      <mat-form-field>
-        <mat-label>Title</mat-label>
-        <input
-          matInput
-          [(ngModel)]="title"
-          name="title"
-          placeholder="Enter your project title"
-        />
-      </mat-form-field>
-
-      <div class="stepper-actions">
-        <button mat-button matStepperNext>Next</button>
+<div class="pd-20 card-box mb-30">
+  <div class="clearfix">
+    <div class="pull-left">
+      <div class="d-inline-flex align-items-end">
+        <p>
+          Paramétrage >
+          <a routerLink="../">Projects</a> >
+        </p>
+        <p class="text-blue">&nbsp;Ajouter</p>
       </div>
-
-      <mat-dialog-actions>
-        <button mat-button mat-dialog-close>Cancel</button>
-      </mat-dialog-actions>
-    </mat-step>
-    <mat-step label="Number">
-      <mat-form-field>
-        <mat-label>Number</mat-label>
-        <input matNativeControl [(ngModel)]="number" name="number" placeholder="Enter your project number">
-      </mat-form-field> 
-        <div class="stepper-actions">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-        <mat-dialog-actions>
-          <button mat-button mat-dialog-close>Cancel</button>
-        </mat-dialog-actions>
-    </mat-step>
-
-
-    
-
-
-    <mat-step label="Type">
-      <mat-form-field>
-        <mat-label>Type</mat-label>
-        <input matNativeControl [(ngModel)]="type" name="type" placeholder="Enter your project type">
-      </mat-form-field> 
-        <div class="stepper-actions">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-        <mat-dialog-actions>
-          <button mat-button mat-dialog-close>Cancel</button>
-        </mat-dialog-actions>
-    </mat-step>
-
-
-    <mat-step label="Responsable">
-      <mat-form-field>
-        <mat-label>Responsable</mat-label>
-        <input matNativeControl [(ngModel)]="responsable" name="responsable" placeholder="Enter your project responsable">
-      </mat-form-field>
-      <div class="stepper-actions">
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+    </div>
+  </div>
+  <form [formGroup]="addProjectForm">
+    <!--title-->
+    <div class="form-group">
+      <label>title *</label>
+      <input
+        min="0"
+        formControlName="title"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          addProjectForm.get('title')!.invalid &&
+          addProjectForm.get('title')!.touched
+        "
+      >
+        title-Invalid
       </div>
-      <mat-dialog-actions>
-        <button mat-button mat-dialog-close>Cancel</button>
-      </mat-dialog-actions>
-    </mat-step>
-
-    <mat-step label="Client">
-      <mat-form-field>
-        <mat-label>Client</mat-label>
-        <input
-          matNativeControl
-          [(ngModel)]="client"
-          name="client"
-          placeholder="Enter your project client"
-        />
-      </mat-form-field>
-      <div class="stepper-actions">
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+    </div>
+    <!--number-->
+    <div class="form-group">
+      <label>number *</label>
+      <input
+        min="0"
+        formControlName="number"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          addProjectForm.get('number')!.invalid &&
+          addProjectForm.get('number')!.touched
+        "
+      >
+        number-Invalid
       </div>
-      <mat-dialog-actions>
-        <button mat-button mat-dialog-close>Cancel</button>
-      </mat-dialog-actions>
-    </mat-step>
-
-    <mat-step label="Type">
-      <mat-form-field>
-        <mat-label>Type</mat-label>
-        <input
-          matNativeControl
-          [(ngModel)]="type"
-          name="type"
-          placeholder="Enter your project type"
-        />
-      </mat-form-field>
-      <div class="stepper-actions">
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+    </div>
+    <!--client-->
+    <div class="form-group">
+      <label>client *</label>
+      <input
+        min="0"
+        formControlName="client"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          addProjectForm.get('client')!.invalid &&
+          addProjectForm.get('client')!.touched
+        "
+      >
+        client-Invalid
       </div>
-      <mat-dialog-actions>
-        <button mat-button mat-dialog-close>Cancel</button>
-      </mat-dialog-actions>
-    </mat-step>
-
-    <mat-step label="Responsable">
-      <mat-form-field>
-        <mat-label>Responsable</mat-label>
-        <input
-          matNativeControl
-          [(ngModel)]="responsable"
-          name="responsable"
-          placeholder="Enter your project responsable"
-        />
-      </mat-form-field>
-      <div class="stepper-actions">
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+    </div>
+    <!--type-->
+    <div class="form-group">
+      <label>type *</label>
+      <input
+        min="0"
+        formControlName="type"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          addProjectForm.get('type')!.invalid &&
+          addProjectForm.get('type')!.touched
+        "
+      >
+        type-Invalid
       </div>
-      <mat-dialog-actions>
-        <button mat-button mat-dialog-close>Cancel</button>
-      </mat-dialog-actions>
-    </mat-step>
-
-    <mat-step label="Alt. Responsable">
-      <mat-form-field>
-        <mat-label>Alt. Responsable</mat-label>
-        <input
-          matNativeControl
-          [(ngModel)]="altResponsable"
-          name="altResponsable"
-          placeholder="Enter your project alt. responsable"
-        />
-      </mat-form-field>
-      <div class="stepper-actions">
-        <button mat-button matStepperPrevious>Back</button>
-      </div>
-
-      <mat-dialog-actions>
-        <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button (click)="saveProject()">Save</button>
-      </mat-dialog-actions>
-    </mat-step>
-  </mat-horizontal-stepper>
-</mat-dialog-content>
+    </div>
+    <!--responsable-->
+    <div class="form-group">
+      <label>responsable</label>
+      <input
+        min="0"
+        formControlName="responsable"
+        class="form-control"
+        type="text"
+      />
+    </div>
+    <!--altResponsable-->
+    <div class="form-group">
+      <label>altResponsable</label>
+      <input
+        min="0"
+        formControlName="altResponsable"
+        class="form-control"
+        type="text"
+      />
+    </div>
+    <!--buttons-->
+    <div class="d-flex justify-content-end">
+      <button
+        type="submit"
+        class="btn btn-success"
+        (click)="saveProject()"
+        [ngStyle]="{ cursor: addProjectForm.valid ? 'pointer' : 'not-allowed' }"
+        [disabled]="!addProjectForm.valid"
+        routerLink="/dashboard/projet"
+      >
+        Ajouter
+      </button>
+      <button
+        type="submit"
+        class="btn btn-secondary ml-3"
+        (click)="resetForm()"
+      >
+        Réinitialiser
+      </button>
+    </div>
+  </form>
+</div>

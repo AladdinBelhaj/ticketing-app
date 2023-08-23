@@ -1,0 +1,57 @@
+/* Ensure table's responsiveness */
+table {
+    width: 100%;
+    table-layout: fixed; /* Prevent table from expanding beyond its container */
+    text-align: center;
+  }
+  
+  /* Adjust form field font size and width */
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  /* Center align headers and adjust font size */
+  th {
+    text-align: center !important;
+    font-size: 15px;
+  }
+  
+  /* Center align sort header container */
+  :host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+  }
+  
+  /* Adjust sort header content spacing */
+  :host ::ng-deep .mat-sort-header-content {
+    padding: 0px !important;
+    flex-direction: column;
+  }
+  
+  /* Reduce form field padding */
+  :host ::ng-deep .mat-form-field-appearance-standard .mat-form-field-flex {
+    padding-top: 0px !important;
+  }
+  
+  /* Styles for the button container */
+  .button-container {
+    display: flex;
+    justify-content: flex-end; /* Push buttons to the right side */
+    align-items: center;
+    margin-top: 10px; /* Add some spacing from the table */
+  }
+  
+  /* Styles for individual buttons */
+  .button-container button {
+    /* Add any specific button styling here */
+    margin-left: 8px; /* Adjust button spacing */
+  }
+  
+  /* Ensure filter inputs remain visible and aligned */
+  .mat-form-field-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+  }
