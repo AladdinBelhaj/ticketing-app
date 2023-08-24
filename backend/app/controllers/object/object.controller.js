@@ -22,7 +22,8 @@ const setupObjectRoutes = (app) => {
       }
     });
   });
-  app.get("/object", (req, res) => {
+  //get all objects
+  app.get("/objet", (req, res) => {
     const selectQuery = "SELECT * FROM objet";
 
     connexion.query(selectQuery, (error, results) => {
@@ -33,6 +34,47 @@ const setupObjectRoutes = (app) => {
         console.log("Data fetched successfully");
         res.status(200).json(results);
       }
+    });
+  });
+  // Delete a objet by ID
+  app.delete("/objet/:id", (req, res) => {
+    const objectId = req.params.id;
+
+    const deleteQuery = "DELETE FROM objet WHERE id = ?";
+
+    connexion.query(deleteQuery, [objectId], (err, results) => {
+      if (err) {
+        console.error("Error deleting objet:", err);
+        res.status(500).json({ message: "Error deleting objet" });
+        return;
+      }
+
+      console.log("objet deleted successfully!");
+      res.status(200).json({ message: "objet deleted successfully" });
+    });
+  });
+  //get object by is
+  app.get("/objet/getbyid/:id", (req, res) => {
+    const id = req.params.id;
+    const selectQuery = "SELECT * FROM objet where id = ?";
+
+    connexion.query(selectQuery, [id], (err, rows) => {
+      res.status(200).json(rows[0]); // Sending all rows
+    });
+  });
+  //get objects by user:
+  app.get("/objet/:title", (req, res) => {
+    const title = req.params.title;
+    const selectQuery = "SELECT * FROM objet where title = ?";
+
+    connexion.query(selectQuery, [title], (err, rows) => {
+      if (err) {
+        console.error("Error fetching objet:", err);
+        res.status(500).json({ message: "Error fetching objet" });
+        return;
+      }
+
+      res.status(200).json(rows); // Sending all rows
     });
   });
 };

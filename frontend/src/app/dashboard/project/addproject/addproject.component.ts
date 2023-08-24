@@ -43,18 +43,19 @@ export class AddprojectComponent implements OnInit, OnDestroy {
     }
   }
   saveProject() {
+    console.log(
+      'Form values before FormData preparation:',
+      this.addProjectForm.value
+    );
     const formData = new FormData();
-
     formData.append('title', this.addProjectForm.value.title);
     formData.append('number', this.addProjectForm.value.number);
     formData.append('client', this.addProjectForm.value.client);
     formData.append('type', this.addProjectForm.value.type);
     formData.append('responsable', this.addProjectForm.value.responsable);
     formData.append('altResponsable', this.addProjectForm.value.altResponsable);
-
     this.projectService.saveProject(formData).subscribe(
       (response) => {
-        console.log('Projet added successfully:', response);
         this.projectService.addProjectForm = undefined;
 
         // You can perform additional actions here after a successful post.
@@ -64,6 +65,7 @@ export class AddprojectComponent implements OnInit, OnDestroy {
         // Handle error cases here.
       }
     );
+    console.log('FormData before sending:', formData);
   }
   resetForm() {
     this.addProjectForm.reset();

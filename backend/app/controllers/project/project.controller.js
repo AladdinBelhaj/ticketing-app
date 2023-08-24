@@ -1,28 +1,26 @@
 const express = require("express");
 const cors = require("cors");
+const multer = require("multer");
+const upload = multer();
 const connexion = require("../db").connexion;
 
 const saveProject = (app) => {
   app.use(cors());
+  //posting
   app.post("/projet", (req, res) => {
-    const { title, number, client, type, responsable, altResponsable } =
-      req.body;
+    const projectData = req.body; // Assuming your Angular service sends the form data as JSON
 
-    const insertQuery = `INSERT INTO projet (title, numero, client, type, resp, resp_alt) VALUES (?, ?, ?, ?, ?, ?)`;
-    const values = [title, number, client, type, responsable, altResponsable];
+    const insertQuery = "INSERT INTO projet SET ?";
 
-    // Execute the query
-    connexion.query(insertQuery, values, (err, results) => {
+    connexion.query(insertQuery, projectData, (err, results) => {
       if (err) {
-        console.error("Error inserting data into the database:", err);
-        res
-          .status(500)
-          .json({ message: "Error inserting data into the database" });
+        console.error("Error saving project:", err);
+        res.status(500).json({ message: "Error saving project" });
         return;
       }
 
-      console.log("Data inserted successfully!");
-      res.status(200).json({ message: "Data inserted successfully" });
+      console.log("Project saved successfully!");
+      res.status(201).json({ message: "Project saved successfully" });
     });
   });
   // Delete a projet by ID

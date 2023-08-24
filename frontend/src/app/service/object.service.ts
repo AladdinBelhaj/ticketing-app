@@ -15,11 +15,17 @@ export class ObjectService {
   saveObject(formData: FormData) {
     return this.http.post(this.apiUrl + '/objet', formData);
   }
-  getAllObjects(): Observable<Object[]> {
-    return this.http.get<Object[]>('http://localhost:3000/objet');
+  public getAllObjects(): Observable<Object[]> {
+    return this.http.get<Object[]>(`${this.apiUrl}/objet`);
   }
-  deleteObject(objectId: number): Observable<any> {
+  public deleteObject(objectId: number): Observable<any> {
     const url = `${this.apiUrl}/objet/${objectId}`;
     return this.http.delete(url);
+  }
+  public getObjectById(id: any): Observable<Object> {
+    return this.http.get<Object>(`${this.apiUrl}/objet/getbyid/${id}`);
+  }
+  public getObjectsByUser(title: string): Observable<Object[]> {
+    return this.http.get<Object[]>(`${this.apiUrl}/objet/${title}`);
   }
 }

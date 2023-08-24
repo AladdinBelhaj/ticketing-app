@@ -10,6 +10,7 @@ import { ProjectComponent } from './project/project.component';
 import { UpdateProjectComponent } from './project/update-project/update-project.component';
 import { ObjectComponent } from './object/object.component';
 import { AddObjectComponent } from './object/add-object/add-object.component';
+import { InfoProjectComponent } from './project/info-project/info-project.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,7 @@ const routes: Routes = [
       },
       {
         path: 'projet/info/:id',
-        component: InfoTicketComponent,
+        component: InfoProjectComponent,
       },
       { path: 'projet/update/:id', component: UpdateProjectComponent },
       //object
