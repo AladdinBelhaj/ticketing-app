@@ -6,13 +6,23 @@ const connexion = require("../db").connexion;
 
 const saveProject = (app) => {
   app.use(cors());
-  //posting
+
   app.post("/projet", (req, res) => {
-    const projectData = req.body; // Assuming your Angular service sends the form data as JSON
+    const projectData = req.body; // Assuming you're sending the project data in the request body
 
-    const insertQuery = "INSERT INTO projet SET ?";
+    const insertQuery =
+      "INSERT INTO projet (title, number, client, type, responsable, altResponsable) VALUES (?, ?, ?, ?, ?, ?)";
 
-    connexion.query(insertQuery, projectData, (err, results) => {
+    const values = [
+      projectData.title,
+      projectData.number,
+      projectData.client,
+      projectData.type,
+      projectData.responsable,
+      projectData.altResponsable,
+    ];
+
+    connexion.query(insertQuery, values, (err, results) => {
       if (err) {
         console.error("Error saving project:", err);
         res.status(500).json({ message: "Error saving project" });
@@ -20,7 +30,7 @@ const saveProject = (app) => {
       }
 
       console.log("Project saved successfully!");
-      res.status(201).json({ message: "Project saved successfully" });
+      res.status(200).json({ message: "Project saved successfully" });
     });
   });
   // Delete a projet by ID
@@ -47,6 +57,38 @@ const saveProject = (app) => {
 
     connexion.query(selectQuery, [id], (err, rows) => {
       res.status(200).json(rows[0]); // Sending all rows
+    });
+  });
+  //update project
+  app.put("/projet/:id", (req, res) => {
+    const projectId = req.params.id;
+    const { title, number, client, type, responsable, altResponsable } =
+      req.body;
+
+    let updateQuery =
+      "UPDATE projet SET title = ?, number = ?, client = ?, type = ?, responsable = ?, altResponsable = ?";
+
+    const updateValues = [
+      title,
+      number,
+      client,
+      type,
+      responsable,
+      altResponsable,
+    ];
+    updateQuery += " WHERE id = ?";
+
+    updateValues.push(projectId);
+
+    connexion.query(updateQuery, updateValues, (err, results) => {
+      if (err) {
+        console.error("Error updating project:", err);
+        res.status(500).json({ message: "Error updating project" });
+        return;
+      }
+
+      console.log("project updated successfully!");
+      res.status(200).json({ message: "project updated successfully" });
     });
   });
 };

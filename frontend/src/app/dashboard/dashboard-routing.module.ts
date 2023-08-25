@@ -11,6 +11,7 @@ import { UpdateProjectComponent } from './project/update-project/update-project.
 import { ObjectComponent } from './object/object.component';
 import { AddObjectComponent } from './object/add-object/add-object.component';
 import { InfoProjectComponent } from './project/info-project/info-project.component';
+import { InfoObjectComponent } from './object/info-object/info-object.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
       //object
       { path: 'objet', component: ObjectComponent },
       { path: 'objet/add', component: AddObjectComponent },
+      {
+        path: 'objet/info/:id',
+        component: InfoObjectComponent,
+      },
     ],
   },
 ];

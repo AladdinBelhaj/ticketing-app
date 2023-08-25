@@ -22,6 +22,9 @@ export class ProjectService {
   public getProjectById(id: any): Observable<Project> {
     return this.http.get<Project>(`${this.apiUrl}/projet/getbyid/${id}`);
   }
+  public updateProject(id: string, project: Project): Observable<any> {
+    return this.http.put(`${this.apiUrl}/projet/${id}`, project);
+  }
   deleteProject(projectId: number): Observable<any> {
     const url = `${this.apiUrl}/projet/${projectId}`;
     return this.http.delete(url);

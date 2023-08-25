@@ -1,1 +1,136 @@
-<p>update-project works!</p>
+<div class="pd-20 card-box mb-30">
+  <div class="clearfix">
+    <div class="pull-left">
+      <div class="d-inline-flex align-items-end">
+        <p>
+          Paramétrage >
+          <a routerLink="../..">Projects</a> >
+        </p>
+        <p class="text-blue">&nbsp;Update</p>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="UpdateProjectForm">
+    <!--title-->
+    <div class="form-group">
+      <label>title *</label>
+      <input
+        min="0"
+        formControlName="title"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          UpdateProjectForm.get('title')!.invalid &&
+          UpdateProjectForm.get('title')!.touched
+        "
+      >
+        title-Invalid
+      </div>
+    </div>
+    <!--number-->
+    <div class="form-group">
+      <label>number *</label>
+      <input
+        min="0"
+        formControlName="number"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          UpdateProjectForm.get('number')!.invalid &&
+          UpdateProjectForm.get('number')!.touched
+        "
+      >
+        number-Invalid
+      </div>
+    </div>
+    <!--client-->
+    <div class="form-group">
+      <label>client *</label>
+      <input
+        min="0"
+        formControlName="client"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          UpdateProjectForm.get('client')!.invalid &&
+          UpdateProjectForm.get('client')!.touched
+        "
+      >
+        client-Invalid
+      </div>
+    </div>
+    <!--type-->
+    <div class="form-group">
+      <label>type *</label>
+      <input
+        min="0"
+        formControlName="type"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          UpdateProjectForm.get('type')!.invalid &&
+          UpdateProjectForm.get('type')!.touched
+        "
+      >
+        type-Invalid
+      </div>
+    </div>
+    <!--responsable-->
+    <div class="form-group">
+      <label>responsable</label>
+      <input
+        min="0"
+        formControlName="responsable"
+        class="form-control"
+        type="text"
+      />
+    </div>
+    <!--altResponsable-->
+    <div class="form-group">
+      <label>altResponsable</label>
+      <input
+        min="0"
+        formControlName="altResponsable"
+        class="form-control"
+        type="text"
+      />
+    </div>
+    <!--BUTTONS-->
+    <div class="d-flex justify-content-end">
+      <button
+        type="submit"
+        class="btn btn-success"
+        (click)="editProject()"
+        [ngStyle]="{
+          cursor: UpdateProjectForm.valid ? 'pointer' : 'not-allowed'
+        }"
+        [disabled]="!UpdateProjectForm.valid"
+      >
+        Modifer
+      </button>
+      <button
+        type="submit"
+        class="btn btn-secondary ml-3"
+        (click)="resetForm()"
+      >
+        Réinitialiser
+      </button>
+    </div>
+  </form>
+</div>
