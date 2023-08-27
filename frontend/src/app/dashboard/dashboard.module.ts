@@ -27,6 +27,7 @@ import { UpdateProjectComponent } from './project/update-project/update-project.
 import { ObjectComponent } from './object/object.component';
 import { AddObjectComponent } from './object/add-object/add-object.component';
 import { InfoObjectComponent } from './object/info-object/info-object.component';
+import { UpdateObjectComponent } from './object/update-object/update-object.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -41,6 +42,7 @@ import { InfoObjectComponent } from './object/info-object/info-object.component'
     ObjectComponent,
     AddObjectComponent,
     InfoObjectComponent,
+    UpdateObjectComponent,
   ],
   imports: [
     HttpClientModule,

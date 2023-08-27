@@ -18,7 +18,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
   styleUrls: ['./object.component.css'],
 })
 export class ObjectComponent implements OnInit {
-  public object!: Object[];
+  public Object!: Object[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!: MatTableDataSource<any>;
@@ -37,22 +37,24 @@ export class ObjectComponent implements OnInit {
     },
     buttonsStyling: false,
   };
+
   constructor(private ObjectService: ObjectService, private router: Router) {}
   ngOnInit() {
     this.ObjectService.getAllObjects().subscribe((response: any) => {
-      this.object = response;
-      this.dataSource = new MatTableDataSource(this.object);
+      this.Object = response;
+      this.dataSource = new MatTableDataSource(this.Object);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
   }
   applyFilter($event: any) {}
+
   removeObject(objectId: number | undefined) {
     if (objectId) {
       this.ObjectService.deleteObject(objectId).subscribe(() => {
-        this.ObjectService.getAllObjects().subscribe((objects: Object[]) => {
-          this.object = objects;
-          this.dataSource = new MatTableDataSource(this.object);
+        this.ObjectService.getAllObjects().subscribe((Objects: Object[]) => {
+          this.Object = Objects;
+          this.dataSource = new MatTableDataSource(this.Object);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         });

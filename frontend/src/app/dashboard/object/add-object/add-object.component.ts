@@ -34,20 +34,21 @@ export class AddObjectComponent implements OnInit, OnDestroy {
     }
   }
   saveObject() {
-    const formData = new FormData();
+    console.log(this.AddObjectForm.value);
+    let object: Object = {
+      title: this.AddObjectForm.value.title,
+      classType: this.AddObjectForm.value.classType,
+    };
 
-    formData.append('title', this.AddObjectForm.value.title);
-    formData.append('classType', this.AddObjectForm.value.classType);
-
-    this.ObjectService.saveObject(formData).subscribe(
+    this.ObjectService.saveObject(object).subscribe(
       (response) => {
-        console.log('objet added successfully:', response);
         this.ObjectService.AddObjectForm = undefined;
       },
       (error) => {
-        console.error('Error adding objet:', error);
+        console.error('Error adding object:', error);
       }
     );
+    console.log('FormData before sending:', object);
   }
   resetForm() {
     this.AddObjectForm.reset();

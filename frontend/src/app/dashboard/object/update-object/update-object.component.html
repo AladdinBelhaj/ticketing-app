@@ -1,0 +1,76 @@
+<div class="pd-20 card-box mb-30">
+  <div class="clearfix">
+    <div class="pull-left">
+      <div class="d-inline-flex align-items-end">
+        <p>
+          Paramétrage >
+          <a routerLink="../..">Objects</a> >
+        </p>
+        <p class="text-blue">&nbsp;Update</p>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="UpdateObjectForm">
+    <!--title-->
+    <div class="form-group">
+      <label>title *</label>
+      <input
+        min="0"
+        formControlName="title"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          UpdateObjectForm.get('title')!.invalid &&
+          UpdateObjectForm.get('title')!.touched
+        "
+      >
+        title-Invalid
+      </div>
+    </div>
+    <!--classType-->
+    <div class="form-group">
+      <label>classType *</label>
+      <input
+        min="0"
+        formControlName="classType"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          UpdateObjectForm.get('classType')!.invalid &&
+          UpdateObjectForm.get('classType')!.touched
+        "
+      >
+        classType-Invalid
+      </div>
+    </div>
+    <!--BUTTONS-->
+    <div class="d-flex justify-content-end">
+      <button
+        type="submit"
+        class="btn btn-success"
+        (click)="editObject()"
+        [ngStyle]="{
+          cursor: UpdateObjectForm.valid ? 'pointer' : 'not-allowed'
+        }"
+        [disabled]="!UpdateObjectForm.valid"
+      >
+        Modifer
+      </button>
+      <button
+        type="submit"
+        class="btn btn-secondary ml-3"
+        (click)="resetForm()"
+      >
+        Réinitialiser
+      </button>
+    </div>
+  </form>
+</div>

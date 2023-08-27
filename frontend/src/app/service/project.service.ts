@@ -12,8 +12,8 @@ export class ProjectService {
   private apiUrl = 'http://localhost:3000';
   constructor(private http: HttpClient) {}
 
-  saveProject(formData: FormData) {
-    return this.http.post(this.apiUrl + '/projet', formData);
+  saveProject(project: Project) {
+    return this.http.post(this.apiUrl + '/projet', project);
   }
 
   getAllProjects(): Observable<Project[]> {

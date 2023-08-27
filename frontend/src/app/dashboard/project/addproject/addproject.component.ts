@@ -47,25 +47,24 @@ export class AddprojectComponent implements OnInit, OnDestroy {
       'Form values before FormData preparation:',
       this.addProjectForm.value
     );
-    const formData = new FormData();
-    formData.append('title', this.addProjectForm.value.title);
-    formData.append('number', this.addProjectForm.value.number);
-    formData.append('client', this.addProjectForm.value.client);
-    formData.append('type', this.addProjectForm.value.type);
-    formData.append('responsable', this.addProjectForm.value.responsable);
-    formData.append('altResponsable', this.addProjectForm.value.altResponsable);
-    this.projectService.saveProject(formData).subscribe(
+    let project: Project = {
+      title: this.addProjectForm.value.title,
+      number: this.addProjectForm.value.number,
+      client: this.addProjectForm.value.client,
+      type: this.addProjectForm.value.type,
+      responsable: this.addProjectForm.value.responsable,
+      altResponsable: this.addProjectForm.value.altResponsable,
+    };
+
+    this.projectService.saveProject(project).subscribe(
       (response) => {
         this.projectService.addProjectForm = undefined;
-
-        // You can perform additional actions here after a successful post.
       },
       (error) => {
         console.error('Error adding projet:', error);
-        // Handle error cases here.
       }
     );
-    console.log('FormData before sending:', formData);
+    console.log('FormData before sending:', project);
   }
   resetForm() {
     this.addProjectForm.reset();

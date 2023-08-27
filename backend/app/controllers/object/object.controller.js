@@ -3,23 +3,24 @@ const cors = require("cors");
 const connexion = require("../db").connexion;
 const router = express.Router();
 
-const setupObjectRoutes = (app) => {
+const saveObject = (app) => {
   app.use(cors());
-  app.use(express.json()); // Make sure to include this middleware for JSON parsing
-  app.post("/object", (req, res) => {
-    const { classType, title } = req.body;
+  app.post("/objet", (req, res) => {
+    const objectData = req.body;
 
-    const insertQuery = `INSERT INTO objet (title, classType) VALUES (?, ?)`;
-    const values = [title, classType];
+    const insertQuery = "INSERT INTO objet (title, classType) VALUES (?, ?)";
 
-    connexion.query(insertQuery, values, (error, results) => {
-      if (error) {
-        console.error("Error inserting data:", error);
-        res.status(500).json({ error: "Error inserting data into database" });
-      } else {
-        console.log("Data inserted successfully");
-        res.status(200).json({ message: "Data inserted successfully" });
+    const values = [objectData.title, objectData.classType];
+
+    connexion.query(insertQuery, values, (err, results) => {
+      if (err) {
+        console.error("Error saving object:", err);
+        res.status(500).json({ message: "Error saving object" });
+        return;
       }
+
+      console.log("object saved successfully!");
+      res.status(200).json({ message: "object saved successfully" });
     });
   });
   //get all objects
@@ -53,7 +54,7 @@ const setupObjectRoutes = (app) => {
       res.status(200).json({ message: "objet deleted successfully" });
     });
   });
-  //get object by is
+  //get Object by id:
   app.get("/objet/getbyid/:id", (req, res) => {
     const id = req.params.id;
     const selectQuery = "SELECT * FROM objet where id = ?";
@@ -77,6 +78,29 @@ const setupObjectRoutes = (app) => {
       res.status(200).json(rows); // Sending all rows
     });
   });
+  //update object
+  app.put("/objet/:id", (req, res) => {
+    const objetId = req.params.id;
+    const { title, classType } = req.body;
+
+    let updateQuery = "UPDATE objet SET title = ?, classType = ?";
+
+    const updateValues = [title, classType];
+    updateQuery += " WHERE id = ?";
+
+    updateValues.push(objetId);
+
+    connexion.query(updateQuery, updateValues, (err, results) => {
+      if (err) {
+        console.error("Error updating object:", err);
+        res.status(500).json({ message: "Error updating object" });
+        return;
+      }
+
+      console.log("object updated successfully!");
+      res.status(200).json({ message: "object updated successfully" });
+    });
+  });
 };
 
-module.exports = setupObjectRoutes;
+module.exports = saveObject;

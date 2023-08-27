@@ -12,13 +12,13 @@ export class ObjectService {
   constructor(private http: HttpClient) {}
   private apiUrl = 'http://localhost:3000';
   // Change the return type to Object[] instead of object[]
-  saveObject(formData: FormData) {
-    return this.http.post(this.apiUrl + '/objet', formData);
+  saveObject(object: Object) {
+    return this.http.post(this.apiUrl + '/objet', object);
   }
-  public getAllObjects(): Observable<Object[]> {
+  getAllObjects(): Observable<Object[]> {
     return this.http.get<Object[]>(`${this.apiUrl}/objet`);
   }
-  public deleteObject(objectId: number): Observable<any> {
+  deleteObject(objectId: number): Observable<any> {
     const url = `${this.apiUrl}/objet/${objectId}`;
     return this.http.delete(url);
   }
@@ -27,5 +27,8 @@ export class ObjectService {
   }
   public getObjectsByUser(title: string): Observable<Object[]> {
     return this.http.get<Object[]>(`${this.apiUrl}/objet/${title}`);
+  }
+  public updateObject(id: string, object: Object): Observable<any> {
+    return this.http.put(`${this.apiUrl}/objet/${id}`, object);
   }
 }

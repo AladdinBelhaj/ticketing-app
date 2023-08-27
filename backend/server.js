@@ -20,8 +20,8 @@ require("./app/routes/auth.route")(app);
 const setupAddTicketRoutes = require("./app/controllers/ticket/addticket.controller.js");
 setupAddTicketRoutes(app);
 // Import and set up the object routes
-const setupObjectRoutes = require("./app/controllers/object/object.controller");
-setupObjectRoutes(app);
+const saveObject = require("./app/controllers/object/object.controller");
+saveObject(app);
 // Import and set up the project routes
 const saveProject = require("./app/controllers/project/project.controller");
 saveProject(app);

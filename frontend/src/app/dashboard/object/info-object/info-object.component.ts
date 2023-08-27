@@ -23,7 +23,7 @@ export class InfoObjectComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap) => {
       if (!paramMap.has('id')) {
-        this.router.navigate(['/dashboard/ticket']);
+        this.router.navigate(['/dashboard/object']);
       } else {
         this.ObjectId = '' + paramMap.get('id');
         this.ObjectService.getObjectById(paramMap.get('id')).subscribe(

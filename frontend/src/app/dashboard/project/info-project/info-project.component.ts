@@ -23,7 +23,7 @@ export class InfoProjectComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap) => {
       if (!paramMap.has('id')) {
-        this.router.navigate(['/dashboard/ticket']);
+        this.router.navigate(['/dashboard/project']);
       } else {
         this.projectId = '' + paramMap.get('id');
         this.ProjectService.getProjectById(paramMap.get('id')).subscribe(
