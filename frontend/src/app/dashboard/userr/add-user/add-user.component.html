@@ -1,0 +1,112 @@
+<div class="pd-20 card-box mb-30">
+  <div class="clearfix">
+    <div class="pull-left">
+      <div class="d-inline-flex align-items-end">
+        <p>
+          Paramétrage >
+          <a routerLink="../">Users</a> >
+        </p>
+        <p class="text-blue">&nbsp;Ajouter</p>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="AddUserForm">
+    <!--Nom-->
+    <div class="form-group">
+      <label>Nom *</label>
+      <input
+        min="0"
+        formControlName="Nom"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          AddUserForm.get('Nom')!.invalid && AddUserForm.get('Nom')!.touched
+        "
+      >
+        Nom-Invalid
+      </div>
+    </div>
+    <!--Prenom-->
+    <div class="form-group">
+      <label>Prenom *</label>
+      <input
+        min="0"
+        formControlName="Prenom"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          AddUserForm.get('Prenom')!.invalid &&
+          AddUserForm.get('Prenom')!.touched
+        "
+      >
+        Nom-Invalid
+      </div>
+    </div>
+    <!--NumTelephone-->
+    <div class="form-group">
+      <label>NumTelephone *</label>
+      <input
+        min="0"
+        formControlName="NumTelephone"
+        class="form-control"
+        required
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          AddUserForm.get('NumTelephone')!.invalid &&
+          AddUserForm.get('NumTelephone')!.touched
+        "
+      >
+        NumTelephone-Invalid
+      </div>
+    </div>
+    <!--Role-->
+    <div class="form-group">
+      <label>Role *</label>
+      <select formControlName="Role" class="form-control" required>
+        <option value="" disabled>Select a role</option>
+        <option value="Client">Client</option>
+        <option value="Employer">Employer</option>
+      </select>
+      <div
+        class="text-danger"
+        *ngIf="
+          AddUserForm.get('Role')!.invalid && AddUserForm.get('Role')!.touched
+        "
+      >
+        Role-Invalid
+      </div>
+    </div>
+    <!--buttons-->
+    <div class="d-flex justify-content-end">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="saveUser()"
+        [ngStyle]="{ cursor: AddUserForm.valid ? 'pointer' : 'not-allowed' }"
+        [disabled]="!AddUserForm.valid"
+        routerLink="/dashboard/user"
+      >
+        Ajouter
+      </button>
+
+      <button
+        type="submit"
+        class="btn btn-secondary ml-3"
+        (click)="resetForm()"
+      >
+        Réinitialiser
+      </button>
+    </div>
+  </form>
+</div>

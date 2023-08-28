@@ -19,7 +19,14 @@ export class LoginComponent implements OnInit {
   PURE_EMAIL_REGEXP =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   form: FormGroup;
-  private user: User = { email: '', password: '' };
+  private user: User = {
+    email: '',
+    password: '',
+    Nom: '',
+    Prenom: '',
+    NumTelephone: 0,
+    Role: '',
+  };
   constructor(
     private loginService: LoginService,
     private formBuilder: FormBuilder

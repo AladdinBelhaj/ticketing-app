@@ -13,6 +13,8 @@ import { AddObjectComponent } from './object/add-object/add-object.component';
 import { InfoProjectComponent } from './project/info-project/info-project.component';
 import { InfoObjectComponent } from './object/info-object/info-object.component';
 import { UpdateObjectComponent } from './object/update-object/update-object.component';
+import { UserComponent } from './userr/user.component';
+import { AddUserComponent } from './userr/add-user/add-user.component';
 
 const routes: Routes = [
   {
@@ -55,6 +57,9 @@ const routes: Routes = [
         path: 'objet/update/:id',
         component: UpdateObjectComponent,
       },
+      //user
+      { path: 'user', component: UserComponent },
+      { path: 'user/add', component: AddUserComponent },
     ],
   },
 ];

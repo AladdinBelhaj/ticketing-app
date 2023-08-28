@@ -28,6 +28,8 @@ import { ObjectComponent } from './object/object.component';
 import { AddObjectComponent } from './object/add-object/add-object.component';
 import { InfoObjectComponent } from './object/info-object/info-object.component';
 import { UpdateObjectComponent } from './object/update-object/update-object.component';
+import { UserComponent } from './userr/user.component';
+import { AddUserComponent } from './userr/add-user/add-user.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -43,6 +45,8 @@ import { UpdateObjectComponent } from './object/update-object/update-object.comp
     AddObjectComponent,
     InfoObjectComponent,
     UpdateObjectComponent,
+    UserComponent,
+    AddUserComponent,
   ],
   imports: [
     HttpClientModule,
