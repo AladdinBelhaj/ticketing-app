@@ -22,7 +22,7 @@ export class UserComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!: MatTableDataSource<any>;
-  displayedColumns = ['Nom', 'Prenom', 'NumTelephone', 'Opérations'];
+  displayedColumns = ['Nom', 'Prenom', 'Role', 'Opérations'];
 
   swalConfig: SweetAlertOptions = {
     title: 'Confirmation',
@@ -41,7 +41,11 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.UserService.getAllUsers().subscribe((response: any) => {
       this.user = response;
-      this.dataSource = new MatTableDataSource(this.user);
+      this.dataSource = new MatTableDataSource(
+        this.user.filter((oneUser) => {
+          return oneUser.Role == 'client';
+        })
+      );
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });

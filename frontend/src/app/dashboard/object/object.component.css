@@ -1,0 +1,11 @@
+.operations-header {
+    text-align: center; /* Center the header text */
+    font-weight: bold;
+  }
+  
+  .operations-buttons {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center; /* Center the buttons vertically */
+  }
+  

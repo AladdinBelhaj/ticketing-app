@@ -25,6 +25,9 @@ saveObject(app);
 // Import and set up the project routes
 const saveProject = require("./app/controllers/project/project.controller");
 saveProject(app);
+// Import and set up the user routes
+const saveUser = require("./app/controllers/user/user.controller");
+saveUser(app);
 // start server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

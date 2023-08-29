@@ -30,6 +30,8 @@ import { InfoObjectComponent } from './object/info-object/info-object.component'
 import { UpdateObjectComponent } from './object/update-object/update-object.component';
 import { UserComponent } from './userr/user.component';
 import { AddUserComponent } from './userr/add-user/add-user.component';
+import { InfoUserComponent } from './userr/info-user/info-user.component';
+import { UpdateUserComponent } from './userr/update-user/update-user.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -47,6 +49,8 @@ import { AddUserComponent } from './userr/add-user/add-user.component';
     UpdateObjectComponent,
     UserComponent,
     AddUserComponent,
+    InfoUserComponent,
+    UpdateUserComponent,
   ],
   imports: [
     HttpClientModule,

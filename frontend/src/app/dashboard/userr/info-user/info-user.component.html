@@ -1,0 +1,29 @@
+<!-- Simple Datatable start -->
+
+<div class="card-box mb-30">
+  <div class="">
+    <div class="pt-3 px-4">
+      <div class="d-inline-flex align-items-end">
+        <p>
+          Paramétrage >
+          <a routerLink="../..">users</a> >
+        </p>
+        <p class="text-blue">&nbsp;Consulter</p>
+      </div>
+      <p class="text-blue h6 my-3">Détails projet:</p>
+      <div *ngIf="user" class="pl-4 d-flex justify-content-around">
+        <div>
+          <p><b>Nom</b> {{ user.Nom }}</p>
+          <p><b>Prenom:</b> {{ user.Prenom }}</p>
+          <p><b>NumTelephone :</b> {{ user.NumTelephone }}</p>
+        </div>
+
+        <div>
+          <p><b>Role :</b> {{ user.Role }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Simple Datatable End -->
