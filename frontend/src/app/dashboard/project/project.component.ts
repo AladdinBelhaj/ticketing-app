@@ -48,7 +48,17 @@ export class ProjectComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
   }
-  applyFilter($event: any) {}
+  applyFilter(event: Event) {
+    this.dataSource = new MatTableDataSource(this.Project);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
   removeProject(projectId: number | undefined) {
     if (projectId) {

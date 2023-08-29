@@ -69,7 +69,7 @@ export class AddticketComponent implements OnInit, OnDestroy {
     formData.append('emitteur', this.addTicketForm.value.emitteur);
     formData.append('objet', this.addTicketForm.value.objet);
     formData.append('projet', this.addTicketForm.value.projet);
-    formData.append('etat', 'en attente');
+    formData.append('etat', this.addTicketForm.value.etat);
     formData.append('responsable', this.addTicketForm.value.responsable);
     formData.append(
       'descriptionSolution',
