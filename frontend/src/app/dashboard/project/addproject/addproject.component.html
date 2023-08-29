@@ -54,16 +54,16 @@
     <!--client-->
     <div class="form-group">
       <label>client *</label>
-      <input
-        min="0"
-        formControlName="client"
-        class="form-control"
-        required
-        type="text"
-
-      />
 
 
+      <mat-form-field>
+        <mat-label>Client</mat-label>
+        <mat-select [(ngModel)]="client" name="client">
+          <mat-option *ngFor="let clientName of clients" [value]="clientName">
+            {{ clientName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       
       <div
         class="text-danger"
