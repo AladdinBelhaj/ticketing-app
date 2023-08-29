@@ -19,6 +19,16 @@ export class ProjectService {
   getAllProjects(): Observable<Project[]> {
     return this.http.get<Project[]>('http://localhost:3000/projet');
   }
+
+  getClientList(): Observable<string[]> {
+    return this.http.get<any[]>('http://localhost:3000/client')
+  }
+
+  getEmployeList(): Observable<string[]>{
+    return this.http.get<any[]>('http://localhost:3000/employe')
+  }
+
+
   public getProjectById(id: any): Observable<Project> {
     return this.http.get<Project>(`${this.apiUrl}/projet/getbyid/${id}`);
   }

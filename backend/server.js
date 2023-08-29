@@ -25,6 +25,24 @@ saveObject(app);
 // Import and set up the project routes
 const saveProject = require("./app/controllers/project/project.controller");
 saveProject(app);
+
+
+
+// import and set up getclient routes
+const getClientList = require("./app/routes/client.route");
+app.use(getClientList()); // Invoke getClientList and use the returned router
+
+// import and set up getclient routes
+const getEmployeList = require('./app/routes/employe.route');
+app.use(getEmployeList());
+
+
+
+
+
+
+
+
 // start server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
