@@ -41,11 +41,7 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.UserService.getAllUsers().subscribe((response: any) => {
       this.user = response;
-      this.dataSource = new MatTableDataSource(
-        this.user.filter((oneUser) => {
-          return oneUser.Role == 'client';
-        })
-      );
+      this.dataSource = new MatTableDataSource(this.user);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
