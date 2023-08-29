@@ -46,7 +46,6 @@ export class UserComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
   }
-  applyFilter($event: any) {}
   removeUser(userId: number | undefined) {
     if (userId) {
       this.UserService.deleteUser(userId).subscribe(() => {
@@ -57,6 +56,17 @@ export class UserComponent implements OnInit {
           this.dataSource.sort = this.sort;
         });
       });
+    }
+  }
+  applyFilter(event: Event) {
+    this.dataSource = new MatTableDataSource(this.user);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
 }
