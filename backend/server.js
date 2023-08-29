@@ -26,6 +26,10 @@ saveObject(app);
 const saveProject = require("./app/controllers/project/project.controller");
 saveProject(app);
 
+// Import and set up the user routes
+const saveUser = require("./app/controllers/user/user.controller");
+saveUser(app);
+
 
 
 // import and set up getclient routes
@@ -48,3 +52,4 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
+
