@@ -75,7 +75,6 @@
       <label>Description</label>
       <textarea formControlName="description" class="form-control"></textarea>
     </div>
-
     <!--FICHIER-->
     <div class="form-group">
       <label>Fichier</label>
@@ -89,7 +88,14 @@
         <label class="custom-file-label">{{ fileName }}</label>
       </div>
     </div>
-
+    <!-- ETAT -->
+    <div class="form-group">
+      <label>Etat</label>
+      <select class="custom-select col-12" formControlName="etat">
+        <option value="en attente">En Attente</option>
+        <option value="draft">Draft</option>
+      </select>
+    </div>
     <!--buttons-->
     <div class="d-flex justify-content-end">
       <button
