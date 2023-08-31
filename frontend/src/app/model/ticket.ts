@@ -5,8 +5,8 @@ export interface Ticket {
   description: string;
   fichier?: File; // Change the type to File
   etat: string;
-  responsable?: string;
-  descriptionSolution?: string;
+  responsable: string;
+  descriptionSolution: string;
   fichierSolution?: string;
   id?: string;
 }

@@ -52,6 +52,8 @@ export class UpdateTicketComponent implements OnInit {
       ),
       fichier: new FormControl(''),
       etat: new FormControl('', Validators.compose([])),
+      responsable: new FormControl('', Validators.compose([])),
+      descriptionSolution: new FormControl('', Validators.compose([])),
     });
   }
   ngOnInit(): void {
@@ -79,6 +81,8 @@ export class UpdateTicketComponent implements OnInit {
               emitteur: this.ticket.emitteur,
               fichier: null,
               etat: this.ticket.etat,
+              responsable: this.ticket.responsable,
+              descriptionSolution: this.ticket.descriptionSolution,
             });
           });
       }
@@ -93,6 +97,8 @@ export class UpdateTicketComponent implements OnInit {
         emitteur: this.updateTicketForm.value.emitteur,
         description: this.updateTicketForm.value.description,
         etat: this.updateTicketForm.value.etat,
+        responsable: this.updateTicketForm.value.responsable,
+        descriptionSolution: this.updateTicketForm.value.descriptionSolution,
       };
 
       this.ticketService

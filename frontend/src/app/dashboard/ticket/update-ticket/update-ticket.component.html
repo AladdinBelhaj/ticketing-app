@@ -89,6 +89,30 @@
         <label class="custom-file-label">{{ fileName }}</label>
       </div>
     </div>
+    <!-- ETAT -->
+    <div class="form-group">
+      <label>Etat</label>
+      <select class="custom-select col-12" formControlName="etat">
+        <option value="en attente">En Attente</option>
+        <option value="draft">Draft</option>
+      </select>
+    </div>
+    <!-- responsable -->
+    <div class="form-group">
+      <label>responsable</label>
+      <select class="custom-select col-12" formControlName="responsable">
+        <option value="Rayen">Rayen</option>
+        <option value="Ala">Ala</option>
+      </select>
+    </div>
+    <!--descriptionSolution-->
+    <div class="form-group">
+      <label>descriptionSolution</label>
+      <textarea
+        formControlName="descriptionSolution"
+        class="form-control"
+      ></textarea>
+    </div>
     <!--BUTTONS-->
     <div class="d-flex justify-content-end">
       <button

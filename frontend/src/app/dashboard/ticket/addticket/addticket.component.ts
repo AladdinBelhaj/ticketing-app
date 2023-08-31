@@ -41,6 +41,15 @@ export class AddticketComponent implements OnInit, OnDestroy {
         Validators.compose([Validators.required])
       ),
       fichier: new FormControl(''),
+      etat: new FormControl('', Validators.compose([])),
+      responsable: new FormControl(
+        '',
+        Validators.compose([Validators.required])
+      ),
+      descriptionSolution: new FormControl(
+        '',
+        Validators.compose([Validators.required])
+      ),
     });
   }
   ngOnDestroy(): void {
