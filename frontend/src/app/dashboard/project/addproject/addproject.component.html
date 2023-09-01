@@ -54,17 +54,11 @@
     <!--client-->
     <div class="form-group">
       <label>client *</label>
-
-
-      <mat-form-field>
-        <mat-label>Client</mat-label>
-        <mat-select [(ngModel)]="client" name="client">
-          <mat-option *ngFor="let clientName of clients" [value]="clientName">
-            {{ clientName }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      
+      <select formControlName="client" class="form-control" required>
+        <option value="" disabled>Select a client</option>
+        <option value="Client">Client</option>
+        <option value="Employer">Employer</option>
+      </select>
       <div
         class="text-danger"
         *ngIf="
@@ -97,23 +91,39 @@
     </div>
     <!--responsable-->
     <div class="form-group">
-      <label>responsable</label>
-      <input
-        min="0"
-        formControlName="responsable"
-        class="form-control"
-        type="text"
-      />
+      <label>responsable *</label>
+      <select formControlName="altResponsable" class="form-control" required>
+        <option value="" disabled>Select responsable</option>
+        <option value="Rayen">Rayen</option>
+        <option value="Ala">Ala</option>
+      </select>
+      <div
+        class="text-danger"
+        *ngIf="
+          addProjectForm.get('altResponsable')!.invalid &&
+          addProjectForm.get('altResponsable')!.touched
+        "
+      >
+        altResponsable-Invalid
+      </div>
     </div>
     <!--altResponsable-->
     <div class="form-group">
-      <label>altResponsable</label>
-      <input
-        min="0"
-        formControlName="altResponsable"
-        class="form-control"
-        type="text"
-      />
+      <label>altResponsable *</label>
+      <select formControlName="altResponsable" class="form-control" required>
+        <option value="" disabled>Select altResponsable</option>
+        <option value="Client">Rayen</option>
+        <option value="Employer">Ala</option>
+      </select>
+      <div
+        class="text-danger"
+        *ngIf="
+          addProjectForm.get('altResponsable')!.invalid &&
+          addProjectForm.get('altResponsable')!.touched
+        "
+      >
+        responsable-Invalid
+      </div>
     </div>
     <!--buttons-->
     <div class="d-flex justify-content-end">

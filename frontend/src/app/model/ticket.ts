@@ -7,6 +7,7 @@ export interface Ticket {
   etat: string;
   responsable: string;
   descriptionSolution: string;
+  dateEmission: string;
   fichierSolution?: string;
   id?: string;
 }

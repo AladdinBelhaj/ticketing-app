@@ -50,6 +50,7 @@ export class AddticketComponent implements OnInit, OnDestroy {
         '',
         Validators.compose([Validators.required])
       ),
+      dateEmission: [new Date()],
     });
   }
   ngOnDestroy(): void {
