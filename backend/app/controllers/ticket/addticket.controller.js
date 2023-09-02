@@ -16,49 +16,56 @@ const upload = multer({ storage: storage });
 const setupAddTicketRoutes = (app) => {
   app.use(cors());
 
-  //posting information
-  app.post("/ticket", upload.single("fichier"), (req, res) => {
-    if (!req.file) {
-      return res.status(400).json({ message: "No file uploaded." });
-    }
-    const {
-      projet,
-      objet,
-      emitteur,
-      description,
-      etat,
-      responsable,
-      descriptionSolution,
-      fichierSolution,
-    } = req.body;
-
-    const insertQuery = `INSERT INTO ticket (projet, objet, emitteur, description,fichier,etat,responsable,descriptionSolution,fichierSolution) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    const values = [
-      projet,
-      objet,
-      emitteur,
-      description,
-      req.file.filename,
-      etat,
-      responsable,
-      descriptionSolution,
-      fichierSolution,
-    ];
-
-    // Execute the query
-    connexion.query(insertQuery, values, (err, results) => {
-      if (err) {
-        console.error("Error inserting data into the database:", err);
-        res
-          .status(500)
-          .json({ message: "Error inserting data into the database" });
-        return;
+  // Posting information
+  app.post(
+    "/ticket",
+    upload.fields([{ name: "fichier" }, { name: "fichierSolution" }]),
+    (req, res) => {
+      if (!req.files) {
+        return res.status(400).json({ message: "No files uploaded." });
       }
 
-      console.log("Data inserted successfully!");
-      res.status(200).json({ message: "Data inserted successfully" });
-    });
-  });
+      const {
+        projet,
+        objet,
+        emitteur,
+        description,
+        etat,
+        responsable,
+        descriptionSolution,
+      } = req.body;
+
+      const fichier = req.files["fichier"][0]; // "fichier" field
+      const fichierSolution = req.files["fichierSolution"][0]; // "fichierSolution" field
+
+      const insertQuery = `INSERT INTO ticket (projet, objet, emitteur, description, fichier, etat, responsable, descriptionSolution, fichierSolution) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+      const values = [
+        projet,
+        objet,
+        emitteur,
+        description,
+        fichier.filename, // Use the filename property of the uploaded file
+        etat,
+        responsable,
+        descriptionSolution,
+        fichierSolution.filename, // Use the filename property of the uploaded file
+      ];
+
+      // Execute the query
+      connexion.query(insertQuery, values, (err, results) => {
+        if (err) {
+          console.error("Error inserting data into the database:", err);
+          res
+            .status(500)
+            .json({ message: "Error inserting data into the database" });
+          return;
+        }
+
+        console.log("Data inserted successfully!");
+        res.status(200).json({ message: "Data inserted successfully" });
+      });
+    }
+  );
 
   //get the information from the project table:
   app.get("/projet", (req, res) => {

@@ -25,6 +25,7 @@ export class AddticketComponent implements OnInit, OnDestroy {
   addTicketForm: FormGroup;
 
   fileName = 'Sélectioner une fichier';
+  fileSolutionName = 'Sélectionner un fichier solution';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,6 +42,7 @@ export class AddticketComponent implements OnInit, OnDestroy {
         Validators.compose([Validators.required])
       ),
       fichier: new FormControl(''),
+      fichierSolution: new FormControl(''),
       etat: new FormControl('', Validators.compose([])),
       responsable: new FormControl(
         '',
@@ -70,6 +72,7 @@ export class AddticketComponent implements OnInit, OnDestroy {
     this.objectService.getAllObjects().subscribe((objects) => {
       this.listObjet = objects;
     });
+    this.addTicketForm.patchValue({ fichierSolution: null });
   }
 
   saveTicket() {
@@ -85,7 +88,11 @@ export class AddticketComponent implements OnInit, OnDestroy {
       'descriptionSolution',
       this.addTicketForm.value.descriptionSolution
     );
-    formData.append('fichierSolution', this.addTicketForm.value.responsable);
+
+    const fileInputSolution = this.addTicketForm.get('fichierSolution');
+    if (fileInputSolution?.value) {
+      formData.append('fichierSolution', fileInputSolution.value);
+    }
 
     const fileInput = this.addTicketForm.get('fichier');
     if (fileInput?.value) {
@@ -110,6 +117,15 @@ export class AddticketComponent implements OnInit, OnDestroy {
       this.addTicketForm.patchValue({ fichier: file });
     } else {
       console.error('No file selected.');
+    }
+  }
+  onFileSolutionChange(fileSolutionInput: HTMLInputElement) {
+    if (fileSolutionInput?.files && fileSolutionInput.files.length > 0) {
+      const file = fileSolutionInput.files[0];
+      this.fileSolutionName = file.name;
+      this.addTicketForm.patchValue({ fichierSolution: file });
+    } else {
+      console.error('No file selected for solution.');
     }
   }
 

@@ -112,6 +112,20 @@
         class="form-control"
       ></textarea>
     </div>
+    <!-- FICHIERSOLUTION -->
+    <div class="form-group">
+      <label>Fichier Solution</label>
+      <div class="custom-file">
+        <input
+          #fileSolutionInput
+          (change)="onFileSolutionChange(fileSolutionInput)"
+          type="file"
+          class="custom-file-input"
+        />
+        <label class="custom-file-label">{{ fileSolutionName }}</label>
+      </div>
+    </div>
+
     <!-- Date Emission -->
     <div class="form-group">
       <label>Date Emission</label>
