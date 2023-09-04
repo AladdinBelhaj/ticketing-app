@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.form.value.remember) {
-      localStorage.setItem('eamil', this.form.value.email);
+      localStorage.setItem('email', this.form.value.email);
       localStorage.setItem('password', this.form.value.password);
     }
     this.user.email = this.form.value.email;
