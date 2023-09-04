@@ -1,9 +1,9 @@
 export interface Employe {
     email: string;
     password: string;
-    Nom: string;
-    Prenom: string;
-    NumTelephone: number;
-    Role: string;
+    name: string;
+    lastname: string;
+    numtelephone: number;
+    role: string;
     id?: string;
   }

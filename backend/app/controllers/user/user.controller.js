@@ -4,6 +4,8 @@ const connexion = require("../db").connexion;
 const router = express.Router();
 const saveUser = (app) => {
   app.use(cors());
+
+  
   app.post("/user", (req, res) => {
     const userData = req.body;
 
@@ -28,6 +30,10 @@ const saveUser = (app) => {
       res.status(200).json({ message: "user saved successfully" });
     });
   });
+
+
+
+
   //get all users
   app.get("/user", (req, res) => {
     const selectQuery = "SELECT * FROM user";

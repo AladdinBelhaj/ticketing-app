@@ -1,9 +1,9 @@
 export interface Client {
-    email: string;
-    password: string;
-    Nom: string;
-    Prenom: string;
-    NumTelephone: number;
-    Role: string;
-    id?: string;
-  }
+  email: string;
+  password: string;
+  name: string;
+  lastname: string;
+  numtelephone: number;
+  role: string;
+  id?: string;
+}

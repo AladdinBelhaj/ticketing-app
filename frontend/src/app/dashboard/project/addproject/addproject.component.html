@@ -99,7 +99,7 @@
       <label>responsable</label>
 
       <select formControlName="responsable" class="form-control" required [(ngModel)]="responsable" name="responsable">
-        <option value="" disabled>Select a client</option>
+        <option value="" disabled>Select an employee</option>
         <option *ngFor="let employeName of employes" [value]="employeName">
           {{ employeName }}
         </option>
@@ -108,9 +108,9 @@
     </div>
     <!--altResponsable-->
     <div class="form-group">
-      <label>--altResponsable--</label>
+      <label>altResponsable</label>
       <select formControlName="responsable" class="form-control" required [(ngModel)]="responsable" name="responsable">
-        <option value="" disabled>Select a client</option>
+        <option value="" disabled>Select an employee</option>
         <option *ngFor="let employeName of employes" [value]="employeName">
           {{ employeName }}
         </option>
