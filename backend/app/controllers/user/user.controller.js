@@ -5,18 +5,19 @@ const router = express.Router();
 const saveUser = (app) => {
   app.use(cors());
 
-  
   app.post("/user", (req, res) => {
     const userData = req.body;
 
     const insertQuery =
-      "INSERT INTO user (Nom, Prenom, NumTelephone, Role) VALUES (?, ?, ?, ?)";
+      "INSERT INTO user (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
 
     const values = [
       userData.Nom,
       userData.Prenom,
       userData.NumTelephone,
-      userData.Role,
+      userData.Role || "Guest",
+      userData.email,
+      userData.password,
     ];
 
     connexion.query(insertQuery, values, (err, results) => {
@@ -30,9 +31,6 @@ const saveUser = (app) => {
       res.status(200).json({ message: "user saved successfully" });
     });
   });
-
-
-
 
   //get all users
   app.get("/user", (req, res) => {

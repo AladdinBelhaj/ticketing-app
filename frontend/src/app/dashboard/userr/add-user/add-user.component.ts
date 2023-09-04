@@ -17,6 +17,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
   Prenom: string = '';
   NumTelephone: number = 0;
   Role: string = '';
+  email: string = '';
+  password: string = '';
   AddUserForm: FormGroup;
   constructor(
     private UserService: UserService,
@@ -29,7 +31,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
         '',
         Validators.compose([Validators.required])
       ),
-      Role: new FormControl('', Validators.compose([Validators.required])),
+      emaill: new FormControl('', Validators.compose([Validators.required])),
+      password: new FormControl('', Validators.compose([Validators.required])),
     });
   }
   ngOnDestroy(): void {
@@ -50,8 +53,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
       Prenom: this.AddUserForm.value.Prenom,
       NumTelephone: this.AddUserForm.value.NumTelephone,
       Role: this.AddUserForm.value.Role,
-      email: '',
-      password: '',
+      email: this.AddUserForm.value.email,
+      password: this.AddUserForm.value.password,
     };
 
     this.UserService.saveUser(user).subscribe(

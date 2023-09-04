@@ -134,7 +134,7 @@
         class="form-control"
         formControlName="dateEmission"
         readonly
-        [value]="addTicketForm.get('dateEmission')?.value | date : 'MMM dd'"
+        [value]="addTicketForm.get('dateEmission')?.value | dateFormat"
       />
     </div>
 

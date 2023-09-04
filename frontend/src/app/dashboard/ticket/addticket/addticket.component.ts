@@ -10,6 +10,7 @@ import { Project } from 'src/app/model/project';
 import { ObjectService } from 'src/app/service/object.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { TicketService } from 'src/app/service/ticket.service';
+import { DateFormatPipe } from 'src/app/date-format.pipe';
 @Component({
   selector: 'app-addticket',
   templateUrl: './addticket.component.html',
