@@ -32,7 +32,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
         Validators.compose([Validators.required])
       ),
       Role: new FormControl('', Validators.compose([Validators.required])),
-      emaill: new FormControl('', Validators.compose([Validators.required])),
+      email: new FormControl('', Validators.compose([Validators.required])),
       password: new FormControl('', Validators.compose([Validators.required])),
     });
   }
