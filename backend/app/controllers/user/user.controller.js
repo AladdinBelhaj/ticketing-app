@@ -15,7 +15,7 @@ const saveUser = (app) => {
       userData.Nom,
       userData.Prenom,
       userData.NumTelephone,
-      userData.Role || "Guest",
+      userData.Role,
       userData.email,
       userData.password,
     ];
