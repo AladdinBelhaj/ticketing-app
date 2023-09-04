@@ -134,8 +134,10 @@
         class="form-control"
         formControlName="dateEmission"
         readonly
+        [value]="addTicketForm.get('dateEmission')?.value | date : 'MMM dd'"
       />
     </div>
+
     <!--buttons-->
     <div class="d-flex justify-content-end">
       <button
