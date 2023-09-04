@@ -54,11 +54,16 @@
     <!--client-->
     <div class="form-group">
       <label>client *</label>
-      <select formControlName="client" class="form-control" required>
+
+
+      <select formControlName="client" class="form-control" required [(ngModel)]="client" name="client">
         <option value="" disabled>Select a client</option>
-        <option value="Client">Client</option>
-        <option value="Employer">Employer</option>
+        <option *ngFor="let clientName of clients" [value]="clientName">
+          {{ clientName }}
+        </option>
       </select>
+      
+
       <div
         class="text-danger"
         *ngIf="
@@ -89,11 +94,13 @@
     </div>
     <!--responsable-->
     <div class="form-group">
-      <label>responsable *</label>
-      <select formControlName="responsable" class="form-control" required>
-        <option value="" disabled>Select responsable</option>
-        <option value="Rayen">Rayen</option>
-        <option value="Ala">Ala</option>
+      <label>responsable</label>
+
+      <select formControlName="responsable" class="form-control" required [(ngModel)]="responsable" name="responsable">
+        <option value="" disabled>Select an employee</option>
+        <option *ngFor="let employeName of employes" [value]="employeName">
+          {{ employeName }}
+        </option>
       </select>
       <div
         class="text-danger"
@@ -107,21 +114,13 @@
     </div>
     <!--altResponsable-->
     <div class="form-group">
-      <label>altResponsable *</label>
-      <select formControlName="altResponsable" class="form-control" required>
-        <option value="" disabled>Select altResponsable</option>
-        <option value="Client">Rayen</option>
-        <option value="Employer">Ala</option>
+      <label>altResponsable</label>
+      <select formControlName="responsable" class="form-control" required [(ngModel)]="responsable" name="responsable">
+        <option value="" disabled>Select an employee</option>
+        <option *ngFor="let employeName of employes" [value]="employeName">
+          {{ employeName }}
+        </option>
       </select>
-      <div
-        class="text-danger"
-        *ngIf="
-          addProjectForm.get('altResponsable')!.invalid &&
-          addProjectForm.get('altResponsable')!.touched
-        "
-      >
-        responsable-Invalid
-      </div>
     </div>
     <!--buttons-->
     <div class="d-flex justify-content-end">
