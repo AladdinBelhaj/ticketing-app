@@ -72,13 +72,11 @@
     <!--type-->
     <div class="form-group">
       <label>type *</label>
-      <input
-        min="0"
-        formControlName="type"
-        class="form-control"
-        required
-        type="text"
-      />
+      <select formControlName="type" class="form-control" required>
+        <option value="" disabled>Select type</option>
+        <option value="web dev">web dev</option>
+        <option value="cybersecurity">cybersecurity</option>
+      </select>
       <div
         class="text-danger"
         *ngIf="
@@ -92,7 +90,7 @@
     <!--responsable-->
     <div class="form-group">
       <label>responsable *</label>
-      <select formControlName="altResponsable" class="form-control" required>
+      <select formControlName="responsable" class="form-control" required>
         <option value="" disabled>Select responsable</option>
         <option value="Rayen">Rayen</option>
         <option value="Ala">Ala</option>
@@ -100,11 +98,11 @@
       <div
         class="text-danger"
         *ngIf="
-          addProjectForm.get('altResponsable')!.invalid &&
-          addProjectForm.get('altResponsable')!.touched
+          addProjectForm.get('responsable')!.invalid &&
+          addProjectForm.get('responsable')!.touched
         "
       >
-        altResponsable-Invalid
+        responsable-Invalid
       </div>
     </div>
     <!--altResponsable-->
