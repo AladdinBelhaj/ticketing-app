@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   password: string = '';
   PURE_EMAIL_REGEXP =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  show = false;
   form: FormGroup;
   private user: User = {
     email: '',
@@ -56,7 +57,10 @@ export class LoginComponent implements OnInit {
       });
     }
   }
-
+  onClick() {
+    // Toggle password visibility
+    this.show = !this.show;
+  }
   login() {
     if (this.form.value.remember) {
       localStorage.setItem('email', this.form.value.email);

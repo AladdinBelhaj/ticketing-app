@@ -55,14 +55,18 @@
     <div class="form-group">
       <label>client *</label>
 
-
-      <select formControlName="client" class="form-control" required [(ngModel)]="client" name="client">
+      <select
+        formControlName="client"
+        class="form-control"
+        required
+        [(ngModel)]="client"
+        name="client"
+      >
         <option value="" disabled>Select a client</option>
         <option *ngFor="let clientName of clients" [value]="clientName">
           {{ clientName }}
         </option>
       </select>
-      
 
       <div
         class="text-danger"
@@ -95,9 +99,14 @@
     <!--responsable-->
     <div class="form-group">
       <label>responsable</label>
-
-      <select formControlName="responsable" class="form-control" required [(ngModel)]="responsable" name="responsable">
-        <option value="" disabled>Select an employee</option>
+      <select
+        formControlName="responsable"
+        class="form-control"
+        required
+        [(ngModel)]="responsable"
+        name="responsable"
+      >
+        <option value="" disabled>Select responsable</option>
         <option *ngFor="let employeName of employes" [value]="employeName">
           {{ employeName }}
         </option>
@@ -115,12 +124,28 @@
     <!--altResponsable-->
     <div class="form-group">
       <label>altResponsable</label>
-      <select formControlName="responsable" class="form-control" required [(ngModel)]="responsable" name="responsable">
-        <option value="" disabled>Select an employee</option>
+
+      <select
+        formControlName="altResponsable"
+        class="form-control"
+        required
+        [(ngModel)]="altResponsable"
+        name="altResponsable"
+      >
+        <option value="" disabled>Select altResponsable</option>
         <option *ngFor="let employeName of employes" [value]="employeName">
           {{ employeName }}
         </option>
       </select>
+      <div
+        class="text-danger"
+        *ngIf="
+          addProjectForm.get('altResponsable')!.invalid &&
+          addProjectForm.get('altResponsable')!.touched
+        "
+      >
+        altResponsable-Invalid
+      </div>
     </div>
     <!--buttons-->
     <div class="d-flex justify-content-end">

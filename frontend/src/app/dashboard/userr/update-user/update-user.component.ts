@@ -21,6 +21,8 @@ export class UpdateUserComponent implements OnInit {
   Prenom: string = '';
   NumTelephone: number = 0;
   Role: string = '';
+  email: string = '';
+  password: string = '';
   UpdateUserForm: FormGroup;
   constructor(
     private UserService: UserService,
@@ -36,6 +38,8 @@ export class UpdateUserComponent implements OnInit {
         Validators.compose([Validators.required])
       ),
       Role: new FormControl('', Validators.compose([Validators.required])),
+      email: new FormControl('', Validators.compose([Validators.required])),
+      password: new FormControl('', Validators.compose([Validators.required])),
     });
   }
   ngOnInit(): void {
@@ -50,8 +54,10 @@ export class UpdateUserComponent implements OnInit {
             this.UpdateUserForm.setValue({
               Nom: this.user.Nom,
               Prenom: this.user.Prenom,
-              client: this.user.NumTelephone,
+              NumTelephone: this.user.NumTelephone,
               Role: this.user.Role,
+              email: this.user.email,
+              password: this.user.password,
             });
           },
           (error: HttpErrorResponse) => {
@@ -68,8 +74,8 @@ export class UpdateUserComponent implements OnInit {
         Prenom: this.UpdateUserForm.value.Prenom,
         NumTelephone: this.UpdateUserForm.value.NumTelephone,
         Role: this.UpdateUserForm.value.Role,
-        email: '',
-        password: '',
+        email: this.UpdateUserForm.value.email,
+        password: this.UpdateUserForm.value.password,
       };
 
       this.UserService.updateUser(this.userid, editeduser).subscribe(() => {

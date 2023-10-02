@@ -17,8 +17,11 @@ export class AddUserComponent implements OnInit, OnDestroy {
   Prenom: string = '';
   NumTelephone: number = 0;
   Role: string = '';
-  email: string = '';
+  PURE_EMAIL_REGEXP =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   password: string = '';
+  show = false;
   AddUserForm: FormGroup;
   constructor(
     private UserService: UserService,
@@ -29,10 +32,20 @@ export class AddUserComponent implements OnInit, OnDestroy {
       Prenom: new FormControl('', Validators.compose([Validators.required])),
       NumTelephone: new FormControl(
         '',
-        Validators.compose([Validators.required])
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('[0-9]{8}'),
+        ])
       ),
       Role: new FormControl('', Validators.compose([Validators.required])),
-      email: new FormControl('', Validators.compose([Validators.required])),
+      email: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.email,
+          Validators.pattern(this.PURE_EMAIL_REGEXP),
+        ])
+      ),
       password: new FormControl('', Validators.compose([Validators.required])),
     });
   }
@@ -43,6 +56,10 @@ export class AddUserComponent implements OnInit, OnDestroy {
     if (this.UserService.AddUserForm != undefined) {
       this.AddUserForm = this.UserService.AddUserForm;
     }
+  }
+  onClick() {
+    // Toggle password visibility
+    this.show = !this.show;
   }
   saveUser() {
     console.log(

@@ -5,29 +5,23 @@ const router = express.Router();
 const saveUser = (app) => {
   app.use(cors());
 
-  
-  app.post("/user", (req, res) => {
+  app.post("/client", (req, res) => {
     const userData = req.body;
 
     const insertQuery =
-      "INSERT INTO client (Nom, Prenom, NumTelephone, Role) VALUES (?, ?, ?, ?)";
+      "INSERT INTO client (Nom, Prenom, NumTelephone) VALUES (?, ?, ?)";
 
-    const values = [
-      userData.Nom,
-      userData.Prenom,
-      userData.NumTelephone,
-      userData.Role,
-    ];
+    const values = [userData.Nom, userData.Prenom, userData.NumTelephone];
 
     connexion.query(insertQuery, values, (err, results) => {
       if (err) {
-        console.error("Error saving user:", err);
-        res.status(500).json({ message: "Error saving user" });
+        console.error("Error saving client:", err);
+        res.status(500).json({ message: "Error saving client" });
         return;
       }
 
-      console.log("user saved successfully!");
-      res.status(200).json({ message: "user saved successfully" });
+      console.log("client saved successfully!");
+      res.status(200).json({ message: "client saved successfully" });
     });
   });
-}
+};

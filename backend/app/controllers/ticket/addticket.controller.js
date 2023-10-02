@@ -83,54 +83,59 @@ const setupAddTicketRoutes = (app) => {
   });
 
   //update ticket
-  app.put("/ticket/:id", upload.single("fichier"), (req, res) => {
-    const ticketId = req.params.id;
+  app.put(
+    "/ticket/:id",
+    upload.fields([{ name: "fichier" }, { name: "fichierSolution" }]),
+    (req, res) => {
+      const ticketId = req.params.id;
 
-    const {
-      projet,
-      objet,
-      emitteur,
-      description,
-      etat,
-      responsable,
-      descriptionSolution,
-      fichierSolution,
-    } = req.body;
+      const {
+        projet,
+        objet,
+        emitteur,
+        description,
+        etat,
+        responsable,
+        descriptionSolution,
+      } = req.body;
 
-    let updateQuery =
-      "UPDATE ticket SET projet = ?, objet = ?, emitteur = ?, description = ?, etat = ?, responsable = ?, descriptionSolution = ?, fichierSolution = ?";
+      let updateQuery =
+        "UPDATE ticket SET projet = ?, objet = ?, emitteur = ?, description = ?, etat = ?, responsable = ?, descriptionSolution = ?";
 
-    const updateValues = [
-      projet,
-      objet,
-      emitteur,
-      description,
-      etat,
-      responsable,
-      descriptionSolution,
-      fichierSolution,
-    ];
+      const updateValues = [
+        projet,
+        objet,
+        emitteur,
+        description,
+        etat,
+        responsable,
+        descriptionSolution,
+      ];
 
-    if (req.file) {
-      updateQuery += ", fichier = ?";
-      updateValues.push(req.file.filename);
-    }
+      // Check if "fichierSolution" has been uploaded
+      if (req.files && req.files["fichierSolution"]) {
+        const fichierSolution = req.files["fichierSolution"][0]; // "fichierSolution" field
 
-    updateQuery += " WHERE id = ?";
-
-    updateValues.push(ticketId);
-
-    connexion.query(updateQuery, updateValues, (err, results) => {
-      if (err) {
-        console.error("Error updating ticket:", err);
-        res.status(500).json({ message: "Error updating ticket" });
-        return;
+        updateQuery += ", fichierSolution = ?";
+        updateValues.push(fichierSolution.filename);
       }
 
-      console.log("Ticket updated successfully!");
-      res.status(200).json({ message: "Ticket updated successfully" });
-    });
-  });
+      updateQuery += " WHERE id = ?";
+
+      updateValues.push(ticketId);
+
+      connexion.query(updateQuery, updateValues, (err, results) => {
+        if (err) {
+          console.error("Error updating ticket:", err);
+          res.status(500).json({ message: "Error updating ticket" });
+          return;
+        }
+
+        console.log("Ticket updated successfully!");
+        res.status(200).json({ message: "Ticket updated successfully" });
+      });
+    }
+  );
 
   //get the information from the objet table:
   app.get("/objet", (req, res) => {

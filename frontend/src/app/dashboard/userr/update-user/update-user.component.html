@@ -89,6 +89,46 @@
         Role-Invalid
       </div>
     </div>
+    <!-- Email -->
+    <div class="form-group">
+      <label>Email *</label>
+      <input
+        placeholder="email"
+        formControlName="email"
+        class="form-control"
+        required
+        type="email"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          UpdateUserForm.get('email')!.invalid &&
+          UpdateUserForm.get('email')!.touched
+        "
+      >
+        Email-Invalid
+      </div>
+    </div>
+    <!-- Password -->
+    <div class="form-group">
+      <label>Password *</label>
+      <input
+        placeholder="Password"
+        formControlName="password"
+        class="form-control"
+        required
+        type="password"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          UpdateUserForm.get('password')!.invalid &&
+          UpdateUserForm.get('password')!.touched
+        "
+      >
+        Password-Invalid
+      </div>
+    </div>
     <!--BUTTONS-->
     <div class="d-flex justify-content-end">
       <button

@@ -146,6 +146,7 @@ export class AddticketComponent implements OnInit, OnDestroy {
   resetForm() {
     this.addTicketForm.reset();
     this.fileName = 'Sélectioner une fichier';
+    this.fileSolutionName = 'Sélectionner un fichier solution';
     this.addTicketForm.patchValue({ emitteur: this.emitteur });
   }
 }

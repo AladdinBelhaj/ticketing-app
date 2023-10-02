@@ -54,13 +54,20 @@
     <!--client-->
     <div class="form-group">
       <label>client *</label>
-      <input
-        min="0"
+
+      <select
         formControlName="client"
         class="form-control"
         required
-        type="text"
-      />
+        [(ngModel)]="client"
+        name="client"
+      >
+        <option value="" disabled>Select a client</option>
+        <option *ngFor="let clientName of clients" [value]="clientName">
+          {{ clientName }}
+        </option>
+      </select>
+
       <div
         class="text-danger"
         *ngIf="
@@ -74,13 +81,11 @@
     <!--type-->
     <div class="form-group">
       <label>type *</label>
-      <input
-        min="0"
-        formControlName="type"
-        class="form-control"
-        required
-        type="text"
-      />
+      <select formControlName="type" class="form-control" required>
+        <option value="" disabled>Select type</option>
+        <option value="web dev">web dev</option>
+        <option value="cybersecurity">cybersecurity</option>
+      </select>
       <div
         class="text-danger"
         *ngIf="
@@ -94,22 +99,53 @@
     <!--responsable-->
     <div class="form-group">
       <label>responsable</label>
-      <input
-        min="0"
+      <select
         formControlName="responsable"
         class="form-control"
-        type="text"
-      />
+        required
+        [(ngModel)]="responsable"
+        name="responsable"
+      >
+        <option value="" disabled>Select responsable</option>
+        <option *ngFor="let employeName of employes" [value]="employeName">
+          {{ employeName }}
+        </option>
+      </select>
+      <div
+        class="text-danger"
+        *ngIf="
+          UpdateProjectForm.get('responsable')!.invalid &&
+          UpdateProjectForm.get('responsable')!.touched
+        "
+      >
+        responsable-Invalid
+      </div>
     </div>
     <!--altResponsable-->
     <div class="form-group">
       <label>altResponsable</label>
-      <input
-        min="0"
+
+      <select
         formControlName="altResponsable"
         class="form-control"
-        type="text"
-      />
+        required
+        [(ngModel)]="altResponsable"
+        name="altResponsable"
+      >
+        <option value="" disabled>Select altResponsable</option>
+        <option *ngFor="let employeName of employes" [value]="employeName">
+          {{ employeName }}
+        </option>
+      </select>
+      <div
+        class="text-danger"
+        *ngIf="
+          UpdateProjectForm.get('altResponsable')!.invalid &&
+          UpdateProjectForm.get('altResponsable')!.touched
+        "
+      >
+        altResponsable-Invalid
+      </div>
     </div>
     <!--BUTTONS-->
     <div class="d-flex justify-content-end">

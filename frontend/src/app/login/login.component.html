@@ -9,6 +9,7 @@
           <h2 class="text-center text-primary">Login</h2>
         </div>
         <form [formGroup]="form">
+          <!-- email -->
           <div class="input-group custom">
             <input
               type="text"
@@ -22,19 +23,21 @@
               ></span>
             </div>
           </div>
+          <!-- password -->
           <div class="input-group custom">
             <input
-              type="password"
+              type="{{ show ? 'text' : 'password' }}"
               class="form-control form-control-lg"
               placeholder="mot de passe"
               formControlName="password"
             />
             <div class="input-group-append custom">
-              <span class="input-group-text"
-                ><i class="dw dw-padlock1"></i
-              ></span>
+              <span class="input-group-text" (click)="onClick()">
+                <i class="dw dw-padlock1"></i>
+              </span>
             </div>
           </div>
+
           <div class="row pb-30">
             <div class="col-6">
               <div class="custom-control custom-checkbox">

@@ -39,6 +39,8 @@ export class UpdateProjectComponent implements OnInit {
       altResponsable: new FormControl(''),
     });
   }
+  clients: string[] = []; // array to store list of clients
+  employes: string[] = []; // array to store list of clients
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap) => {
       if (!paramMap.has('id')) {
@@ -62,6 +64,23 @@ export class UpdateProjectComponent implements OnInit {
           }
         );
       }
+      // fetch list of clients from back end
+      this.projectService.getClientList().subscribe(
+        (clients) => {
+          this.clients = clients;
+        },
+        (error) => {
+          console.error('Error fetching clients:', error);
+        }
+      );
+      this.projectService.getEmployeList().subscribe(
+        (employes) => {
+          this.employes = employes;
+        },
+        (error) => {
+          console.error('Error fetching employes:', error);
+        }
+      );
     });
   }
   public editProject() {

@@ -75,12 +75,12 @@ const saveUser = (app) => {
   //update user
   app.put("/user/:id", (req, res) => {
     const userId = req.params.id;
-    const { Nom, Prenom, NumTelephone, Role } = req.body;
+    const { Nom, Prenom, NumTelephone, Role, email, password } = req.body;
 
     let updateQuery =
-      "UPDATE user SET Nom = ?, Prenom = ?, NumTelephone = ?, Role = ? ";
+      "UPDATE user SET Nom = ?, Prenom = ?, NumTelephone = ?, Role = ? , email = ?, password = ?";
 
-    const updateValues = [Nom, Prenom, NumTelephone, Role];
+    const updateValues = [Nom, Prenom, NumTelephone, Role, email, password];
     updateQuery += " WHERE id = ?";
 
     updateValues.push(userId);

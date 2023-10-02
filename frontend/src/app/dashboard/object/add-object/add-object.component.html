@@ -34,21 +34,20 @@
     <!--classType-->
     <div class="form-group">
       <label>classType *</label>
-      <input
-        min="0"
-        formControlName="classType"
-        class="form-control"
-        required
-        type="text"
-      />
+      <select formControlName="classType" class="form-control" required>
+        <option value="" disabled>Select classType</option>
+        <option value="FO">FO</option>
+        <option value="FB">FB</option>
+        <option value="FnB">FnB</option>
+      </select>
       <div
         class="text-danger"
         *ngIf="
-          AddObjectForm.get('classType')!.invalid &&
-          AddObjectForm.get('classType')!.touched
+          AddObjectForm.get('type')!.invalid &&
+          AddObjectForm.get('type')!.touched
         "
       >
-        classType-Invalid
+        type-Invalid
       </div>
     </div>
     <!--buttons-->

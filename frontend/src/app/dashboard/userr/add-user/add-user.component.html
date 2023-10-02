@@ -52,13 +52,14 @@
     </div>
     <!-- NumTelephone -->
     <div class="form-group">
-      <label>NumTelephone *</label>
+      <label for="NumTelephone">NumTelephone *</label>
       <input
-        min="0"
+        id="NumTelephone"
         formControlName="NumTelephone"
         class="form-control"
         required
         type="text"
+        pattern="[0-9]{8}"
       />
       <div
         class="text-danger"
@@ -67,9 +68,10 @@
           AddUserForm.get('NumTelephone')!.touched
         "
       >
-        NumTelephone-Invalid
+        NumTelephone - Invalid
       </div>
     </div>
+
     <!-- Role -->
     <div class="form-group">
       <label>Role *</label>
@@ -91,6 +93,7 @@
     <div class="form-group">
       <label>Email *</label>
       <input
+        placeholder="email"
         formControlName="email"
         class="form-control"
         required
@@ -105,25 +108,25 @@
         Email-Invalid
       </div>
     </div>
-    <!-- Password -->
+    <!-- password -->
     <div class="form-group">
-      <label>Password *</label>
-      <input
-        formControlName="password"
-        class="form-control"
-        required
-        type="password"
-      />
-      <div
-        class="text-danger"
-        *ngIf="
-          AddUserForm.get('password')!.invalid &&
-          AddUserForm.get('password')!.touched
-        "
-      >
-        Password-Invalid
+      <label for="password">Password</label>
+      <div class="input-group custom">
+        <input
+          type="{{ show ? 'text' : 'password' }}"
+          class="form-control form-control-lg"
+          id="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <div class="input-group-append custom">
+          <span class="input-group-text" (click)="onClick()">
+            <i class="dw dw-padlock1"></i>
+          </span>
+        </div>
       </div>
     </div>
+
     <!-- buttons -->
     <div class="d-flex justify-content-end">
       <button

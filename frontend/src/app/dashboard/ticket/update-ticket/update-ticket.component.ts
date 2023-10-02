@@ -30,6 +30,7 @@ export class UpdateTicketComponent implements OnInit {
   updateTicketForm: FormGroup;
 
   fileName = 'Sélectioner une fichier';
+  fileSolutionName = 'Sélectionner un fichier solution';
   navigateToticketService() {
     this.router.navigate(['/ticket-list']); // Adjust the route as needed
   }
@@ -51,6 +52,7 @@ export class UpdateTicketComponent implements OnInit {
         Validators.compose([Validators.required])
       ),
       fichier: new FormControl(''),
+      fichierSolution: new FormControl(''),
       etat: new FormControl('', Validators.compose([])),
       responsable: new FormControl('', Validators.compose([])),
       descriptionSolution: new FormControl('', Validators.compose([])),
@@ -80,6 +82,7 @@ export class UpdateTicketComponent implements OnInit {
               description: this.ticket.description,
               emitteur: this.ticket.emitteur,
               fichier: null,
+              fichierSolution: null,
               etat: this.ticket.etat,
               responsable: this.ticket.responsable,
               descriptionSolution: this.ticket.descriptionSolution,
@@ -118,10 +121,32 @@ export class UpdateTicketComponent implements OnInit {
       console.error('No file selected.');
     }
   }
+  onFileSolutionChange(fileSolutionInput: HTMLInputElement) {
+    if (fileSolutionInput?.files && fileSolutionInput.files.length > 0) {
+      const file = fileSolutionInput.files[0];
+      this.fileSolutionName = file.name;
+      this.updateTicketForm.patchValue({ fichierSolution: file });
+    } else {
+      console.error('No file selected for solution.');
+    }
+  }
+  covertFile() {
+    let fileInput = this.updateTicketForm.value.fichier;
+    if (fileInput?.files && fileInput.files.length > 0) {
+      const imageBlob = fileInput.files[0];
+      const file = new FormData();
+      file.set('file', imageBlob);
+      return file;
+    } else {
+      console.error('No image selected.');
+      return null;
+    }
+  }
   //just added
   resetForm() {
     this.updateTicketForm.reset();
     this.fileName = 'Sélectioner une fichier';
+    this.fileSolutionName = 'Sélectionner un fichier solution';
     this.updateTicketForm.patchValue({ emitteur: this.emitteur });
   }
 }
