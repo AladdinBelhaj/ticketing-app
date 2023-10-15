@@ -17,6 +17,8 @@ import { DateFormatPipe } from 'src/app/date-format.pipe';
   styleUrls: ['./addticket.component.css'],
 })
 export class AddticketComponent implements OnInit, OnDestroy {
+
+
   listProjet: Project[] = [];
 
   listObjet: Object[] = [];
@@ -60,7 +62,39 @@ export class AddticketComponent implements OnInit, OnDestroy {
     this.ticketService.addTicketForm = this.addTicketForm;
   }
 
+
+
+  clients: string[] = []; // array to store list of clients
+  employes: string[] = []; // array to store list of clients
+
   ngOnInit(): void {
+
+
+    this.projectService.getClientList().subscribe(
+      (clients) => {
+        this.clients = clients;
+      },
+      (error) => {
+        console.error('Error fetching clients:', error);
+      }
+    );
+
+    this.projectService.getEmployeList().subscribe(
+      (employes) => {
+        this.employes = employes;
+      },
+      (error) =>{
+        console.error('Error fetching employes:', error);
+      }
+    )
+
+
+
+
+
+
+
+
     if (this.ticketService.addTicketForm != undefined) {
       this.addTicketForm = this.ticketService.addTicketForm;
     }
