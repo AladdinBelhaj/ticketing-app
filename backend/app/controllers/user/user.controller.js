@@ -1,35 +1,45 @@
 const express = require("express");
 const cors = require("cors");
 const connexion = require("../db").connexion;
+var util = require("util");
 const router = express.Router();
 const saveUser = (app) => {
   app.use(cors());
 
-  app.post("/user", (req, res) => {
-    const userData = req.body;
+  app.post("/user", async (req, res) => {
+    const asyncQuery = util.promisify(connexion.query).bind(connexion);
+    try {
+      const userData = req.body;
+       let query = 'SELECT * FROM user WHERE email = ?';
+       let data = await asyncQuery(query, userData.email);
+       if (data.length > 0){
+      res.status(500).json({ message: "Error mail existe" });       
+       }
+      const insertQuery =  "INSERT INTO user (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
 
-    const insertQuery =
-      "INSERT INTO user (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
-
-    const values = [
-      userData.Nom,
-      userData.Prenom,
-      userData.NumTelephone,
-      userData.Role,
-      userData.email,
-      userData.password,
-    ];
-
-    connexion.query(insertQuery, values, (err, results) => {
-      if (err) {
-        console.error("Error saving user:", err);
-        res.status(500).json({ message: "Error saving user" });
-        return;
+      const values = [
+        userData.Nom,
+        userData.Prenom,
+        userData.NumTelephone,
+        userData.Role,
+        userData.email,
+        userData.password,
+      ];
+      if (userData.Role === 'Client'){
+        const insertclientQuery =  "INSERT INTO client (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        await asyncQuery(insertclientQuery, values);
+      }else if (userData.Role === 'Employer'){
+        const insertemployerQuery =  "INSERT INTO employer (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        await asyncQuery(insertemployerQuery, values);
       }
+      const result = await asyncQuery(insertQuery, values);
+      console.log("User saved successfully!");
+      res.status(200).json({ message: "User saved successfully" });
 
-      console.log("user saved successfully!");
-      res.status(200).json({ message: "user saved successfully" });
-    });
+    } catch (error) {
+      console.error("Error saving user:", error);
+      res.status(500).json({ message: "Error saving user" });
+    }
   });
 
   //get all users

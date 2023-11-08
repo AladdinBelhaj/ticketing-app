@@ -1,6 +1,6 @@
 const connexion = require('../db').connexion
 const jwt = require('jsonwebtoken');
-
+var util = require("util");
 
 const secretKey = 'issatm123';
 
@@ -8,7 +8,7 @@ const secretKey = 'issatm123';
 const login = (req, res) => { // handle user login requests
     const { email, password } = req.body; // server expects email and password in request body
   
-    connexion.query('SELECT * FROM client WHERE email = ?', email, (err, results) => { // query the database to find user
+    connexion.query('SELECT * FROM user WHERE email = ?', email, (err, results) => { // query the database to find user
       if(err) {
         console.error('Error logging in:', err);
         res.status(500).json({ error: 'Failed to log in' }); // error with database query
@@ -20,7 +20,7 @@ const login = (req, res) => { // handle user login requests
         if(password !== user.password) {
           res.status(401).json({ error: 'Invalid email or password' }); // user exists, wrong password
         } else {
-          const token = jwt.sign({ id: user.id, email: user.email }, secretKey, { // user logs in
+          const token = jwt.sign({ id: user.id, email: user.email,role:user.role }, secretKey, { // user logs in
             expiresIn: '1h', // token expires in 1h
           });
   
