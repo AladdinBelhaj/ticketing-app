@@ -15,18 +15,19 @@
           </a>
           <ul class="submenu">
             <li>
-              <a routerLink="dashboard/projet">Gestion projet</a>
+              <a routerLink="dashboard/projet" *ngIf="userRole !== 'Client'">Gestion projet</a>
             </li>
-            <li><a routerLink="dashboard/ticket">Gestion ticket </a></li>
-            <li><a routerLink="dashboard/objet">Gestion objet </a></li>
+            <li><a routerLink="dashboard/ticket">Gestion ticket</a></li>
+            <li><a routerLink="dashboard/objet" *ngIf="userRole !== 'Client'">Gestion objet</a></li>
           </ul>
         </li>
         <li>
-          <a routerLink="/dashboard/user" class="dropdown-toggle no-arrow">
+          <a routerLink="/dashboard/user" *ngIf="userRole !== 'Client' && userRole !== 'Employer'" class="dropdown-toggle no-arrow">
             <span class="micon bi bi-table"></span
             ><span class="mtext">Gestion User</span>
           </a>
         </li>
+        
       </ul>
     </div>
   </div>

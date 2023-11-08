@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
 
-  constructor() { }
+  userRole: string = "";
+
+  constructor() {}
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('role') || 'Guest';
   }
 
+
+
+
+
+  
 }
