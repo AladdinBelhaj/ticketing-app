@@ -29,7 +29,7 @@ const saveUser = (app) => {
         const insertclientQuery =  "INSERT INTO client (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
         await asyncQuery(insertclientQuery, values);
       }else if (userData.Role === 'Employer'){
-        const insertemployerQuery =  "INSERT INTO employer (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        const insertemployerQuery =  "INSERT INTO employe (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
         await asyncQuery(insertemployerQuery, values);
       }
       const result = await asyncQuery(insertQuery, values);

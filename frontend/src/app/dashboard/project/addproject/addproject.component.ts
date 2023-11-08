@@ -8,6 +8,9 @@ import {
 import { Project } from 'src/app/model/project';
 import { ProjectService } from 'src/app/service/project.service';
 
+import { User } from 'src/app/model/user';
+import { UserService } from 'src/app/service/user.service';
+
 @Component({
   selector: 'app-addproject',
   templateUrl: './addproject.component.html',
@@ -23,7 +26,8 @@ export class AddprojectComponent implements OnInit, OnDestroy {
   addProjectForm: FormGroup;
   constructor(
     private projectService: ProjectService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService
   ) {
     this.addProjectForm = this.formBuilder.group({
       title: new FormControl('', Validators.compose([Validators.required])),
@@ -46,26 +50,7 @@ export class AddprojectComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
 
-        // fetch list of clients from back end
-        this.projectService.getClientList().subscribe(
-          (clients) => {
-            this.clients = clients;
-          },
-          (error) => {
-            console.error('Error fetching clients:', error);
-          }
-        );
-    
-        this.projectService.getEmployeList().subscribe(
-          (employes) => {
-            this.employes = employes;
-          },
-          (error) =>{
-            console.error('Error fetching employes:', error);
-          }
-        )
-      
-
+    this.fetchUsers();
 
 
 
@@ -73,6 +58,20 @@ export class AddprojectComponent implements OnInit, OnDestroy {
       this.addProjectForm = this.projectService.addProjectForm;
     }
   }
+
+
+  fetchUsers() {
+    this.userService.getAllUsers().subscribe((users) => {
+      this.clients = users
+        .filter((user) => user.Role === 'Client')
+        .map((user) => `${user.Nom} ${user.Prenom}`);
+        
+      this.employes = users
+        .filter((user) => user.Role === 'Employer')
+        .map((user) => `${user.Nom} ${user.Prenom}`);
+    });
+  }
+
   saveProject() {
     console.log(
       'Form values before FormData preparation:',
