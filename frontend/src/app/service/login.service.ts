@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, of, tap } from 'rxjs';
+import { Subject, catchError, of, tap } from 'rxjs';
 import { User } from '../model/user';
 import { UserService } from './user.service';
 
@@ -9,6 +9,7 @@ import { UserService } from './user.service';
   providedIn: 'root',
 })
 export class LoginService {
+  private dataSubject = new Subject<void>();
   constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
   login(user: User) {
     this.http
@@ -31,6 +32,7 @@ export class LoginService {
 
 
             this.router.navigate(['/dashboard']);
+            this.triggerGetData()
           });
         }),
         catchError((error) => {
@@ -49,6 +51,17 @@ export class LoginService {
     localStorage.removeItem('token'); // save the token in local storage or in a cookie
     localStorage.removeItem('email');
     localStorage.removeItem('role'); // Clear the user's role on logout
+    localStorage.removeItem('password'); // Clear the user's role on logout
     this.router.navigate(['/login']);
+  }
+
+
+
+  triggerGetData() {
+    this.dataSubject.next();
+  }
+
+  getDataObservable() {
+    return this.dataSubject.asObservable();
   }
 }

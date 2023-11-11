@@ -33,6 +33,7 @@ import { AddUserComponent } from './userr/add-user/add-user.component';
 import { InfoUserComponent } from './userr/info-user/info-user.component';
 import { UpdateUserComponent } from './userr/update-user/update-user.component';
 import { DateFormatPipe } from '../date-format.pipe';
+import { DashboardcomComponent } from './dashboardcom/dashboardcom.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -53,6 +54,7 @@ import { DateFormatPipe } from '../date-format.pipe';
     InfoUserComponent,
     UpdateUserComponent,
     DateFormatPipe,
+    DashboardcomComponent,
   ],
   imports: [
     HttpClientModule,
@@ -70,6 +72,8 @@ import { DateFormatPipe } from '../date-format.pipe';
     MatTableModule,
     MatPaginatorModule,
     MatTooltipModule,
+    FormsModule,
+    ReactiveFormsModule,
     SweetAlert2Module,
     SweetAlert2Module.forRoot(),
   ],

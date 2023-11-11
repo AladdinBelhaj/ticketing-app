@@ -17,6 +17,7 @@ import { UserComponent } from './userr/user.component';
 import { AddUserComponent } from './userr/add-user/add-user.component';
 import { InfoUserComponent } from './userr/info-user/info-user.component';
 import { UpdateUserComponent } from './userr/update-user/update-user.component';
+import { DashboardcomComponent } from './dashboardcom/dashboardcom.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       //ticket
+      {
+        path: '', // This will match when the URL is /dashboard
+        component: DashboardcomComponent,
+      },
       {
         path: 'ticket',
         component: TicketComponent,
