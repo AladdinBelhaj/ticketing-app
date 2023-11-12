@@ -21,9 +21,7 @@ export class TicketService {
   public updateTicket(id: string, ticket: Ticket): Observable<any> {
     return this.http.put(`${this.apiUrl}/ticket/${id}`, ticket);
   }
-  public getTicketById(id: any): Observable<Ticket> {
-    return this.http.get<Ticket>(`${this.apiUrl}/ticket/getbyid/${id}`);
-  }
+
   public getTickets(): Observable<Ticket[]> {
     return this.http.get<Ticket[]>(`${this.apiUrl}/ticket`);
   }

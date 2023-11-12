@@ -11,6 +11,9 @@ import { ObjectService } from 'src/app/service/object.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { TicketService } from 'src/app/service/ticket.service';
 import { DateFormatPipe } from 'src/app/date-format.pipe';
+import { User } from 'src/app/model/user';
+import { UserService } from 'src/app/service/user.service';
+
 @Component({
   selector: 'app-addticket',
   templateUrl: './addticket.component.html',
@@ -34,7 +37,8 @@ export class AddticketComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private ticketService: TicketService,
     private projectService: ProjectService,
-    private objectService: ObjectService
+    private objectService: ObjectService,
+    private userService: UserService
   ) {
     this.addTicketForm = this.formBuilder.group({
       projet: new FormControl('', Validators.compose([Validators.required])),
@@ -69,31 +73,9 @@ export class AddticketComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+    this.fetchUsers();
 
-    this.projectService.getClientList().subscribe(
-      (clients) => {
-        this.clients = clients;
-      },
-      (error) => {
-        console.error('Error fetching clients:', error);
-      }
-    );
-
-    this.projectService.getEmployeList().subscribe(
-      (employes) => {
-        this.employes = employes;
-      },
-      (error) =>{
-        console.error('Error fetching employes:', error);
-      }
-    )
-
-
-
-
-
-
-
+    
 
     if (this.ticketService.addTicketForm != undefined) {
       this.addTicketForm = this.ticketService.addTicketForm;
@@ -109,6 +91,22 @@ export class AddticketComponent implements OnInit, OnDestroy {
     });
     this.addTicketForm.patchValue({ fichierSolution: null });
   }
+
+
+
+  fetchUsers() {
+    this.userService.getAllUsers().subscribe((users) => {
+      this.clients = users
+        .filter((user) => user.Role === 'Client')
+        .map((user) => `${user.Nom} ${user.Prenom}`);
+        
+      this.employes = users
+        .filter((user) => user.Role === 'Employer')
+        .map((user) => `${user.Nom} ${user.Prenom}`);
+    });
+  }
+
+
 
   saveTicket() {
     const formData = new FormData();

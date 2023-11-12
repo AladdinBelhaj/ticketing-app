@@ -96,14 +96,31 @@
         <option value="draft">Draft</option>
       </select>
     </div>
-    <!-- responsable -->
-    <div class="form-group">
-      <label>responsable</label>
-      <select class="custom-select col-12" formControlName="responsable">
-        <option value="Rayen">Rayen</option>
-        <option value="Ala">Ala</option>
-      </select>
-    </div>
+
+<!--responsable-->
+<div class="form-group">
+  <label>responsable</label>
+  <select
+    formControlName="responsable"
+    class="form-control"
+    required
+    name="responsable"
+  >
+    <option value="" disabled>Select responsable</option>
+    <option *ngFor="let employeName of employes" [value]="employeName">
+      {{ employeName }}
+    </option>
+  </select>
+  <div
+    class="text-danger"
+    *ngIf="
+      addTicketForm.get('responsable')!.invalid &&
+      addTicketForm.get('responsable')!.touched
+    "
+  >
+    responsable-Invalid
+  </div>
+</div>
 
     
     <!--descriptionSolution-->

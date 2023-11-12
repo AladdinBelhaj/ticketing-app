@@ -19,7 +19,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
   styleUrls: ['./ticket.component.css'],
 })
 export class TicketComponent implements OnInit {
-  public tikcet!: Ticket[];
+  public ticket!: Ticket[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!: MatTableDataSource<any>;
@@ -45,14 +45,14 @@ export class TicketComponent implements OnInit {
     this.ticketservice
       .getTicketsByUser(localStorage.getItem('email')!)
       .subscribe((response: any) => {
-        this.tikcet = response;
-        this.dataSource = new MatTableDataSource(this.tikcet);
+        this.ticket = response;
+        this.dataSource = new MatTableDataSource(this.ticket);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       });
   }
   applyFilter(event: Event) {
-    this.dataSource = new MatTableDataSource(this.tikcet);
+    this.dataSource = new MatTableDataSource(this.ticket);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     const filterValue = (event.target as HTMLInputElement).value;
@@ -69,8 +69,8 @@ export class TicketComponent implements OnInit {
         this.ticketservice
           .getTicketsByUser(localStorage.getItem('email')!)
           .subscribe((tickets: Ticket[]) => {
-            this.tikcet = tickets;
-            this.dataSource = new MatTableDataSource(this.tikcet);
+            this.ticket = tickets;
+            this.dataSource = new MatTableDataSource(this.ticket);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
           });
