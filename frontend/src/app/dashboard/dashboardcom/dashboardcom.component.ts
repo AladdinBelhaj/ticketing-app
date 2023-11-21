@@ -85,7 +85,8 @@ export class DashboardcomComponent implements OnInit {
       this.ticketService
       .getTickets()
       .subscribe((response: any) => {
-        this.ticket = response.find((t:any)=> t.responsable == userName);
+        this.ticket = response.filter((t: any) => t.responsable === userName);
+
         this.dataSource = new MatTableDataSource(this.ticket);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
