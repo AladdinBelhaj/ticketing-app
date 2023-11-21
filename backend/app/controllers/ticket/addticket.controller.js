@@ -16,56 +16,78 @@ const upload = multer({ storage: storage });
 const setupAddTicketRoutes = (app) => {
   app.use(cors());
 
-  // Posting information
-  app.post(
-    "/ticket",
-    upload.fields([{ name: "fichier" }, { name: "fichierSolution" }]),
-    (req, res) => {
-      if (!req.files) {
-        return res.status(400).json({ message: "No files uploaded." });
+
+
+
+  app.post("/ticket", upload.fields([{ name: "fichier" }]), (req, res) => {
+    const { projet, objet, emitteur, description, etat, responsable, descriptionSolution } = req.body;
+    const fichier = req.files && req.files["fichier"] ? req.files["fichier"][0].filename : null;
+  
+    const insertQuery = `INSERT INTO ticket (projet, objet, emitteur, description, fichier, etat, responsable, descriptionSolution) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    const values = [projet, objet, emitteur, description, fichier, etat, responsable, descriptionSolution];
+  
+    connexion.query(insertQuery, values, (err, results) => {
+      if (err) {
+        console.error("Error inserting data into the database:", err);
+        res.status(500).json({ message: "Error inserting data into the database" });
+        return;
       }
+  
+      console.log("Data inserted successfully!");
+      res.status(200).json({ message: "Data inserted successfully" });
+    });
+  });
+  
+  // Posting information
+  // app.post(
+  //   "/ticket",
+  //   upload.fields([{ name: "fichier" }, { name: "fichierSolution" }]),
+  //   (req, res) => {
+  //     if (!req.files) {
+  //       return res.status(400).json({ message: "No files uploaded." });
+  //     }
 
-      const {
-        projet,
-        objet,
-        emitteur,
-        description,
-        etat,
-        responsable,
-        descriptionSolution,
-      } = req.body;
+  //     const {
+  //       projet,
+  //       objet,
+  //       emitteur,
+  //       description,
+  //       etat,
+  //       responsable,
+  //       descriptionSolution,
+  //     } = req.body;
 
-      const fichier = req.files["fichier"][0]; // "fichier" field
-      const fichierSolution = req.files["fichierSolution"][0]; // "fichierSolution" field
+  //     const fichier = req.files["fichier"][0]; // "fichier" field
+  //     const fichierSolution = req.files["fichierSolution"][0]; // "fichierSolution" field
 
-      const insertQuery = `INSERT INTO ticket (projet, objet, emitteur, description, fichier, etat, responsable, descriptionSolution, fichierSolution) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-      const values = [
-        projet,
-        objet,
-        emitteur,
-        description,
-        fichier.filename, // Use the filename property of the uploaded file
-        etat,
-        responsable,
-        descriptionSolution,
-        fichierSolution.filename, // Use the filename property of the uploaded file
-      ];
+  //     const insertQuery = `INSERT INTO ticket (projet, objet, emitteur, description, fichier, etat, responsable, descriptionSolution, fichierSolution) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  //     const values = [
+  //       projet,
+  //       objet,
+  //       emitteur,
+  //       description,
+  //       fichier.filename, // Use the filename property of the uploaded file
+  //       etat,
+  //       responsable,
+  //       descriptionSolution,
+  //       fichierSolution.filename, // Use the filename property of the uploaded file
+  //     ];
 
-      // Execute the query
-      connexion.query(insertQuery, values, (err, results) => {
-        if (err) {
-          console.error("Error inserting data into the database:", err);
-          res
-            .status(500)
-            .json({ message: "Error inserting data into the database" });
-          return;
-        }
+  //     // Execute the query
+  //     connexion.query(insertQuery, values, (err, results) => {
+  //       if (err) {
+  //         console.error("Error inserting data into the database:", err);
+  //         res
+  //           .status(500)
+  //           .json({ message: "Error inserting data into the database" });
+  //         return;
+  //       }
 
-        console.log("Data inserted successfully!");
-        res.status(200).json({ message: "Data inserted successfully" });
-      });
-    }
-  );
+  //       console.log("Data inserted successfully!");
+  //       res.status(200).json({ message: "Data inserted successfully" });
+  //     });
+  //   }
+  // );
 
   //get the information from the project table:
   app.get("/projet", (req, res) => {
