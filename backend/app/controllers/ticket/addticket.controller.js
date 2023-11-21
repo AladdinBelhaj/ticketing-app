@@ -167,7 +167,19 @@ const setupAddTicketRoutes = (app) => {
       res.status(200).json(rows); // Sending all rows
     });
   });
-
+  app.get("/ticket", (req, res) => {
+    const selectQuery = "SELECT * FROM ticket";
+  
+    connexion.query(selectQuery, (error, results) => {
+      if (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).json({ error: "Error fetching data from database" });
+      } else {
+        console.log("Data fetched successfully");
+        res.status(200).json(results);
+      }
+    });
+  });
   // Delete a ticket by ID
   app.delete("/ticket/:id", (req, res) => {
     const ticketId = req.params.id;
@@ -202,5 +214,7 @@ const setupAddTicketRoutes = (app) => {
     });
   });
 };
+
+
 
 module.exports = setupAddTicketRoutes;

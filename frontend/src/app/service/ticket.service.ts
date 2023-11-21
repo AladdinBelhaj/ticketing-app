@@ -22,9 +22,14 @@ export class TicketService {
     return this.http.put(`${this.apiUrl}/ticket/${id}`, ticket);
   }
 
+  public getTicketById(id: any): Observable<Ticket> {
+    return this.http.get<Ticket>(`${this.apiUrl}/ticket/getbyid/${id}`);
+  }
+
   public getTickets(): Observable<Ticket[]> {
     return this.http.get<Ticket[]>(`${this.apiUrl}/ticket`);
   }
+  
   deleteTicket(ticketId: number): Observable<any> {
     const url = `${this.apiUrl}/ticket/${ticketId}`;
     return this.http.delete(url);

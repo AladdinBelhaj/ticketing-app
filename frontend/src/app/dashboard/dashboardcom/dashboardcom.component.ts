@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/model/user';
 import {
   FormBuilder,
   FormControl,
@@ -47,16 +48,55 @@ export class DashboardcomComponent implements OnInit {
   constructor(private userService: UserService, private ticketService: TicketService,private router: Router) {}
 
   ngOnInit(): void {
-    this.ticketService
-    .getTicketsByUser(localStorage.getItem('email')!)
-    .subscribe((response: any) => {
-      this.ticket = response;
-      this.dataSource = new MatTableDataSource(this.ticket);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
-    // Get the user's email from local storage
+    const userRole = localStorage.getItem('role');
     const userEmail = localStorage.getItem('email');
+    if(userRole == "Client"){
+      this.ticketService
+      .getTicketsByUser(localStorage.getItem('email')!)
+      .subscribe((response: any) => {
+        this.ticket = response;
+        this.dataSource = new MatTableDataSource(this.ticket);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+    }else if(userRole == "Admin"){
+      this.ticketService
+      .getTickets()
+      .subscribe((response: any) => {
+        this.ticket = response;
+        this.dataSource = new MatTableDataSource(this.ticket);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+    }else{
+      let user: any;
+      let userName = "";
+      this.userService
+      .getAllUsers()
+      .subscribe((response: any) =>{
+         user = response;
+         const foundUser = user.find((u: any) => u.email === userEmail);
+         userName = `${foundUser.Nom} ${foundUser.Prenom}`;
+         console.log(userName)
+      });
+      
+      
+
+      this.ticketService
+      .getTickets()
+      .subscribe((response: any) => {
+        this.ticket = response.find((t:any)=> t.responsable == userName);
+        this.dataSource = new MatTableDataSource(this.ticket);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+
+
+
+    }
+
+    // Get the user's email from local storage
+
 
     if (userEmail) {
       // Fetch all users and filter by the user's email
