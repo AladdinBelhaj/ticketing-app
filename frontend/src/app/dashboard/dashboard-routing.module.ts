@@ -18,6 +18,7 @@ import { AddUserComponent } from './userr/add-user/add-user.component';
 import { InfoUserComponent } from './userr/info-user/info-user.component';
 import { UpdateUserComponent } from './userr/update-user/update-user.component';
 import { DashboardcomComponent } from './dashboardcom/dashboardcom.component';
+import { AddResponsableComponent } from './dashboardcom/add-responsable/add-responsable.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
       },
       { path: 'ticket/update/:id', component: UpdateTicketComponent },
       { path: 'ticket/info/:id', component: InfoTicketComponent },
+      { path: 'dashboardcom/add-responsable/:id', component: AddResponsableComponent },
       //project
       {
         path: 'projet',

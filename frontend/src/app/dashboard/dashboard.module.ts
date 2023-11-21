@@ -34,6 +34,7 @@ import { InfoUserComponent } from './userr/info-user/info-user.component';
 import { UpdateUserComponent } from './userr/update-user/update-user.component';
 import { DateFormatPipe } from '../date-format.pipe';
 import { DashboardcomComponent } from './dashboardcom/dashboardcom.component';
+import { AddResponsableComponent } from './dashboardcom/add-responsable/add-responsable.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -55,6 +56,7 @@ import { DashboardcomComponent } from './dashboardcom/dashboardcom.component';
     UpdateUserComponent,
     DateFormatPipe,
     DashboardcomComponent,
+    AddResponsableComponent,
   ],
   imports: [
     HttpClientModule,
