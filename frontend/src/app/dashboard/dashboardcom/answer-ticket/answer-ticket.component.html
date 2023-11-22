@@ -1,0 +1,59 @@
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+      <div class="pull-left">
+        <div class="d-inline-flex align-items-end">
+          <p>
+            Paramétrage >
+            <a routerLink="../..">Tickets</a> >
+          </p>
+          <p class="text-blue">&nbsp;Update</p>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="updateTicketForm">
+     
+      <!--descriptionSolution-->
+      <div class="form-group">
+        <label>descriptionSolution</label>
+        <textarea
+          formControlName="descriptionSolution"
+          class="form-control"
+        ></textarea>
+      </div>
+      <!-- FICHIERSOLUTION -->
+      <div class="form-group">
+        <label>Fichier Solution</label>
+        <div class="custom-file">
+          <input
+            #fileSolutionInput
+            (change)="onFileSolutionChange(fileSolutionInput)"
+            type="file"
+            class="custom-file-input"
+          />
+          <label class="custom-file-label">{{ fileSolutionName }}</label>
+        </div>
+      </div>
+      <!--BUTTONS-->
+      <div class="d-flex justify-content-end">
+        <button
+          type="submit"
+          class="btn btn-success"
+          (click)="editTicket()"
+          [ngStyle]="{
+            cursor: updateTicketForm.valid ? 'pointer' : 'not-allowed'
+          }"
+          [disabled]="!updateTicketForm.valid"
+        >
+          Modifer
+        </button>
+        <button
+          type="submit"
+          class="btn btn-secondary ml-3"
+          (click)="resetForm()"
+        >
+          Réinitialiser
+        </button>
+      </div>
+    </form>
+  </div>
+  
