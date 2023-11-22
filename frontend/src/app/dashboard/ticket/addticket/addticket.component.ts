@@ -50,7 +50,7 @@ export class AddticketComponent implements OnInit, OnDestroy {
       ),
       fichier: new FormControl(''),
       fichierSolution: new FormControl(''),
-      etat: new FormControl('En Cours', Validators.compose([])),
+      etat: new FormControl('En Attente', Validators.compose([])),
       responsable: new FormControl(
         '',
         Validators.compose([])

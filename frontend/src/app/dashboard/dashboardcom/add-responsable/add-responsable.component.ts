@@ -114,7 +114,7 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
         objet: this.updateTicketForm.value.objet,
         emitteur: this.updateTicketForm.value.emitteur,
         description: this.updateTicketForm.value.description,
-        etat: this.updateTicketForm.value.etat,
+        etat: 'En Cours',
         responsable: this.updateTicketForm.value.responsable,
         descriptionSolution: this.updateTicketForm.value.descriptionSolution,
         dateEmission: this.updateTicketForm.value.dateEmission,

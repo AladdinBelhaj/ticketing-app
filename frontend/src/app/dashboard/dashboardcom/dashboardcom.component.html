@@ -25,21 +25,13 @@
         <div class="">
           <div class="d-inline-flex align-items-end">
             <p>Paramétrage ></p>
-            <p class="text-blue">&nbsp;Tickets</p>
+            <p class="text-blue">
+              &nbsp;
+              <span *ngIf="userR === 'Client'">My Tickets</span>
+              <span *ngIf="userR === 'Employer'">Tickets to Work On</span>
+              <span *ngIf="userR === 'Admin'">All Tickets</span>
           </div>
         </div>
-      </div>
-      <div class="mb-4">
-        <button
-          type="button"
-          class="btn btn-success"
-          routerLink="add"
-          [matTooltip]="'Ajouter'"
-          matTooltipPosition="above"
-          aria-label="Button that displays a tooltip in various positions"
-        >
-          <i class="icon-copy fa fa-plus" aria-hidden="true"></i>
-        </button>
       </div>
     </div>
     <div class="pt-4 mx-2 align-items-center justify-content-end">
@@ -142,46 +134,3 @@
     </div>
   </div>
 </div>
-
-
-
-<!-- 
-
-<div class="card-box mb-30">
-    <h2 class="h4 pd-20">Your Tickets</h2>
-    <table class="data-table table nowrap">
-        <thead>
-            <tr>
-                <th class="table-plus datatable-nosort">Product</th>
-                <th>Projet</th>
-                <th>Objet</th>
-                <th>Emitteur</th>
-                <th>Description</th>
-                <th class="datatable-nosort">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of items">
-                <td>
-                    <h5 class="font-16">{{ item.projet }}</h5>
-                </td>
-                <td>{{ item.objet }}</td>
-                <td>{{ item.emitteur}}</td>
-                <td>{{ item.description }}</td>
-                <td>
-                    <div class="dropdown">
-                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                            role="button" data-toggle="dropdown">
-                            <i class="dw dw-more"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                            <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                            <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                            <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div> -->

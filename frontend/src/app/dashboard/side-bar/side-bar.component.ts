@@ -21,6 +21,7 @@ export class SideBarComponent implements OnInit {
     });
   }
 
+  
   getdata() { 
     this.userRole = localStorage.getItem('role') || 'Guest';
 console.log(localStorage.getItem('role'))

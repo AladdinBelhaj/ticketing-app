@@ -17,7 +17,7 @@ import {
 } from '@angular/forms';
 import { TicketService } from 'src/app/service/ticket.service';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
-
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-dashboardcom',
@@ -25,6 +25,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
   styleUrls: ['./dashboardcom.component.css'],
 })
 export class DashboardcomComponent implements OnInit {
+  userR = localStorage.getItem('role');
   userName: string = '';
   public ticket!: Ticket[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -135,5 +136,4 @@ removeTicket(ticketId: number | undefined) {
     });
   }
 }
-
 }
