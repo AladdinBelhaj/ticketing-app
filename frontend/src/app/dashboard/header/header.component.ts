@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/service/login.service';
+import { NotifService } from 'src/app/service/notif.service';
+import { Notification } from 'src/app/model/notification';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +9,25 @@ import { LoginService } from 'src/app/service/login.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private service: LoginService) {}
+  userNotifs: Notification[] = [];
+  notifs: Notification[] = [];
+  userEmail: string = localStorage.getItem('email') ?? '';
+  count = 0;
 
-  ngOnInit(): void {}
+  constructor(private service: LoginService, private notifService: NotifService) {}
+
+  ngOnInit(): void {
+    // Fetch all notifications and filter them by user
+    this.notifService.getAllNotifs().subscribe((notifications) => {
+      this.notifs = notifications;
+      this.userNotifs = this.notifs.filter((notif) => notif.sentTo === this.userEmail);
+      this.count = this.userNotifs.length;
+    });
+    
+  }
 
   logout() {
     this.service.logout();
   }
+
 }

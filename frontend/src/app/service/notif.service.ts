@@ -16,7 +16,7 @@ export class NotifService {
     return this.http.post(url, notification);
   }
 
-  getAllNotifs(): Observable<Object[]> {
+  getAllNotifs(): Observable<Notification[]> {
     return this.http.get<Notification[]>(`${this.apiUrl}/notification`);
   }
 

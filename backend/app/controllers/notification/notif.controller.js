@@ -24,9 +24,9 @@ const saveNotification = (app) => {
       res.status(200).json({ message: "Notification saved successfully" });
     });
   });
-};
 
-app.get("/notification", (req, res) => {
+  // Fetch notifications
+  app.get("/notification", (req, res) => {
     const selectQuery = "SELECT * FROM notification";
 
     connexion.query(selectQuery, (error, results) => {
@@ -39,10 +39,6 @@ app.get("/notification", (req, res) => {
       }
     });
   });
-
-
-
-
-
+};
 
 module.exports = saveNotification;
