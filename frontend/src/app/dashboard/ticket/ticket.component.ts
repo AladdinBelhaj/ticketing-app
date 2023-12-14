@@ -1,9 +1,12 @@
+// Import statements...
+import { UserService } from 'src/app/service/user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Ticket } from 'src/app/model/ticket';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/model/user';
 import {
   FormBuilder,
   FormControl,
@@ -12,13 +15,16 @@ import {
 } from '@angular/forms';
 import { TicketService } from 'src/app/service/ticket.service';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
-  selector: 'app-ticket',
+  selector: 'app-ticket', // Updated selector
   templateUrl: './ticket.component.html',
   styleUrls: ['./ticket.component.css'],
 })
 export class TicketComponent implements OnInit {
+  userR = localStorage.getItem('role');
+  userName: string = '';
   public ticket!: Ticket[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -39,18 +45,58 @@ export class TicketComponent implements OnInit {
     buttonsStyling: false,
   };
 
-  constructor(private ticketservice: TicketService, private router: Router) {}
+  constructor(private userService: UserService, private ticketService: TicketService, private router: Router) {}
 
-  ngOnInit() {
-    this.ticketservice
-      .getTicketsByUser(localStorage.getItem('email')!)
-      .subscribe((response: any) => {
-        this.ticket = response;
+  ngOnInit(): void {
+    const userRole = localStorage.getItem('role');
+    const userEmail = localStorage.getItem('email');
+    if (userRole == 'Client') {
+      this.ticketService
+        .getTicketsByUser(localStorage.getItem('email')!)
+        .subscribe((response: any) => {
+          this.ticket = response;
+          this.dataSource = new MatTableDataSource(this.ticket);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        });
+    } else if (userRole == 'Admin') {
+      this.ticketService
+        .getTickets()
+        .subscribe((response: any) => {
+          this.ticket = response;
+          this.dataSource = new MatTableDataSource(this.ticket);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        });
+    } else {
+      let user: any;
+      let userName = '';
+      this.userService.getAllUsers().subscribe((response: any) => {
+        user = response;
+        const foundUser = user.find((u: any) => u.email === userEmail);
+        userName = `${foundUser.Nom} ${foundUser.Prenom}`;
+        console.log(userName);
+      });
+
+      this.ticketService.getTickets().subscribe((response: any) => {
+        this.ticket = response.filter((t: any) => t.responsable === userName);
+
         this.dataSource = new MatTableDataSource(this.ticket);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       });
+    }
+
+    if (userEmail) {
+      this.userService.getAllUsers().subscribe((users) => {
+        const userWithEmail = users.find((user) => user.email === userEmail);
+        if (userWithEmail) {
+          this.userName = `${userWithEmail.Nom} ${userWithEmail.Prenom}`;
+        }
+      });
+    }
   }
+
   applyFilter(event: Event) {
     this.dataSource = new MatTableDataSource(this.ticket);
     this.dataSource.paginator = this.paginator;
@@ -65,8 +111,8 @@ export class TicketComponent implements OnInit {
 
   removeTicket(ticketId: number | undefined) {
     if (ticketId) {
-      this.ticketservice.deleteTicket(ticketId).subscribe(() => {
-        this.ticketservice
+      this.ticketService.deleteTicket(ticketId).subscribe(() => {
+        this.ticketService
           .getTicketsByUser(localStorage.getItem('email')!)
           .subscribe((tickets: Ticket[]) => {
             this.ticket = tickets;

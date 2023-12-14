@@ -46,17 +46,17 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
     private userService: UserService
   ) {
     this.updateTicketForm = this.formBuilder.group({
-      projet: new FormControl('', Validators.compose([Validators.required])),
-      objet: new FormControl('', Validators.compose([Validators.required])),
-      emitteur: new FormControl('', Validators.compose([Validators.required])),
+      projet: new FormControl('', Validators.compose([])),
+      objet: new FormControl('', Validators.compose([])),
+      emitteur: new FormControl('', Validators.compose([])),
       description: new FormControl(
         '',
-        Validators.compose([Validators.required])
+        Validators.compose([])
       ),
       fichier: new FormControl(''),
       fichierSolution: new FormControl(''),
       etat: new FormControl('', Validators.compose([])),
-      responsable: new FormControl('', Validators.compose([])),
+      responsable: new FormControl('', Validators.compose([Validators.required])),
       descriptionSolution: new FormControl('', Validators.compose([])),
     });
   }
