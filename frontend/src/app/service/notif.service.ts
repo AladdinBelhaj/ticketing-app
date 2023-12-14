@@ -11,9 +11,8 @@ export class NotifService {
 
   constructor(private http: HttpClient) {}
 
-  // Method to create a notification
   createNotification(notification: Notification): Observable<any> {
-    const url = `${this.apiUrl}/notification`; // Replace with your actual endpoint
+    const url = `${this.apiUrl}/notification`; 
     return this.http.post(url, notification);
   }
 
