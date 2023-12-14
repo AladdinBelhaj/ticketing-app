@@ -10,7 +10,7 @@ import { Project } from 'src/app/model/project';
 import { ObjectService } from 'src/app/service/object.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { UserService } from 'src/app/service/user.service';
-
+import { NotifService } from 'src/app/service/notif.service';
 @Component({
   selector: 'app-add-responsable', // Change the selector
   templateUrl: './add-responsable.component.html', // Change the file name
@@ -42,6 +42,7 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
     private projectService: ProjectService,
     private objectService: ObjectService,
     private router: Router,
+    private notifService: NotifService,
     private route: ActivatedRoute,
     private userService: UserService
   ) {
@@ -123,9 +124,20 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
       this.ticketService
         .updateTicket(this.ticketid, editedTicket)
         .subscribe(() => {
+
+          const notificationData = {
+            notifText: 'Your ticket has been updated.', // Adjust the notification text
+            sentTo: editedTicket.emitteur, // Use the 'emitteur' from the edited ticket
+          };
+  
+          this.notifService.createNotification(notificationData).subscribe(() => {
+            console.log('Notification sent successfully');
+          });
           this.router.navigate(['/dashboard/ticket']);
         });
     }
+
+
   }
   onFileChange(fileInput: HTMLInputElement) {
     if (fileInput?.files && fileInput.files.length > 0) {

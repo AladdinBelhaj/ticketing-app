@@ -40,7 +40,8 @@ app.use(getClientList()); // Invoke getClientList and use the returned router
 const getEmployeList = require('./app/routes/employe.route');
 app.use(getEmployeList());
 
-
+const saveNotification = require ('./app/controllers/notification/notif.controller');
+saveNotification(app);
 
 
 
