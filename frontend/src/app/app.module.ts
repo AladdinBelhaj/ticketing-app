@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './dashboard/header/header.component';
 import { SideBarComponent } from './dashboard/side-bar/side-bar.component';
 import { LoginComponent } from './login/login.component';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

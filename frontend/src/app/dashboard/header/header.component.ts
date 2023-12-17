@@ -14,20 +14,26 @@ export class HeaderComponent implements OnInit {
   userEmail: string = localStorage.getItem('email') ?? '';
   count = 0;
 
-  constructor(private service: LoginService, private notifService: NotifService) {}
+  constructor(
+    private service: LoginService,
+    private notifService: NotifService
+  ) {}
 
   ngOnInit(): void {
     // Fetch all notifications and filter them by user
     this.notifService.getAllNotifs().subscribe((notifications) => {
       this.notifs = notifications;
-      this.userNotifs = this.notifs.filter((notif) => notif.sentTo === this.userEmail);
+      this.userNotifs = this.notifs.filter(
+        (notif) => notif.sentTo === this.userEmail
+      );
       this.count = this.userNotifs.length;
     });
-    
   }
 
   logout() {
     this.service.logout();
   }
-
+  getNotificationText(): string {
+    return this.userNotifs.map((notif) => notif.notifText).join('\n');
+  }
 }

@@ -7,9 +7,14 @@
     ></div>
   </div>
   <div class="header-right">
-    <button type="button" class="btn">
+    <button
+      type="button"
+      class="btn"
+      matTooltip="{{ getNotificationText() }}"
+      matTooltipClass="custom-tooltip"
+    >
       <i style="font-size: 20px" class="bi bi-bell"></i>
-      <span class="badge badge-pill badge-danger" >{{count}}</span>
+      <span class="badge badge-pill badge-danger">{{ count }}</span>
     </button>
     <button type="button" class="btn" (click)="logout()">
       <i style="font-size: 20px" class="dw dw-logout"></i>
