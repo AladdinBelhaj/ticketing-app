@@ -11,23 +11,42 @@ import { Notification } from 'src/app/model/notification';
 export class HeaderComponent implements OnInit {
   userNotifs: Notification[] = [];
   notifs: Notification[] = [];
-  userEmail: string = localStorage.getItem('email') ?? '';
+  userEmail = '';
   count = 0;
 
   constructor(
     private service: LoginService,
-    private notifService: NotifService
+    private notifService: NotifService,
+    private dataSharingService: LoginService
   ) {}
 
   ngOnInit(): void {
-    // Fetch all notifications and filter them by user
+    this.loadUserEmail();
+    this.loadNotifications();
+    this.dataSharingService.getDataObservable().subscribe(() => {
+      console.log('hello');
+      this.loadUserEmail();
+      this.loadNotifications();
+    });
+  }
+
+  private loadNotifications() {
     this.notifService.getAllNotifs().subscribe((notifications) => {
       this.notifs = notifications;
-      this.userNotifs = this.notifs.filter(
-        (notif) => notif.sentTo === this.userEmail
-      );
-      this.count = this.userNotifs.length;
+      this.updateCount();
     });
+  }
+
+  private updateCount() {
+    this.userNotifs = this.notifs.filter(
+      (notif) => notif.sentTo === this.userEmail
+    );
+    this.count = this.userNotifs.length;
+  }
+
+  loadUserEmail() {
+    this.userEmail = localStorage.getItem('email') || 'Guest';
+    console.log(localStorage.getItem('email'));
   }
 
   logout() {

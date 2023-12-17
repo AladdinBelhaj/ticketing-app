@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/service/login.service';
 
@@ -14,25 +13,24 @@ export class SideBarComponent implements OnInit {
   constructor(private dataSharingService: LoginService) {}
 
   ngOnInit(): void {
-    // this.userRole = localStorage.getItem('role') || 'Guest';
+    this.loadUserRole();
+    
     this.dataSharingService.getDataObservable().subscribe(() => {
-      console.log('hello')
-      this.getdata();
+      console.log('hello');
+      this.loadUserRole();
     });
+    
   }
 
-  
-  getdata() { 
+  loadUserRole() {
     this.userRole = localStorage.getItem('role') || 'Guest';
-console.log(localStorage.getItem('role'))
-
+    console.log(localStorage.getItem('role'));
   }
 
   ngOnDestroy(): void {
-    console.log('hello')
-    this.userRole = "";
+    console.log('hello');
+    // You may choose not to clear the userRole during ngOnDestroy,
+    // depending on your application logic.
+    // this.userRole = "";
   }
-
-
-  
 }
