@@ -1,21 +1,19 @@
 <div class="header">
   <div class="header-left">
     <div class="menu-icon bi bi-list"></div>
-    <div
-      class="search-toggle-icon bi bi-search"
-      data-toggle="header_search"
-    ></div>
+    <div class="search-toggle-icon bi bi-search" data-toggle="header_search"></div>
   </div>
   <div class="header-right">
-    <button
-      type="button"
-      class="btn"
-      matTooltip="{{ getNotificationText() }}"
-      matTooltipClass="custom-tooltip"
-    >
-      <i style="font-size: 20px" class="bi bi-bell"></i>
-      <span class="badge badge-pill badge-danger">{{ count }}</span>
-    </button>
+    <div class="dropdown" *ngIf="count > 0">
+      <button type="button" class="btn" (click)="toggleDropdown()">
+        <i style="font-size: 20px" class="bi bi-bell"></i>
+        <span class="badge badge-pill badge-danger">{{ count }}</span>
+      </button>
+      <div class="dropdown-menu" [ngClass]="{ 'show': isDropdownOpen }">
+        <a class="dropdown-item" *ngFor="let notif of userNotifs">{{ notif.notifText }}</a>
+      </div>
+    </div>
+
     <button type="button" class="btn" (click)="logout()">
       <i style="font-size: 20px" class="dw dw-logout"></i>
     </button>

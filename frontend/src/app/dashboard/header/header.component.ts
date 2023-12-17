@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   notifs: Notification[] = [];
   userEmail = '';
   count = 0;
-
+  isDropdownOpen = false;
   constructor(
     private service: LoginService,
     private notifService: NotifService,
@@ -54,5 +54,9 @@ export class HeaderComponent implements OnInit {
   }
   getNotificationText(): string {
     return this.userNotifs.map((notif) => notif.notifText).join('\n');
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 }
