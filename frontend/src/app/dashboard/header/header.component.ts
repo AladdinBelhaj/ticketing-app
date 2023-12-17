@@ -59,4 +59,15 @@ export class HeaderComponent implements OnInit {
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
+  deleteNotification(notifId: string) {
+    this.notifService.deleteNotification(notifId).subscribe(() => {
+      this.loadNotifications();
+    });
+  }
+  validateId(id: any): string {
+    if (typeof id === 'string' || typeof id === 'number') {
+      return id.toString();
+    }
+    return '';
+  }
 }

@@ -12,14 +12,15 @@ export class NotifService {
   constructor(private http: HttpClient) {}
 
   createNotification(notification: Notification): Observable<any> {
-    const url = `${this.apiUrl}/notification`; 
+    const url = `${this.apiUrl}/notification`;
     return this.http.post(url, notification);
   }
 
   getAllNotifs(): Observable<Notification[]> {
     return this.http.get<Notification[]>(`${this.apiUrl}/notification`);
   }
-
-
-
+  deleteNotification(notifId: string): Observable<any> {
+    const url = `${this.apiUrl}/notification/${notifId}`;
+    return this.http.delete(url);
+  }
 }

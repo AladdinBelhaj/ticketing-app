@@ -9,7 +9,8 @@ const saveNotification = (app) => {
   app.post("/notification", (req, res) => {
     const notificationData = req.body;
 
-    const insertQuery = "INSERT INTO notification (notifText, sentTo) VALUES (?, ?)";
+    const insertQuery =
+      "INSERT INTO notification (notifText, sentTo) VALUES (?, ?)";
 
     const values = [notificationData.notifText, notificationData.sentTo];
 
@@ -37,6 +38,23 @@ const saveNotification = (app) => {
         console.log("Data fetched successfully");
         res.status(200).json(results);
       }
+    });
+  });
+  // Delete a notif by ID
+  app.delete("/notification/:id", (req, res) => {
+    const notifid = req.params.id;
+
+    const deleteQuery = "DELETE FROM notification WHERE id = ?";
+
+    connexion.query(deleteQuery, [notifid], (err, results) => {
+      if (err) {
+        console.error("Error deleting notification:", err);
+        res.status(500).json({ message: "Error deleting notification" });
+        return;
+      }
+
+      console.log("notification deleted successfully!");
+      res.status(200).json({ message: "notification deleted successfully" });
     });
   });
 };

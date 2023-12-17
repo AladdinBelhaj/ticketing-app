@@ -5,4 +5,11 @@
     font-size: 14px; /* Text size */
     /* Add any other desired styles */
   }
+  .notification-btn i {
+    margin-bottom: 10px;
+  }
+  .custom-small-btn {
+    padding: 0.2rem 0.4rem; /* Adjust padding as needed */
+    font-size: 0.8rem; /* Adjust font size as needed */
+  }
   
