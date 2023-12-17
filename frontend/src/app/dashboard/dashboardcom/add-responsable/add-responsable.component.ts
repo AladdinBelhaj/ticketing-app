@@ -176,9 +176,4 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
     this.fileSolutionName = 'Sélectionner un fichier solution';
     this.updateTicketForm.patchValue({ emitteur: this.emitteur });
   }
-
-
-
-
-
 }
