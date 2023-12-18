@@ -126,17 +126,34 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
         .subscribe(() => {
 
           const notificationData = {
-            notifText: 'Your ticket has been updated.', // Adjust the notification text
-            sentTo: editedTicket.emitteur, // Use the 'emitteur' from the edited ticket
+            notifText: 'Your ticket has been received.',
+            sentTo: editedTicket.emitteur,
           };
   
+
           this.notifService.createNotification(notificationData).subscribe(() => {
             console.log('Notification sent successfully');
           });
+
+          this.router.navigate(['/dashboard/ticket']);
+        });
+          
+        this.ticketService
+        .updateTicket(this.ticketid, editedTicket)
+        .subscribe(() => {
+    
+          const resNotificationData = {
+            notifText: 'You have received a new ticket.',
+            sentTo: editedTicket.responsable,
+          };
+  
+          this.notifService.createNotification(resNotificationData).subscribe(() => {
+            console.log('Notification sent successfully');
+          });
+
           this.router.navigate(['/dashboard/ticket']);
         });
     }
-
 
   }
   onFileChange(fileInput: HTMLInputElement) {

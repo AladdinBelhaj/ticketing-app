@@ -12,7 +12,7 @@ import { Object } from 'src/app/model/object';
 import { Project } from 'src/app/model/project';
 import { ObjectService } from 'src/app/service/object.service';
 import { ProjectService } from 'src/app/service/project.service';
-
+import { NotifService } from 'src/app/service/notif.service';
 @Component({
   selector: 'app-answer-ticket',
   templateUrl: './answer-ticket.component.html',
@@ -42,7 +42,8 @@ export class AnswerTicketComponent {
     private projectService: ProjectService,
     private objectService: ObjectService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private notifService: NotifService
   ) {
     this.updateTicketForm = this.formBuilder.group({
       projet: new FormControl('', Validators.compose([])),
@@ -109,6 +110,15 @@ export class AnswerTicketComponent {
       this.ticketService
         .updateTicket(this.ticketid, editedTicket)
         .subscribe(() => {
+          
+          const notificationData = {
+            notifText: 'Your ticket has been answered.', // Adjust the notification text
+            sentTo: editedTicket.emitteur, // Use the 'emitteur' from the edited ticket
+          };
+  
+          this.notifService.createNotification(notificationData).subscribe(() => {
+            console.log('Notification sent successfully');
+          });
           this.router.navigate(['/dashboard/ticket']);
         });
     }

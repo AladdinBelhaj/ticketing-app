@@ -13,3 +13,13 @@
     font-size: 0.8rem; /* Adjust font size as needed */
   }
   
+  /* Add this CSS to your stylesheet */
+.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.custom-small-btn {
+  margin-left: 10px; /* Adjust the margin as needed */
+}

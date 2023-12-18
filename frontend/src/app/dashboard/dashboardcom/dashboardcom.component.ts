@@ -1,6 +1,3 @@
-// dashboardcom.component.ts
-
-
 import { UserService } from 'src/app/service/user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Ticket } from 'src/app/model/ticket';
@@ -25,6 +22,9 @@ import { LoginService } from 'src/app/service/login.service';
   styleUrls: ['./dashboardcom.component.css'],
 })
 export class DashboardcomComponent implements OnInit {
+
+  updateTicketForm: FormGroup;
+
   userR = localStorage.getItem('role');
   userName: string = '';
   public ticket!: Ticket[];
@@ -46,7 +46,27 @@ export class DashboardcomComponent implements OnInit {
     },
     buttonsStyling: false,
   };
-  constructor(private userService: UserService, private ticketService: TicketService,private router: Router) {}
+  constructor(private userService: UserService,
+     private ticketService: TicketService,
+     private router: Router,
+     private formBuilder: FormBuilder) 
+     {
+       this.updateTicketForm = this.formBuilder.group({
+         projet: new FormControl('', Validators.compose([])),
+         objet: new FormControl('', Validators.compose([])),
+         emitteur: new FormControl('', Validators.compose([])),
+         description: new FormControl(
+           '',
+           Validators.compose([])
+         ),
+         fichier: new FormControl(''),
+         fichierSolution: new FormControl(''),
+         etat: new FormControl('', Validators.compose([])),
+         responsable: new FormControl('', Validators.compose([Validators.required])),
+         descriptionSolution: new FormControl('', Validators.compose([])),
+       });
+     }
+
 
   ngOnInit(): void {
     const userRole = localStorage.getItem('role');
@@ -109,7 +129,14 @@ export class DashboardcomComponent implements OnInit {
         }
       });
     }
+
+
+
+
+
+    
 }
+
 applyFilter(event: Event) {
   this.dataSource = new MatTableDataSource(this.ticket);
   this.dataSource.paginator = this.paginator;
@@ -135,5 +162,10 @@ removeTicket(ticketId: number | undefined) {
         });
     });
   }
+
+
+
 }
+
+
 }
