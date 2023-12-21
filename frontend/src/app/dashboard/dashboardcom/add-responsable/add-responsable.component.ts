@@ -97,6 +97,7 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
               fichierSolution: null,
               etat: this.ticket.etat,
               responsable: this.ticket.responsable,
+              altResponsable: this.ticket.altResponsable,
               descriptionSolution: this.ticket.descriptionSolution,
             });
           });
