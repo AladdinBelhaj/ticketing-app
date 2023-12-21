@@ -98,7 +98,7 @@
             </button>
             
             <button
-            *ngIf="userR === 'Client' && element.etat !== 'Terminé'"
+            *ngIf="userR === 'Client' && element.etat == 'En Attente'"
             class="btn btn-warning mx-4"
             [routerLink]="['/dashboard/ticket/update', element.id]"
           >
@@ -112,13 +112,21 @@
               <i class="dw dw-edit2 text-white"></i>
             </button>
             
-              <button
+              <button *ngIf="userR === 'Admin' || userR == 'Employer'"
                 [swal]="swalConfig"
                 (confirm)="removeTicket(element.id)"
                 class="btn btn-danger"
               >
                 <a><i class="dw dw-delete-3"></i> </a>
               </button>
+
+              <button *ngIf="userR === 'Client' && element.etat == 'En Attente'"
+              [swal]="swalConfig"
+              (confirm)="removeTicket(element.id)"
+              class="btn btn-danger"
+            >
+              <a><i class="dw dw-delete-3"></i> </a>
+            </button>
             </div>
           </td>
           <!-- ... other HTML content ... -->

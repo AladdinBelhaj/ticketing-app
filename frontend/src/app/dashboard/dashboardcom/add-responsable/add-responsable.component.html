@@ -36,6 +36,30 @@
   </div>
 </div> 
 
+<div class="form-group">
+  <label>altResponsable</label>
+  <select
+    formControlName="altResponsable"
+    class="form-control"
+    required
+    name="altResponsable"
+  >
+    <option value="" disabled>Select altResponsable</option>
+     <option *ngFor="let employeName of employes" [value]="employeName">
+      {{ employeName }}
+    </option>
+  </select>
+  <div
+    class="text-danger"
+    *ngIf="
+      updateTicketForm.get('altResponsable')!.invalid &&
+      updateTicketForm.get('altResponsable')!.touched
+    "
+  >
+    altResponsable-Invalid
+  </div>
+  
+</div>
       <!--BUTTONS-->
       <div class="d-flex justify-content-end">
         <button

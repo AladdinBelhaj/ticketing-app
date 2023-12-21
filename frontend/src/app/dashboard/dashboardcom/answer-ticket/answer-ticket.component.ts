@@ -106,6 +106,7 @@ export class AnswerTicketComponent {
         objet: this.updateTicketForm.value.objet,
         emitteur: this.updateTicketForm.value.emitteur,
         description: this.updateTicketForm.value.description,
+        altResponsable: this.updateTicketForm.value.altResponsable,
         etat: 'Terminé',
         responsable: this.updateTicketForm.value.responsable,
         descriptionSolution: this.updateTicketForm.value.descriptionSolution,

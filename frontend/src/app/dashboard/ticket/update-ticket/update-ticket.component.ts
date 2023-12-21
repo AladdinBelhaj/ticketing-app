@@ -101,6 +101,7 @@ export class UpdateTicketComponent implements OnInit {
         description: this.updateTicketForm.value.description,
         etat: this.updateTicketForm.value.etat,
         responsable: this.updateTicketForm.value.responsable,
+        altResponsable: this.updateTicketForm.value.altResponsable,
         descriptionSolution: this.updateTicketForm.value.descriptionSolution,
         dateEmission: this.updateTicketForm.value.dateEmission,
       };

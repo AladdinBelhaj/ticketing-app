@@ -60,6 +60,7 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
       fichierSolution: new FormControl(''),
       etat: new FormControl('', Validators.compose([])),
       responsable: new FormControl('', Validators.compose([Validators.required])),
+      altResponsable: new FormControl('', Validators.compose([Validators.required])),
       descriptionSolution: new FormControl('', Validators.compose([])),
     });
   }
@@ -120,6 +121,7 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
         description: this.updateTicketForm.value.description,
         etat: 'En Cours',
         responsable: this.updateTicketForm.value.responsable,
+        altResponsable: this.updateTicketForm.value.altResponsable,
         descriptionSolution: this.updateTicketForm.value.descriptionSolution,
         dateEmission: this.updateTicketForm.value.dateEmission,
       };
