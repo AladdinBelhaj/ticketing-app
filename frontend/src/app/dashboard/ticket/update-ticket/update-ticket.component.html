@@ -16,7 +16,7 @@
       <label>Projet *</label>
       <div>
         <select class="custom-select col-12" formControlName="projet">
-          <option *ngFor="let projet of listProjet" [value]="projet.id">
+          <option *ngFor="let projet of listProjet" [value]="projet.title">
             {{ projet.title }} - {{ projet.number }}
           </option>
         </select>
@@ -36,7 +36,7 @@
       <label>Objet *</label>
       <div>
         <select class="custom-select col-12" formControlName="objet">
-          <option *ngFor="let objet of listObjet" [value]="objet.id">
+          <option *ngFor="let objet of listObjet" [value]="objet.title">
             {{ objet.title }} - {{ objet.classType }}
           </option>
         </select>
@@ -89,43 +89,7 @@
         <label class="custom-file-label">{{ fileName }}</label>
       </div>
     </div>
-    <!-- ETAT -->
-    <div class="form-group">
-      <label>Etat</label>
-      <select class="custom-select col-12" formControlName="etat">
-        <option value="en attente">En Attente</option>
-        <option value="draft">Draft</option>
-      </select>
-    </div>
-    <!-- responsable -->
-    <div class="form-group">
-      <label>responsable</label>
-      <select class="custom-select col-12" formControlName="responsable">
-        <option value="Rayen">Rayen</option>
-        <option value="Ala">Ala</option>
-      </select>
-    </div>
-    <!--descriptionSolution-->
-    <div class="form-group">
-      <label>descriptionSolution</label>
-      <textarea
-        formControlName="descriptionSolution"
-        class="form-control"
-      ></textarea>
-    </div>
-    <!-- FICHIERSOLUTION -->
-    <div class="form-group">
-      <label>Fichier Solution</label>
-      <div class="custom-file">
-        <input
-          #fileSolutionInput
-          (change)="onFileSolutionChange(fileSolutionInput)"
-          type="file"
-          class="custom-file-input"
-        />
-        <label class="custom-file-label">{{ fileSolutionName }}</label>
-      </div>
-    </div>
+
     <!--BUTTONS-->
     <div class="d-flex justify-content-end">
       <button

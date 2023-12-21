@@ -97,7 +97,13 @@
               <i class="dw dw-edit2 text-white"></i>
             </button>
             
-            
+            <button
+            *ngIf="userR === 'Client' && element.etat !== 'Terminé'"
+            class="btn btn-warning mx-4"
+            [routerLink]="['/dashboard/ticket/update', element.id]"
+          >
+            <i class="dw dw-edit2 text-white"></i>
+          </button>
             <button
               *ngIf="userR === 'Employer' && element.etat !== 'Terminé'"
               class="btn btn-warning mx-4"
