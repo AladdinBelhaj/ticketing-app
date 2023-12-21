@@ -13,7 +13,7 @@ import { TicketService } from 'src/app/service/ticket.service';
 import { DateFormatPipe } from 'src/app/date-format.pipe';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/service/user.service';
-
+import { NotifService } from 'src/app/service/notif.service';
 @Component({
   selector: 'app-addticket',
   templateUrl: './addticket.component.html',
@@ -38,7 +38,8 @@ export class AddticketComponent implements OnInit, OnDestroy {
     private ticketService: TicketService,
     private projectService: ProjectService,
     private objectService: ObjectService,
-    private userService: UserService
+    private userService: UserService,
+    private notifService: NotifService
   ) {
     this.addTicketForm = this.formBuilder.group({
       projet: new FormControl('', Validators.compose([Validators.required])),
@@ -136,11 +137,23 @@ export class AddticketComponent implements OnInit, OnDestroy {
       (response) => {
         console.log('Ticket added successfully:', response);
         this.ticketService.addTicketForm = undefined;
+    
+        const notificationData = {
+          notifText: 'A new ticket has been added.',
+          sentTo: "admin@gmail.com",
+        };
+    
+        this.notifService.createNotification(notificationData).subscribe(() => {
+          console.log('Notification sent successfully');
+        });
       },
       (error) => {
         console.error('Error adding ticket:', error);
       }
     );
+    
+
+
   }
 
   onFileChange(fileInput: HTMLInputElement) {

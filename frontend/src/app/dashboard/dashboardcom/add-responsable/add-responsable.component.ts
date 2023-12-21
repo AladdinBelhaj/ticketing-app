@@ -11,6 +11,8 @@ import { ObjectService } from 'src/app/service/object.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { UserService } from 'src/app/service/user.service';
 import { NotifService } from 'src/app/service/notif.service';
+import { User } from 'src/app/model/user';
+
 @Component({
   selector: 'app-add-responsable', // Change the selector
   templateUrl: './add-responsable.component.html', // Change the file name
@@ -61,8 +63,9 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
       descriptionSolution: new FormControl('', Validators.compose([])),
     });
   }
-  employes: string[] = []; // array to store list of clients
-
+  empEmails: User[] = []; // array to store list of clients
+  empEmail = "";
+  employes: string[] = [];
   ngOnInit(): void {
     this.fetchUsers();
 
@@ -137,18 +140,28 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
 
           this.router.navigate(['/dashboard/ticket']);
         });
-          
+        this.userService.getAllUsers().subscribe((users) => {
+        
+          this.empEmails = users
+          .filter((user) => user.Role == "Employer" && `${user.Nom} ${user.Prenom}` == editedTicket.responsable);
+          this.empEmail = this.empEmails[0].email;
+        });
         this.ticketService
         .updateTicket(this.ticketid, editedTicket)
         .subscribe(() => {
     
+
+
           const resNotificationData = {
             notifText: 'You have received a new ticket.',
-            sentTo: editedTicket.responsable,
+            sentTo: this.empEmail,
+
           };
   
           this.notifService.createNotification(resNotificationData).subscribe(() => {
             console.log('Notification sent successfully');
+            console.log(this.empEmail);
+    
           });
 
           this.router.navigate(['/dashboard/ticket']);

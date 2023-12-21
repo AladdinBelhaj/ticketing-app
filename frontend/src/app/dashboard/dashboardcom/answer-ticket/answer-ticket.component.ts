@@ -13,6 +13,7 @@ import { Project } from 'src/app/model/project';
 import { ObjectService } from 'src/app/service/object.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { NotifService } from 'src/app/service/notif.service';
+import { UserService } from 'src/app/service/user.service';
 @Component({
   selector: 'app-answer-ticket',
   templateUrl: './answer-ticket.component.html',
@@ -25,6 +26,9 @@ export class AnswerTicketComponent {
   listProjet: Project[] = [];
 
   listObjet: Object[] = [];
+
+  employes: string[] = [];
+
 
   emitteur: string = 'email';
 
@@ -43,7 +47,8 @@ export class AnswerTicketComponent {
     private objectService: ObjectService,
     private router: Router,
     private route: ActivatedRoute,
-    private notifService: NotifService
+    private notifService: NotifService,
+    private userService: UserService
   ) {
     this.updateTicketForm = this.formBuilder.group({
       projet: new FormControl('', Validators.compose([])),
@@ -112,8 +117,8 @@ export class AnswerTicketComponent {
         .subscribe(() => {
           
           const notificationData = {
-            notifText: 'Your ticket has been answered.', // Adjust the notification text
-            sentTo: editedTicket.emitteur, // Use the 'emitteur' from the edited ticket
+            notifText: 'Your ticket has been answered.',
+            sentTo: editedTicket.emitteur, 
           };
   
           this.notifService.createNotification(notificationData).subscribe(() => {
@@ -160,4 +165,7 @@ export class AnswerTicketComponent {
     this.fileSolutionName = 'Sélectionner un fichier solution';
     this.updateTicketForm.patchValue({ emitteur: this.emitteur });
   }
+
+
+
 }
