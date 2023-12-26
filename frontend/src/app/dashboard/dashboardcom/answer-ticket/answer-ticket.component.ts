@@ -14,6 +14,7 @@ import { ObjectService } from 'src/app/service/object.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { NotifService } from 'src/app/service/notif.service';
 import { UserService } from 'src/app/service/user.service';
+import { User } from 'src/app/model/user';
 @Component({
   selector: 'app-answer-ticket',
   templateUrl: './answer-ticket.component.html',
@@ -29,7 +30,8 @@ export class AnswerTicketComponent {
 
   employes: string[] = [];
 
-
+  empEmails: User[] = []; // array to store list of clients
+  empEmail = "";
   emitteur: string = 'email';
 
   updateTicketForm: FormGroup;
@@ -129,6 +131,58 @@ export class AnswerTicketComponent {
         });
     }
   }
+
+
+
+  public delegateTicket() {
+    if (this.updateTicketForm.valid) {
+      const editedTicket: Ticket = {
+        projet: this.updateTicketForm.value.projet,
+        objet: this.updateTicketForm.value.objet,
+        emitteur: this.updateTicketForm.value.emitteur,
+        description: this.updateTicketForm.value.description,
+        altResponsable: this.updateTicketForm.value.responsable,
+        etat: 'En Cours',
+        responsable: this.updateTicketForm.value.responsable,
+        descriptionSolution: this.updateTicketForm.value.descriptionSolution,
+        dateEmission: this.updateTicketForm.value.dateEmission,
+      };
+
+      this.ticketService
+        .updateTicket(this.ticketid, editedTicket)
+        .subscribe(() => {
+          
+          this.router.navigate(['/dashboard/ticket']);
+        });
+        this.userService.getAllUsers().subscribe((users) => {
+        
+          this.empEmails = users
+          .filter((user) => user.Role == "Employer" && `${user.Nom} ${user.Prenom}` == editedTicket.responsable);
+          this.empEmail = this.empEmails[0].email;
+        });
+        this.ticketService
+        .updateTicket(this.ticketid, editedTicket)
+        .subscribe(() => {
+    
+
+
+          const resNotificationData = {
+            notifText: 'Vous avez reçu un nouveau ticket',
+            sentTo: this.empEmail,
+
+          };
+  
+          this.notifService.createNotification(resNotificationData).subscribe(() => {
+            console.log('Notification sent successfully');
+            console.log(this.empEmail);
+    
+          });
+
+          this.router.navigate(['/dashboard/ticket']);
+        });
+    }
+  }
+
   onFileChange(fileInput: HTMLInputElement) {
     if (fileInput?.files && fileInput.files.length > 0) {
       const file = fileInput.files[0];
