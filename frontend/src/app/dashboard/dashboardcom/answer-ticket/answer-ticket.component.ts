@@ -118,7 +118,7 @@ export class AnswerTicketComponent {
         .subscribe(() => {
           
           const notificationData = {
-            notifText: 'Your ticket has been answered.',
+            notifText: 'Votre ticket a reçu une réponse',
             sentTo: editedTicket.emitteur, 
           };
   

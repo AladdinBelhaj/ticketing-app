@@ -18,7 +18,6 @@
   </div>
 </div>
 
-
 <div class="card-box mb-30">
   <div class="d-flex justify-content-between align-items-center">
     <div class="d-flex flex-column pt-3 px-4">
@@ -31,6 +30,18 @@
               <span *ngIf="userR === 'Client'">My Tickets</span>
               <span *ngIf="userR === 'Employer'">Tickets to Work On</span>
               <span *ngIf="userR === 'Admin'">All Tickets</span>
+          </div>
+          <div class="mb-4">
+            <button
+            type="button"
+            class="btn btn-success"
+            routerLink="add"
+            [matTooltip]="'Ajouter'"
+            matTooltipPosition="above"
+            aria-label="Button that displays a tooltip in various positions"
+            >
+            <i class="icon-copy fa fa-plus" aria-hidden="true"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -61,7 +72,7 @@
               {{ element.projet }}
             </td>
           </ng-container>
-
+  
           <ng-container matColumnDef="objet">
             <th mat-header-cell *matHeaderCellDef>
               <p mat-sort-header style="margin: 0px; padding-top: 18.8px">
@@ -72,7 +83,7 @@
               {{ element.objet }}
             </td>
           </ng-container>
-
+  
           <ng-container matColumnDef="etat">
             <th mat-header-cell *matHeaderCellDef>
               <p mat-sort-header style="margin: 0px; padding-top: 18.8px">
@@ -83,7 +94,7 @@
               {{ element.etat }}
             </td>
           </ng-container>
-
+  
           <ng-container matColumnDef="Opérations">
             <th mat-header-cell *matHeaderCellDef>
               {{ displayedColumns[3] }}
@@ -105,7 +116,13 @@
                 <i class="dw dw-edit2 text-white"></i>
               </button>
               
-              
+              <button
+              *ngIf="userR === 'Client' && element.etat == 'En Attente'"
+              class="btn btn-warning mx-4"
+              [routerLink]="['/dashboard/ticket/update', element.id]"
+            >
+              <i class="dw dw-edit2 text-white"></i>
+            </button>
               <button
                 *ngIf="userR === 'Employer' && element.etat !== 'Terminé'"
                 class="btn btn-warning mx-4"
@@ -114,23 +131,30 @@
                 <i class="dw dw-edit2 text-white"></i>
               </button>
               
-                <button
+                <button *ngIf="userR === 'Admin' || userR == 'Employer'"
                   [swal]="swalConfig"
                   (confirm)="removeTicket(element.id)"
                   class="btn btn-danger"
                 >
                   <a><i class="dw dw-delete-3"></i> </a>
                 </button>
-
+  
+                <button *ngIf="userR === 'Client' && element.etat == 'En Attente'"
+                [swal]="swalConfig"
+                (confirm)="removeTicket(element.id)"
+                class="btn btn-danger"
+              >
+                <a><i class="dw dw-delete-3"></i> </a>
+              </button>
               </div>
             </td>
             <!-- ... other HTML content ... -->
           </ng-container>
-
+  
           <ng-container matColumnDef="ops-filter">
             <th mat-header-cell *matHeaderCellDef></th>
           </ng-container>
-
+  
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let element; columns: displayedColumns"></tr>
         </table>
@@ -146,4 +170,8 @@
       </div>
     </div>
   </div>
-</div>
+  </div>
+  
+  
+  
+  

@@ -1,5 +1,3 @@
-// File: add-responsable.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -132,7 +130,7 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
         .subscribe(() => {
 
           const notificationData = {
-            notifText: 'Your ticket has been received.',
+            notifText: 'Votre ticket a été reçu',
             sentTo: editedTicket.emitteur,
           };
   
@@ -156,7 +154,7 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
 
 
           const resNotificationData = {
-            notifText: 'You have received a new ticket.',
+            notifText: 'Vous avez reçu un nouveau ticket',
             sentTo: this.empEmail,
 
           };
@@ -181,6 +179,7 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
       console.error('No file selected.');
     }
   }
+
   onFileSolutionChange(fileSolutionInput: HTMLInputElement) {
     if (fileSolutionInput?.files && fileSolutionInput.files.length > 0) {
       const file = fileSolutionInput.files[0];
