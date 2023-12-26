@@ -34,9 +34,11 @@
   >
     responsable-Invalid
   </div>
-</div> 
+</div>
 
-<div class="form-group">
+
+
+  <div class="form-group">
   <label>altResponsable</label>
   <select
     formControlName="altResponsable"
@@ -44,8 +46,8 @@
     required
     name="altResponsable"
   >
-    <option value="" disabled>Select altResponsable</option>
-     <option *ngFor="let employeName of employes" [value]="employeName">
+    <option value="" disabled>Select alternative responsable</option>
+    <option *ngFor="let employeName of employes" [value]="employeName">
       {{ employeName }}
     </option>
   </select>
@@ -58,8 +60,8 @@
   >
     altResponsable-Invalid
   </div>
-  
-</div>
+</div> 
+
       <!--BUTTONS-->
       <div class="d-flex justify-content-end">
         <button

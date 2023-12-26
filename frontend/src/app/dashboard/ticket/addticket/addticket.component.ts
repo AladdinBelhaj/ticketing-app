@@ -56,6 +56,11 @@ export class AddticketComponent implements OnInit, OnDestroy {
         '',
         Validators.compose([])
       ),
+      altResponsable: new FormControl(
+        '',
+        Validators.compose([])
+      ),
+      
       descriptionSolution: new FormControl(
         '',
         Validators.compose([])
@@ -118,6 +123,7 @@ export class AddticketComponent implements OnInit, OnDestroy {
     formData.append('projet', this.addTicketForm.value.projet);
     formData.append('etat', this.addTicketForm.value.etat);
     formData.append('responsable', this.addTicketForm.value.responsable);
+    formData.append('altResponsable', this.addTicketForm.value.altResponsable);
     formData.append(
       'descriptionSolution',
       this.addTicketForm.value.descriptionSolution

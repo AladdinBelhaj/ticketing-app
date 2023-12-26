@@ -11,7 +11,17 @@
       </div>
     </div>
     <form [formGroup]="updateTicketForm">
-     
+      <button
+      type="submit"
+      class="btn btn-success"
+      (click)="delegateTicket()"
+      [ngStyle]="{
+        cursor: updateTicketForm.valid ? 'pointer' : 'not-allowed'
+      }"
+      [disabled]="!updateTicketForm.valid"
+    >
+      Delegate Ticket
+    </button>
       <!--descriptionSolution-->
       <div class="form-group">
         <label>Description solution</label>
