@@ -23,9 +23,8 @@ const setupAddTicketRoutes = (app) => {
     const { projet, objet, emitteur, description, etat, responsable, altResponsable, descriptionSolution } = req.body;
     const fichier = req.files && req.files["fichier"] ? req.files["fichier"][0].filename : null;
   
-    const insertQuery = `INSERT INTO ticket (projet, objet, emitteur, description, fichier, etat, responsable, altResponsable, descriptionSolution) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    const insertQuery = `INSERT INTO ticket (projet, objet, emitteur, description, fichier, etat, responsable, altResponsable, descriptionSolution) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?)`;
     const values = [projet, objet, emitteur, description, fichier, etat, responsable, altResponsable, descriptionSolution];
-  
     connexion.query(insertQuery, values, (err, results) => {
       if (err) {
         console.error("Error inserting data into the database:", err);
@@ -132,8 +131,8 @@ const setupAddTicketRoutes = (app) => {
         description,
         etat,
         responsable,
+        altResponsable,
         descriptionSolution,
-        altResponsable
 
       ];
 
