@@ -27,4 +27,7 @@ export class UserService {
   public updateUser(id: string, user: User): Observable<any> {
     return this.http.put(`${this.apiUrl}/user/${id}`, user);
   }
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/user/checkEmail/${email}`);
+  }
 }
