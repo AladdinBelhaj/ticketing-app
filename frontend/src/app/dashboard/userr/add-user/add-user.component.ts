@@ -62,32 +62,42 @@ export class AddUserComponent implements OnInit, OnDestroy {
     this.show = !this.show;
   }
   saveUser() {
-    console.log(
-      'Form values before FormData preparation:',
-      this.AddUserForm.value
-    );
-    let user: User = {
-      Nom: this.AddUserForm.value.Nom,
-      Prenom: this.AddUserForm.value.Prenom,
-      NumTelephone: this.AddUserForm.value.NumTelephone,
-      Role: this.AddUserForm.value.Role,
-      email: this.AddUserForm.value.email,
-      password: this.AddUserForm.value.password,
-    };
+    const emailToCheck = this.AddUserForm.value.email;
 
-    this.UserService.saveUser(user).subscribe(
-      (response) => {
-        this.UserService.AddUserForm = undefined;
+    // Check if email exists before saving
+    this.UserService.checkEmailExists(emailToCheck).subscribe(
+      (exists) => {
+        if (exists) {
+          // Email already exists in the database
+          console.log('Email already exists. Cannot add user.');
+          // Handle this case (e.g., show an error message)
+        } else {
+          // Email doesn't exist, proceed to save
+          let user: User = {
+            Nom: this.AddUserForm.value.Nom,
+            Prenom: this.AddUserForm.value.Prenom,
+            NumTelephone: this.AddUserForm.value.NumTelephone,
+            Role: this.AddUserForm.value.Role,
+            email: this.AddUserForm.value.email,
+            password: this.AddUserForm.value.password,
+          };
+
+          this.UserService.saveUser(user).subscribe(
+            (response) => {
+              this.UserService.AddUserForm = undefined;
+            },
+            (error) => {
+              console.error('Error adding user:', error);
+            }
+          );
+          console.log('FormData before sending:', user);
+        }
       },
       (error) => {
-        console.error('Error adding user:', error);
+        console.error('Error checking email:', error);
       }
     );
-    console.log('FormData before sending:', user);
   }
-
-  
-
 
   resetForm() {
     this.AddUserForm.reset();
