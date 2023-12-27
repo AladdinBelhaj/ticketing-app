@@ -10,13 +10,17 @@ const saveUser = (app) => {
     const asyncQuery = util.promisify(connexion.query).bind(connexion);
     try {
       const userData = req.body;
-       let query = 'SELECT * FROM user WHERE email = ?';
-       let data = await asyncQuery(query, userData.email);
-       if (data.length > 0){
-      res.status(500).json({ message: "Error mail existe" });       
-       }
-      const insertQuery =  "INSERT INTO user (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+      // Check if the email exists in the database
+      let query = "SELECT * FROM user WHERE email = ?";
+      let data = await asyncQuery(query, userData.email);
 
+      if (data.length > 0) {
+        // Email already exists in the database
+        return res.status(400).json({ message: "Error: Email already exists" });
+      }
+
+      const insertQuery =
+        "INSERT INTO user (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
       const values = [
         userData.Nom,
         userData.Prenom,
@@ -25,17 +29,20 @@ const saveUser = (app) => {
         userData.email,
         userData.password,
       ];
-      if (userData.Role === 'Client'){
-        const insertclientQuery =  "INSERT INTO client (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
-        await asyncQuery(insertclientQuery, values);
-      }else if (userData.Role === 'Employer'){
-        const insertemployerQuery =  "INSERT INTO employe (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
-        await asyncQuery(insertemployerQuery, values);
+
+      if (userData.Role === "Client") {
+        const insertClientQuery =
+          "INSERT INTO client (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        await asyncQuery(insertClientQuery, values);
+      } else if (userData.Role === "Employer") {
+        const insertEmployerQuery =
+          "INSERT INTO employe (Nom, Prenom, NumTelephone, Role, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        await asyncQuery(insertEmployerQuery, values);
       }
+
       const result = await asyncQuery(insertQuery, values);
       console.log("User saved successfully!");
       res.status(200).json({ message: "User saved successfully" });
-
     } catch (error) {
       console.error("Error saving user:", error);
       res.status(500).json({ message: "Error saving user" });
@@ -105,6 +112,25 @@ const saveUser = (app) => {
       console.log("user updated successfully!");
       res.status(200).json({ message: "user updated successfully" });
     });
+  });
+  //check email
+  app.get("/user/checkEmail/:email", async (req, res) => {
+    const { email } = req.params;
+
+    try {
+      const asyncQuery = util.promisify(connexion.query).bind(connexion);
+      const query = "SELECT * FROM user WHERE email = ?";
+      const data = await asyncQuery(query, [email]);
+
+      if (data.length > 0) {
+        res.status(200).json(true); // Email exists
+      } else {
+        res.status(200).json(false); // Email doesn't exist
+      }
+    } catch (error) {
+      console.error("Error checking email:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
   });
 };
 
