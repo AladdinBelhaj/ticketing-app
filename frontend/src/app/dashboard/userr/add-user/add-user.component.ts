@@ -84,7 +84,6 @@ export class AddUserComponent implements OnInit, OnDestroy {
       }
     );
     console.log('FormData before sending:', user);
-        }
   }
 
   
