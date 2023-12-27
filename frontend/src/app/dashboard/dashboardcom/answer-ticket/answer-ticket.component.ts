@@ -28,6 +28,7 @@ export class AnswerTicketComponent {
 
   listObjet: Object[] = [];
 
+  swap = "";
   employes: string[] = [];
 
   empEmails: User[] = []; // array to store list of clients
@@ -134,16 +135,19 @@ export class AnswerTicketComponent {
 
 
 
+
   public delegateTicket() {
+    
     if (this.updateTicketForm.valid) {
+      this.swap = this.updateTicketForm.value.altResponsable;
       const editedTicket: Ticket = {
         projet: this.updateTicketForm.value.projet,
         objet: this.updateTicketForm.value.objet,
         emitteur: this.updateTicketForm.value.emitteur,
         description: this.updateTicketForm.value.description,
-        altResponsable: this.updateTicketForm.value.responsable,
         etat: 'En Cours',
-        responsable: this.updateTicketForm.value.responsable,
+        responsable: this.updateTicketForm.value.altResponsable,
+        altResponsable: this.swap,
         descriptionSolution: this.updateTicketForm.value.descriptionSolution,
         dateEmission: this.updateTicketForm.value.dateEmission,
       };
