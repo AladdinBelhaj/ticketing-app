@@ -20,12 +20,11 @@ const setupAddTicketRoutes = (app) => {
 
 
   app.post("/ticket", upload.fields([{ name: "fichier" }]), (req, res) => {
-    const { projet, objet, emitteur, description, etat, responsable, descriptionSolution } = req.body;
+    const { projet, objet, emitteur, description, etat, responsable, altResponsable, descriptionSolution } = req.body;
     const fichier = req.files && req.files["fichier"] ? req.files["fichier"][0].filename : null;
   
-    const insertQuery = `INSERT INTO ticket (projet, objet, emitteur, description, fichier, etat, responsable, descriptionSolution) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-    const values = [projet, objet, emitteur, description, fichier, etat, responsable, descriptionSolution];
-  
+    const insertQuery = `INSERT INTO ticket (projet, objet, emitteur, description, fichier, etat, responsable, altResponsable, descriptionSolution) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?)`;
+    const values = [projet, objet, emitteur, description, fichier, etat, responsable, altResponsable, descriptionSolution];
     connexion.query(insertQuery, values, (err, results) => {
       if (err) {
         console.error("Error inserting data into the database:", err);
@@ -118,11 +117,12 @@ const setupAddTicketRoutes = (app) => {
         description,
         etat,
         responsable,
+        altResponsable,
         descriptionSolution,
       } = req.body;
 
       let updateQuery =
-        "UPDATE ticket SET projet = ?, objet = ?, emitteur = ?, description = ?, etat = ?, responsable = ?, descriptionSolution = ?";
+        "UPDATE ticket SET projet = ?, objet = ?, emitteur = ?, description = ?, etat = ?, responsable = ?, altResponsable = ?, descriptionSolution = ?";
 
       const updateValues = [
         projet,
@@ -131,7 +131,9 @@ const setupAddTicketRoutes = (app) => {
         description,
         etat,
         responsable,
+        altResponsable,
         descriptionSolution,
+
       ];
 
       // Check if "fichierSolution" has been uploaded

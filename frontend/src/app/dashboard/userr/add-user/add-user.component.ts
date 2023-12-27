@@ -84,23 +84,16 @@ export class AddUserComponent implements OnInit, OnDestroy {
             password: this.AddUserForm.value.password,
           };
 
-          this.UserService.saveUser(user).subscribe(
-            (response) => {
-              this.UserService.AddUserForm = undefined;
-            },
-            (error) => {
-              console.error('Error adding user:', error);
-            }
-          );
-          console.log('FormData before sending:', user);
-        }
+    this.UserService.saveUser(user).subscribe(
+      (response) => {
+        this.UserService.AddUserForm = undefined;
       },
       (error) => {
-        console.error('Error checking email:', error);
+        console.error('Error adding user:', error);
       }
     );
+    console.log('FormData before sending:', user);
   }
-
   resetForm() {
     this.AddUserForm.reset();
   }

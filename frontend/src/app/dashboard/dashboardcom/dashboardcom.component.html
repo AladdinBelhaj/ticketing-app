@@ -5,14 +5,14 @@
     </div>
     <div class="col-md-8">
       <h4 class="font-20 weight-500 mb-10 text-capitalize">
-        Welcome back
+        Bienvenue,
         <div class="weight-600 font-30 text-blue">{{ userName }}!</div>
       </h4>
       <p class="font-18 max-width-600">
         <!-- Change the welcome message based on user role -->
-        <ng-container *ngIf="userR === 'Client'">Welcome, valued client! Thank you for choosing our ticketing system. Create your ticket now!</ng-container>
-        <ng-container *ngIf="userR === 'Employer'">Welcome to the Employee Dashboard. Manage your tickets here...</ng-container>
-        <ng-container *ngIf="userR === 'Admin'">Greetings, Admin! Here are all the tickets...</ng-container>
+        <ng-container *ngIf="userR === 'Client'">Bienvenue, client précieux ! Merci d'avoir choisi notre système de gestion des tickets. Créez votre ticket maintenant !</ng-container>
+        <ng-container *ngIf="userR === 'Employer'">Bienvenue sur le tableau de bord de l'employé. Gérez vos tickets ici...</ng-container>
+        <ng-container *ngIf="userR === 'Admin'">Salutations, Admin ! Voici tous les tickets...</ng-container>
       </p>
     </div>
   </div>
@@ -31,18 +31,7 @@
               <span *ngIf="userR === 'Employer'">Tickets to Work On</span>
               <span *ngIf="userR === 'Admin'">All Tickets</span>
           </div>
-          <div class="mb-4">
-            <button
-            type="button"
-            class="btn btn-success"
-            routerLink="add"
-            [matTooltip]="'Ajouter'"
-            matTooltipPosition="above"
-            aria-label="Button that displays a tooltip in various positions"
-            >
-            <i class="icon-copy fa fa-plus" aria-hidden="true"></i>
-            </button>
-          </div>
+
         </div>
       </div>
     </div>
@@ -110,7 +99,7 @@
                 </button>
                 <button
                 *ngIf="userR === 'Admin' && element.etat !== 'Terminé'"
-                class="btn btn-warning mx-4"
+                class="btn btn-warning mx-5"
                 [routerLink]="['/dashboard/dashboardcom/add-responsable', element.id]"
               >
                 <i class="dw dw-edit2 text-white"></i>
@@ -118,14 +107,14 @@
               
               <button
               *ngIf="userR === 'Client' && element.etat == 'En Attente'"
-              class="btn btn-warning mx-4"
+              class="btn btn-warning mx-5"
               [routerLink]="['/dashboard/ticket/update', element.id]"
             >
               <i class="dw dw-edit2 text-white"></i>
             </button>
               <button
                 *ngIf="userR === 'Employer' && element.etat !== 'Terminé'"
-                class="btn btn-warning mx-4"
+                class="btn btn-warning mx-5"
                 [routerLink]="['/dashboard/dashboardcom/answer-ticket', element.id]"
               >
                 <i class="dw dw-edit2 text-white"></i>

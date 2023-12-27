@@ -96,7 +96,7 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
               etat: this.ticket.etat,
               responsable: this.ticket.responsable,
               altResponsable: this.ticket.altResponsable,
-              descriptionSolution: this.ticket.descriptionSolution,
+              descriptionSolution: this.ticket.descriptionSolution
             });
           });
       }
@@ -133,7 +133,6 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
             notifText: 'Votre ticket a été reçu',
             sentTo: editedTicket.emitteur,
           };
-  
 
           this.notifService.createNotification(notificationData).subscribe(() => {
             console.log('Notification sent successfully');
@@ -141,12 +140,15 @@ export class AddResponsableComponent implements OnInit { // Change the class nam
 
           this.router.navigate(['/dashboard/ticket']);
         });
+
+        
         this.userService.getAllUsers().subscribe((users) => {
         
           this.empEmails = users
           .filter((user) => user.Role == "Employer" && `${user.Nom} ${user.Prenom}` == editedTicket.responsable);
           this.empEmail = this.empEmails[0].email;
         });
+
         this.ticketService
         .updateTicket(this.ticketid, editedTicket)
         .subscribe(() => {

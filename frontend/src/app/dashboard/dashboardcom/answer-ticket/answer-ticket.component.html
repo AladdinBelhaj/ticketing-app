@@ -11,7 +11,7 @@
       </div>
     </div>
     <form [formGroup]="updateTicketForm">
-     
+
       <!--descriptionSolution-->
       <div class="form-group">
         <label>Description solution</label>
@@ -37,23 +37,37 @@
       <div class="d-flex justify-content-end">
         <button
           type="submit"
-          class="btn btn-success"
+          class="btn btn-success mr-3"
           (click)="editTicket()"
           [ngStyle]="{
             cursor: updateTicketForm.valid ? 'pointer' : 'not-allowed'
           }"
           [disabled]="!updateTicketForm.valid"
         >
-          Modifer
+          Répondre
         </button>
+      
         <button
           type="submit"
-          class="btn btn-secondary ml-3"
+          class="btn btn-warning mr-3"
+          (click)="delegateTicket()"
+          [ngStyle]="{
+            cursor: updateTicketForm.valid ? 'pointer' : 'not-allowed'
+          }"
+          [disabled]="!updateTicketForm.valid"
+        >
+        Déléguer le ticket
+        </button>
+      
+        <button
+          type="submit"
+          class="btn btn-secondary"
           (click)="resetForm()"
         >
           Réinitialiser
         </button>
       </div>
+      
     </form>
   </div>
   

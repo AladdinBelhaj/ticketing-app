@@ -14,6 +14,7 @@ import { ObjectService } from 'src/app/service/object.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { NotifService } from 'src/app/service/notif.service';
 import { UserService } from 'src/app/service/user.service';
+import { User } from 'src/app/model/user';
 @Component({
   selector: 'app-answer-ticket',
   templateUrl: './answer-ticket.component.html',
@@ -27,9 +28,11 @@ export class AnswerTicketComponent {
 
   listObjet: Object[] = [];
 
+  swap = "";
   employes: string[] = [];
 
-
+  empEmails: User[] = []; // array to store list of clients
+  empEmail = "";
   emitteur: string = 'email';
 
   updateTicketForm: FormGroup;
@@ -62,6 +65,8 @@ export class AnswerTicketComponent {
       fichierSolution: new FormControl(''),
       etat: new FormControl('', Validators.compose([])),
       responsable: new FormControl('', Validators.compose([])),
+      altResponsable: new FormControl('', Validators.compose([])),
+
       descriptionSolution: new FormControl('', Validators.compose([])),
     });
   }
@@ -92,6 +97,7 @@ export class AnswerTicketComponent {
               fichierSolution: null,
               etat: this.ticket.etat,
               responsable: this.ticket.responsable,
+              altResponsable: this.ticket.altResponsable,
               descriptionSolution: this.ticket.descriptionSolution,
             });
           });
@@ -129,6 +135,66 @@ export class AnswerTicketComponent {
         });
     }
   }
+
+
+
+
+  public delegateTicket() {
+    
+    if (this.updateTicketForm.valid) {
+      const tempAltResponsable = this.updateTicketForm.value.altResponsable;
+      const tempResponsable = this.updateTicketForm.value.responsable;
+
+      console.log(tempAltResponsable);
+      console.log(this.updateTicketForm.value.altResponsable);
+      const editedTicket: Ticket = {
+        projet: this.updateTicketForm.value.projet,
+        objet: this.updateTicketForm.value.objet,
+        emitteur: this.updateTicketForm.value.emitteur,
+        description: this.updateTicketForm.value.description,
+        etat: 'En Cours',
+        responsable: tempAltResponsable,
+        altResponsable: tempResponsable,
+        descriptionSolution: this.updateTicketForm.value.descriptionSolution,
+        dateEmission: this.updateTicketForm.value.dateEmission,
+      };
+
+
+      this.ticketService
+        .updateTicket(this.ticketid, editedTicket)
+        .subscribe(() => {
+          
+          this.router.navigate(['/dashboard/ticket']);
+        });
+        this.userService.getAllUsers().subscribe((users) => {
+        
+          this.empEmails = users
+          .filter((user) => user.Role == "Employer" && `${user.Nom} ${user.Prenom}` == editedTicket.responsable);
+          this.empEmail = this.empEmails[0].email;
+        });
+        this.ticketService
+        .updateTicket(this.ticketid, editedTicket)
+        .subscribe(() => {
+    
+
+
+          const resNotificationData = {
+            notifText: 'Vous avez reçu un nouveau ticket',
+            sentTo: this.empEmail,
+
+          };
+  
+          this.notifService.createNotification(resNotificationData).subscribe(() => {
+            console.log('Notification sent successfully');
+            console.log(this.empEmail);
+    
+          });
+
+          this.router.navigate(['/dashboard/ticket']);
+        });
+    }
+  }
+
   onFileChange(fileInput: HTMLInputElement) {
     if (fileInput?.files && fileInput.files.length > 0) {
       const file = fileInput.files[0];
