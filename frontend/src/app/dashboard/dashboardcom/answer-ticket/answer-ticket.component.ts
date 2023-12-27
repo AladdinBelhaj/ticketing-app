@@ -65,6 +65,8 @@ export class AnswerTicketComponent {
       fichierSolution: new FormControl(''),
       etat: new FormControl('', Validators.compose([])),
       responsable: new FormControl('', Validators.compose([])),
+      altResponsable: new FormControl('', Validators.compose([])),
+
       descriptionSolution: new FormControl('', Validators.compose([])),
     });
   }
@@ -95,6 +97,7 @@ export class AnswerTicketComponent {
               fichierSolution: null,
               etat: this.ticket.etat,
               responsable: this.ticket.responsable,
+              altResponsable: this.ticket.altResponsable,
               descriptionSolution: this.ticket.descriptionSolution,
             });
           });
@@ -139,11 +142,11 @@ export class AnswerTicketComponent {
   public delegateTicket() {
     
     if (this.updateTicketForm.valid) {
-
-      const tempResponsable = this.updateTicketForm.value.responsable;
       const tempAltResponsable = this.updateTicketForm.value.altResponsable;
+      const tempResponsable = this.updateTicketForm.value.responsable;
 
-
+      console.log(tempAltResponsable);
+      console.log(this.updateTicketForm.value.altResponsable);
       const editedTicket: Ticket = {
         projet: this.updateTicketForm.value.projet,
         objet: this.updateTicketForm.value.objet,

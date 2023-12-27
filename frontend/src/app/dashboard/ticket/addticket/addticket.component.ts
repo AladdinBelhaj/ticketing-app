@@ -145,7 +145,7 @@ export class AddticketComponent implements OnInit, OnDestroy {
         this.ticketService.addTicketForm = undefined;
     
         const notificationData = {
-          notifText: 'A new ticket has been added.',
+          notifText: 'Un nouveau ticket a été ajouté',
           sentTo: "admin@gmail.com",
         };
     
