@@ -20,7 +20,7 @@
     required
     name="responsable"
   >
-    <option value="" disabled>Select responsable</option>
+    <option value="" disabled>Choisir responsable</option>
     <option *ngFor="let employeName of employes" [value]="employeName">
       {{ employeName }}
     </option>
@@ -46,7 +46,7 @@
     required
     name="altResponsable"
   >
-    <option value="" disabled>Select alternative responsable</option>
+    <option value="" disabled>Choisir responsable alternative</option>
     <option *ngFor="let employeName of employes" [value]="employeName">
       {{ employeName }}
     </option>
