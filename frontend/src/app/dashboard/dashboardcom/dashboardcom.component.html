@@ -98,7 +98,7 @@
                   <i class="dw dw-eye"></i>
                 </button>
                 <button
-                *ngIf="userR === 'Admin' && element.etat !== 'Terminé'"
+                *ngIf="userR === 'Admin' && element.etat !== 'En Cours'"
                 class="btn btn-warning mx-5"
                 [routerLink]="['/dashboard/dashboardcom/add-responsable', element.id]"
               >
