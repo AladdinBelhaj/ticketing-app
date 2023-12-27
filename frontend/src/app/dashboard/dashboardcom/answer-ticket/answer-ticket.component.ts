@@ -139,18 +139,23 @@ export class AnswerTicketComponent {
   public delegateTicket() {
     
     if (this.updateTicketForm.valid) {
-      this.swap = this.updateTicketForm.value.altResponsable;
+
+      const tempResponsable = this.updateTicketForm.value.responsable;
+      const tempAltResponsable = this.updateTicketForm.value.altResponsable;
+
+
       const editedTicket: Ticket = {
         projet: this.updateTicketForm.value.projet,
         objet: this.updateTicketForm.value.objet,
         emitteur: this.updateTicketForm.value.emitteur,
         description: this.updateTicketForm.value.description,
         etat: 'En Cours',
-        responsable: this.updateTicketForm.value.altResponsable,
-        altResponsable: this.swap,
+        responsable: tempAltResponsable,
+        altResponsable: tempResponsable,
         descriptionSolution: this.updateTicketForm.value.descriptionSolution,
         dateEmission: this.updateTicketForm.value.dateEmission,
       };
+
 
       this.ticketService
         .updateTicket(this.ticketid, editedTicket)
