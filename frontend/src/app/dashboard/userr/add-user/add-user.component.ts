@@ -71,8 +71,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
         if (exists) {
           Swal.fire({
             icon: 'warning',
-            title: 'Email Exists',
-            text: 'Email already exists. Cannot add user.',
+            title: 'Email Existe',
+            text: "L'email existe déjà. Impossible d'ajouter un nouvel utilisateur",
           });
         } else {
           // Email doesn't exist, proceed to save
