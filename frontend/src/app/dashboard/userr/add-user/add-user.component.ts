@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/service/user.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -68,9 +69,11 @@ export class AddUserComponent implements OnInit, OnDestroy {
     this.UserService.checkEmailExists(emailToCheck).subscribe(
       (exists) => {
         if (exists) {
-          // Email already exists in the database
-          console.log('Email already exists. Cannot add user.');
-          // Handle this case (e.g., show an error message)
+          Swal.fire({
+            icon: 'warning',
+            title: 'Email Exists',
+            text: 'Email already exists. Cannot add user.',
+          });
         } else {
           // Email doesn't exist, proceed to save
           let user: User = {
