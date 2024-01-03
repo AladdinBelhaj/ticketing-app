@@ -29,8 +29,5 @@ export class SideBarComponent implements OnInit {
 
   ngOnDestroy(): void {
     console.log('hello');
-    // You may choose not to clear the userRole during ngOnDestroy,
-    // depending on your application logic.
-    // this.userRole = "";
   }
 }
